@@ -3,6 +3,7 @@
     v-scroll="handleScroll"
     color="primary"
     dark
+    app
   >
     <v-toolbar-side-icon @click.stop="drawer = !drawer"/>
     <v-toolbar-title>Title</v-toolbar-title>
