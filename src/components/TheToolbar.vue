@@ -12,24 +12,23 @@
     <v-spacer/>
 
     <v-avatar 
-      v-if="auth.email"
+      v-if="user.email"
       color="teal" 
       size="32">
-      <span class="white--text">{{ auth.email.chartAt(0) }}</span>
+      <span class="white--text">{{ user.email.charAt(0).toUpperCase() }}</span>
     </v-avatar>
-    <v-btn 
-      v-else 
-      small 
-      depressed 
-      color="primary"
-      class="caption text-capitalize">Iniciar sesión</v-btn>
+    <the-loggin-button v-else/>
     
   </v-toolbar>
 
 </template>
 <script>
+import TheLogginButton from './TheLogginButton'
 export default {
   name: 'TheToolbar',
+  components: {
+    TheLogginButton,
+  },
   directives: {
     scroll: {
       inserted(el, binding) {
@@ -48,6 +47,9 @@ export default {
   computed: {
     auth() {
       return this.$store.state.auth
+    },
+    user() {
+      return this.auth.user || {}
     },
   },
   methods: {

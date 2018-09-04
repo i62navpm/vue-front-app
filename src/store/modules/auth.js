@@ -1,14 +1,18 @@
 export default {
   state: {
     user: {},
+    credential: {},
   },
   mutations: {
-    setUser: (state, user) => (state.user = user),
+    setAuth: (state, { user, credential }) => {
+      state.user = user
+      state.credential = credential
+    },
   },
   actions: {
-    setUser: ({ commit }, { user }) => commit('setUser', user),
+    setAuth: ({ commit }, auth) => commit('setAuth', auth),
   },
   getters: {
-    getUser: state => state.user,
+    getAuth: state => state.auth,
   },
 }
