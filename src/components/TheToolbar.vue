@@ -12,10 +12,18 @@
     <v-spacer/>
 
     <v-avatar 
+      v-if="auth.email"
       color="teal" 
       size="32">
-      <span class="white--text">M</span>
+      <span class="white--text">{{ auth.email.chartAt(0) }}</span>
     </v-avatar>
+    <v-btn 
+      v-else 
+      small 
+      depressed 
+      color="primary"
+      class="caption text-capitalize">Iniciar sesión</v-btn>
+    
   </v-toolbar>
 
 </template>
@@ -36,6 +44,11 @@ export default {
     return {
       drawer: false,
     }
+  },
+  computed: {
+    auth() {
+      return this.$store.state.auth
+    },
   },
   methods: {
     toggleSidebar(value) {
