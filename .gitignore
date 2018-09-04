@@ -22,3 +22,5 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw*
+*.rules
+firestore.indexes.json
