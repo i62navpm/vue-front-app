@@ -5,7 +5,7 @@
     dark
     app
   >
-    <v-toolbar-side-icon @click.stop="drawer = !drawer"/>
+    <v-toolbar-side-icon @click.stop="toggleSidebar(!drawer)"/>
     <v-toolbar-title>Title</v-toolbar-title>
     <v-spacer/>
     <!-- TODO: Select tag -->
@@ -38,6 +38,9 @@ export default {
     }
   },
   methods: {
+    toggleSidebar(value) {
+      this.$store.commit('setSidebar', value)
+    },
     handleScroll(evt, el) {
       const step = 12 / 300
 

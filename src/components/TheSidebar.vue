@@ -1,9 +1,10 @@
 <template>
   <v-navigation-drawer
-    v-model="drawer"
-    persistent
+    :value="sidebarStatus"
+    persistent 
     temporary
     app
+    @input="toggleSidebar({open:$event})"
   >
     <v-list>
       <v-list-tile>
@@ -24,6 +25,17 @@ export default {
     return {
       drawer: true,
     }
+  },
+  computed: {
+    sidebarStatus() {
+      const { open } = this.$store.state.sidebar
+      return open
+    },
+  },
+  methods: {
+    toggleSidebar({ open }) {
+      this.$store.commit('setSidebar', open)
+    },
   },
 }
 </script>
