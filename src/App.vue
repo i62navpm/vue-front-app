@@ -5,6 +5,7 @@
     <the-sidebar />
     
     <v-content>
+      <the-main-people-search/>
       <router-view/>
     </v-content>
 
@@ -18,12 +19,14 @@
 <script>
 import TheToolbar from './components/TheToolbar'
 import TheSidebar from './components/TheSidebar'
+import TheMainPeopleSearch from './components/TheMainPeopleSearch'
 
 export default {
   name: 'App',
   components: {
     TheToolbar,
     TheSidebar,
+    TheMainPeopleSearch,
   },
 }
 </script>
