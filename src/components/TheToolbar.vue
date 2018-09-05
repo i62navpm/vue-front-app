@@ -11,23 +11,23 @@
     <!-- TODO: Select tag -->
     <v-spacer/>
 
-    <v-avatar 
-      v-if="user.email"
-      color="teal" 
-      size="32">
-      <span class="white--text">{{ user.email.charAt(0).toUpperCase() }}</span>
-    </v-avatar>
-    <the-loggin-button v-else/>
+
+    <the-logout-button v-if="user.email"/>
+    <the-login-button v-else/>
     
   </v-toolbar>
 
 </template>
 <script>
-import TheLogginButton from './TheLogginButton'
+import firebase from 'firebase/app'
+import TheLoginButton from './TheLoginButton'
+import TheLogoutButton from './TheLogoutButton'
+
 export default {
   name: 'TheToolbar',
   components: {
-    TheLogginButton,
+    TheLoginButton,
+    TheLogoutButton,
   },
   directives: {
     scroll: {
@@ -52,7 +52,35 @@ export default {
       return this.auth.user || {}
     },
   },
+  beforeCreate() {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.setStoreUser(user)
+      } else {
+        this.$store.dispatch('logout')
+      }
+    })
+  },
   methods: {
+    setStoreUser({
+      displayName,
+      email,
+      emailVerified,
+      phoneNumber,
+      photoURL,
+      refreshToken,
+    }) {
+      this.$store.commit('setAuth', {
+        user: {
+          displayName,
+          email,
+          emailVerified,
+          phoneNumber,
+          photoURL,
+          refreshToken,
+        },
+      })
+    },
     toggleSidebar(value) {
       this.$store.commit('setSidebar', value)
     },
