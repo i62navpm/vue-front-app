@@ -1,7 +1,7 @@
 <template>
   <v-menu 
     bottom 
-    right>
+    left>
     <v-btn 
       slot="activator" 
       small 
@@ -21,7 +21,7 @@
 import { ui, uiConfig } from '@/plugins/firebaseUi'
 
 export default {
-  name: 'TheLogginButton',
+  name: 'TheLoginButton',
   mounted() {
     uiConfig.callbacks = {
       signInSuccessWithAuthResult: this.signInSuccess,
