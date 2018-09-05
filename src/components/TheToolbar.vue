@@ -7,10 +7,14 @@
   >
     <v-toolbar-side-icon @click.stop="toggleSidebar(!drawer)"/>
     <v-toolbar-title>Title</v-toolbar-title>
-    <v-spacer/>
-    <!-- TODO: Select tag -->
+
     <v-spacer/>
 
+    <people-search-select 
+      v-scroll="handleScrollInput" 
+      class="search-toolbar"/>
+
+    <v-spacer/>
 
     <the-logout-button v-if="user.email"/>
     <the-login-button v-else/>
@@ -22,12 +26,14 @@
 import firebase from 'firebase/app'
 import TheLoginButton from './TheLoginButton'
 import TheLogoutButton from './TheLogoutButton'
+import PeopleSearchSelect from './PeopleSearchSelect'
 
 export default {
   name: 'TheToolbar',
   components: {
     TheLoginButton,
     TheLogoutButton,
+    PeopleSearchSelect,
   },
   directives: {
     scroll: {
@@ -94,6 +100,13 @@ export default {
         }px 8px;`
       )
     },
+    handleScrollInput(evt, el) {
+      el.setAttribute(
+        'style',
+        `opacity: ${window.scrollY >= 300 && 1};
+        visibility: ${window.scrollY >= 300 ? 'visible' : 'hidden'}`
+      )
+    },
   },
 }
 </script>
@@ -102,5 +115,10 @@ export default {
 .v-toolbar[data-booted='true'] {
   transition: null;
   box-shadow: rgba(0, 0, 0, 0.28) 0px -8px 8px;
+}
+.search-toolbar {
+  visibility: hidden;
+  transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
 }
 </style>
