@@ -23,18 +23,27 @@
       slot="selection"
       slot-scope="{ item, selected }"
     >
-      {{ selected }}
+      {{ item.item.apellidosynombre }}
     </template>
     <template
       slot="item"
       slot-scope="{ item, tile }"
     >
-      {{ item }}
+      <v-list-tile-content>
+        <v-list-tile-title v-text="item.item.apellidosynombre"/>
+        <v-list-tile-sub-title v-text="`*****${item.item.dni}`"/>
+      </v-list-tile-content>
+      <v-list-tile-action>
+        <v-icon>mdi-coin</v-icon>
+      </v-list-tile-action>
     </template>
   </v-autocomplete>
 
 </template>
 <script>
+import debounce from 'lodash.debounce'
+import { fb } from '@/plugins/firebaseFunctions'
+
 export default {
   name: 'PeopleSearchSelect',
   directives: {},
@@ -44,9 +53,23 @@ export default {
       isLoading: false,
       items: [],
       search: null,
+      searchPerson: fb.httpsCallable('searchPerson'),
     }
   },
-  methods: {},
+  watch: {
+    search: debounce(async function(value) {
+      if (!value) return
+      this.isLoading = true
+      try {
+        const { data } = await this.searchPerson(value)
+        this.items = data
+      } catch (err) {
+        console.log(err)
+      } finally {
+        this.isLoading = false
+      }
+    }, 400),
+  },
 }
 </script>
 
@@ -59,5 +82,19 @@ export default {
 }
 .v-select.v-select--is-menu-active .v-input__icon--append .v-icon {
   transform: none;
+}
+.theme--dark.v-list {
+  background: white;
+  transition: none;
+  color: rgba(0, 0, 0, 0.87);
+  .v-list__tile__sub-title {
+    color: rgba(0, 0, 0, 0.54);
+  }
+
+  div {
+    &:hover {
+      background: rgb(238, 238, 238);
+    }
+  }
 }
 </style>
