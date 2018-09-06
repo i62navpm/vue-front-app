@@ -33,9 +33,6 @@
         <v-list-tile-title v-text="item.item.apellidosynombre"/>
         <v-list-tile-sub-title v-text="`*****${item.item.dni}`"/>
       </v-list-tile-content>
-      <v-list-tile-action>
-        <v-icon>mdi-coin</v-icon>
-      </v-list-tile-action>
     </template>
   </v-autocomplete>
 
