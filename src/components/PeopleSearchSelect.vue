@@ -5,6 +5,7 @@
     :loading="isLoading"
     :search-input.sync="search"
     :color="isLoading ? 'accent' : 'primary'"
+    :readonly="isLoading"
     no-filter
     attach
     hide-no-data
@@ -87,6 +88,7 @@ export default {
   .v-list__tile__sub-title {
     color: rgba(0, 0, 0, 0.54);
   }
+  .v-list__tile--highlighted,
   :hover {
     transition: all 0.15s linear;
     background: rgb(238, 238, 238);
