@@ -77,6 +77,12 @@ export default {
   .v-label {
     color: white;
   }
+  input {
+    transition: color 0.15s linear;
+    &[readonly] {
+      color: rgba(0, 0, 0, 0.5);
+    }
+  }
 }
 .v-select.v-select--is-menu-active .v-input__icon--append .v-icon {
   transform: none;
@@ -86,7 +92,7 @@ export default {
   color: rgba(0, 0, 0, 0.87);
   text-transform: capitalize;
   .v-list__tile__sub-title {
-    color: rgba(0, 0, 0, 0.54);
+    color: rgba(0, 0, 0, 0.5);
   }
   .v-list__tile--highlighted,
   :hover {
