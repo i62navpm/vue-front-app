@@ -58,7 +58,7 @@ export default {
   },
   watch: {
     search: debounce(async function(value) {
-      if (!value) return
+      if (!value || value.length < 3) return
       this.isLoading = true
       try {
         const { data } = await this.searchPerson(value)
@@ -85,16 +85,14 @@ export default {
 }
 .theme--dark.v-list {
   background: white;
-  transition: none;
   color: rgba(0, 0, 0, 0.87);
+  text-transform: capitalize;
   .v-list__tile__sub-title {
     color: rgba(0, 0, 0, 0.54);
   }
-
-  div {
-    &:hover {
-      background: rgb(238, 238, 238);
-    }
+  :hover {
+    transition: all 0.15s linear;
+    background: rgb(238, 238, 238);
   }
 }
 </style>
