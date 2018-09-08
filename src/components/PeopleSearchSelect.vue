@@ -72,6 +72,7 @@ export default {
   methods: {
     goToPerson() {
       if (!this.model) return
+      this.$store.dispatch('setSearchDialog', true)
     },
   },
 }
