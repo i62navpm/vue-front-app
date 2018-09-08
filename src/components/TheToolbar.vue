@@ -9,11 +9,15 @@
     <v-toolbar-title>Title</v-toolbar-title>
 
     <v-spacer/>
-
-    <people-search-select 
-      v-scroll="handleScrollInput" 
-      class="search-toolbar"/>
-
+    
+    <v-flex 
+      xs6
+    >
+      <people-search-select 
+        v-scroll="handleScrollInput" 
+        class="search-toolbar"/>
+    </v-flex>
+    
     <v-spacer/>
 
     <the-logout-button v-if="user.email"/>
