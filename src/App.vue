@@ -4,7 +4,7 @@
     <the-toolbar />
     <the-sidebar />
     
-    <v-content>
+    <v-content :class="{collapse: $route.name !== 'home'}">
       <the-main-people-search/>
       <router-view/>
     </v-content>
@@ -30,3 +30,9 @@ export default {
   },
 }
 </script>
+
+<style lang="scss" scoped>
+.collapse {
+  transform: translateY(-30em);
+}
+</style>
