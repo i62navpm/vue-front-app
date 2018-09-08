@@ -5,6 +5,7 @@
     dark
     app
   >
+    <the-dialog-people-search/>
     <v-toolbar-side-icon @click.stop="toggleSidebar(!drawer)"/>
     <v-toolbar-title>Title</v-toolbar-title>
 
@@ -31,6 +32,7 @@ import firebase from 'firebase/app'
 import TheLoginButton from './TheLoginButton'
 import TheLogoutButton from './TheLogoutButton'
 import PeopleSearchSelect from './PeopleSearchSelect'
+import TheDialogPeopleSearch from './TheDialogPeopleSearch'
 
 export default {
   name: 'TheToolbar',
@@ -38,6 +40,7 @@ export default {
     TheLoginButton,
     TheLogoutButton,
     PeopleSearchSelect,
+    TheDialogPeopleSearch,
   },
   directives: {
     scroll: {
