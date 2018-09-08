@@ -17,8 +17,9 @@
     label="Escribe tu nombre o tu dni"
     class="main-select"
     append-icon="search"
-    dark  
-    solo-inverted
+    dark
+    solo-inverted  
+    @change="goToPerson"
   >
     <template
       slot="selection"
@@ -67,6 +68,11 @@ export default {
         this.isLoading = false
       }
     }, 400),
+  },
+  methods: {
+    goToPerson() {
+      if (!this.model) return
+    },
   },
 }
 </script>
