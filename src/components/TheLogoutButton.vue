@@ -4,7 +4,7 @@
     left>
     <v-avatar 
       slot="activator"
-      color="teal" 
+      color="red darken-4" 
       size="32">
       <span class="white--text">{{ user.displayName.charAt(0).toUpperCase() }}</span>
     </v-avatar>
