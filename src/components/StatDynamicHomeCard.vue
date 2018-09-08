@@ -45,17 +45,6 @@ export default {
       default: '',
     },
   },
-  data() {
-    return {
-      titleMap: {
-        assignmentList: 'Listado de asignaciones',
-        normalList: 'Listado normal',
-        bilingualList: 'Listado bilingüe',
-        voluntaryList: 'Listado de voluntarios',
-        citationList: 'Listado de citaciones',
-      },
-    }
-  },
   computed: {
     binding() {
       const binding = {}
@@ -63,9 +52,6 @@ export default {
       if (!this.$vuetify.breakpoint.mdAndUp) binding.column = true
 
       return binding
-    },
-    title() {
-      return this.titleMap[this.list]
     },
     statObject() {
       return {
