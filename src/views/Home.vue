@@ -36,12 +36,12 @@
             :list="'bilingualList'"
             class="mb-5"/>
         </article>
-        <article v-if="data.citationList">
+        <article v-if="data.voluntaryList">
           <h3 class="font-weight-regular home-title mb-2">Lista de voluntarios</h3>
           <h4 class="font-weight-regular home-subheading mb-4">Número de personas en el listado de voluntarios</h4>
           <stat-static-home-card
-            :data="data.citationList" 
-            :list="'citationList'"
+            :data="data.voluntaryList" 
+            :list="'voluntaryList'"
             class="mb-5"/>
         </article>
       </v-layout>
