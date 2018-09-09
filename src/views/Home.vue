@@ -1,5 +1,5 @@
 <template>
-  <v-container >
+  <v-container>
     <v-slide-y-transition mode="out-in">
       <v-layout 
         column 
