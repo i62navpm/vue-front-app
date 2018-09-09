@@ -1,7 +1,7 @@
 <template>
   <div class="text-xs-center">
     <v-dialog
-      v-model="dialog"
+      v-model="dialog.open"
       persistent
       width="300"
     >
@@ -20,12 +20,17 @@
             <v-list-tile color="white">
               <v-list-tile-action>
                 <v-progress-circular
+                  v-if="dialog.loading.normalList"
                   :width="2"
                   indeterminate
                   size="16"
                   class="mr-3"
                   color="pink"
                 />
+                <v-icon 
+                  v-else
+                  class="mr-3"
+                  color="lime">check</v-icon>
               </v-list-tile-action>
 
               <v-list-tile-content>
@@ -38,12 +43,17 @@
             <v-list-tile color="white">
               <v-list-tile-action>
                 <v-progress-circular
+                  v-if="dialog.loading.bilingualList"
                   :width="2"
                   indeterminate
                   size="16"
                   class="mr-3"
                   color="pink"
                 />
+                <v-icon 
+                  v-else
+                  class="mr-3"
+                  color="lime">check</v-icon>
               </v-list-tile-action>
 
               <v-list-tile-content>
@@ -56,12 +66,17 @@
             <v-list-tile color="white">
               <v-list-tile-action>
                 <v-progress-circular
+                  v-if="dialog.loading.voluntaryList"
                   :width="2"
                   indeterminate
                   size="16"
                   class="mr-3"
                   color="pink"
                 />
+                <v-icon 
+                  v-else
+                  class="mr-3"
+                  color="lime">check</v-icon>
               </v-list-tile-action>
 
               <v-list-tile-content>
@@ -81,15 +96,7 @@ export default {
   name: 'TheDialogPeopleSearch',
   computed: {
     dialog() {
-      return this.$store.state.searchDialog.open
-    },
-  },
-  methods: {
-    closeDialog() {
-      setTimeout(() => {
-        this.$store.dispatch('setSearchDialog', false)
-        this.$router.push('about')
-      }, 5000)
+      return this.$store.state.searchDialog
     },
   },
 }
