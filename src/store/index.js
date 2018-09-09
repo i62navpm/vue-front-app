@@ -9,7 +9,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   strict: process.env.NODE_ENV !== 'production',
-  plugins: [createPersistedState()],
+  plugins: [createPersistedState({ paths: ['sidebar', 'auth', 'home'] })],
   modules: {
     sidebar,
     searchDialog,
