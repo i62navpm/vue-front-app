@@ -72,7 +72,7 @@ export default {
   methods: {
     goToPerson() {
       if (!this.model) return
-      this.$store.dispatch('setSearchDialog', true)
+      this.$router.push(`/${this.model.apellidosynombre}`)
     },
   },
 }
