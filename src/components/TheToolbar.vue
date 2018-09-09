@@ -7,7 +7,10 @@
   >
     <the-dialog-people-search/>
     <v-toolbar-side-icon @click.stop="toggleSidebar(!drawer)"/>
-    <v-toolbar-title>Title</v-toolbar-title>
+    <router-link
+      :to="'/'" 
+      tag="v-toolbar-title" 
+      class="white--text">Title</router-link>
 
     <v-spacer/>
     
@@ -122,6 +125,9 @@ export default {
 .v-toolbar[data-booted='true'] {
   transition: null;
   box-shadow: rgba(0, 0, 0, 0.28) 0px -8px 8px;
+  .v-toolbar__title {
+    cursor: pointer;
+  }
 }
 .search-toolbar {
   visibility: hidden;
