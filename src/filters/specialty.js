@@ -15,7 +15,7 @@ export default function(value) {
     '002-educacioninfantil_ingles': '[002] Educación infantil inglés',
     '003-musica_ingles': '[003] Música inglés',
     '004-educacionfisica_ingles': '[004] Educación física_inglés',
-    '005-inglés_inglés': '[005] Inglés inglés',
+    '005-ingles_ingles': '[005] Inglés inglés',
   }
   return mapSpecialty[value]
 }
