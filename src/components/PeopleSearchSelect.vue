@@ -67,7 +67,7 @@ export default {
       } finally {
         this.isLoading = false
       }
-    }, 400),
+    }, 1000),
   },
   methods: {
     goToPerson() {
