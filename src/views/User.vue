@@ -2,8 +2,17 @@
   <v-container>
     <v-slide-y-transition mode="out-in">
       <v-layout 
+        align-space-around 
+        justify-space-between 
         column 
-        align-let>
+        fill-height>
+        <v-flex 
+          v-if="items.length" 
+          xs12
+          class="mb-5">
+          <line-chart :data="statObject"/>
+        </v-flex>
+        
         <v-expansion-panel popout>
           <v-expansion-panel-content
             v-for="(item,i) in items"
@@ -29,8 +38,9 @@
                   </v-list-tile-content>
                   <v-list-tile-action>
                     <v-badge 
-                      overlap 
-                      left>
+                      :right="item.trending < 0" 
+                      :left="item.trending >= 0" 
+                      overlap>
                       <span slot="badge">{{ trendingAbs(item.trending) }}</span>
                       <v-tooltip 
                         v-if="item.trending > 0" 
@@ -84,12 +94,34 @@
 
 <script>
 import store from '@/store'
+import LineChart from '@/components/LineChart'
+
 export default {
   name: 'User',
+  components: {
+    LineChart,
+  },
   data() {
     return {
       items: [],
     }
+  },
+  computed: {
+    statObject() {
+      return this.items.map(list => {
+        return {
+          labels: list.info.map(item => {
+            ;[item] = Object.keys(item)
+            return item
+          }),
+          label: this.$options.filters.specialty(list.specialty),
+          values: list.info.map(item => {
+            ;[item] = Object.values(item).map(({ position }) => position)
+            return item
+          }),
+        }
+      })
+    },
   },
   methods: {
     trendingAbs(trending) {
