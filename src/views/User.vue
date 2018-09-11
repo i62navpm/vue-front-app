@@ -8,6 +8,7 @@
           <v-expansion-panel-content
             v-for="(item,i) in items"
             :key="i"
+            expand-icon=""
           >
             <div slot="header">
               <v-list 
@@ -26,11 +27,54 @@
                     <v-list-tile-title>{{ item.modality | modality }}</v-list-tile-title>
                     <v-list-tile-sub-title>{{ item.specialty | specialty }}</v-list-tile-sub-title>
                   </v-list-tile-content>
+                  <v-list-tile-action>
+                    <v-badge 
+                      overlap 
+                      left>
+                      <span slot="badge">{{ trendingAbs(item.trending) }}</span>
+                      <v-tooltip 
+                        v-if="item.trending > 0" 
+                        bottom>
+                        <span slot="activator"><v-icon
+                          large
+                          color="green"
+                        >
+                          trending_up
+                        </v-icon>
+                        </span>
+                        <span>Estás más cerca! 🎉</span>
+                      </v-tooltip>
+                      <v-tooltip 
+                        v-else-if="item.trending < 0" 
+                        bottom>
+                        <span slot="activator"><v-icon
+                          large
+                          color="red"
+                        >
+                          trending_down
+                        </v-icon>
+                        </span>
+                        <span>Te has alejado 😭</span>
+                      </v-tooltip>
+                      <v-tooltip 
+                        v-else 
+                        bottom>
+                        <span slot="activator"><v-icon
+                          large
+                          color="yellow darken-2"
+                          class="rotate"
+                        >
+                          pause
+                        </v-icon>
+                        </span>
+                        <span>Te mantienes igual 😒</span>
+                      </v-tooltip>
+                        
+                    </v-badge>
+                  </v-list-tile-action>
                 </v-list-tile>
-            </v-list></div>
-            <v-card>
-              <v-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</v-card-text>
-            </v-card>
+              </v-list>
+            </div>
           </v-expansion-panel-content>
         </v-expansion-panel>
       </v-layout>
@@ -47,8 +91,21 @@ export default {
       items: [],
     }
   },
+  methods: {
+    trendingAbs(trending) {
+      return Math.abs(trending)
+    },
+  },
   async beforeRouteEnter(to, from, next) {
+    function trending(item) {
+      const [lastPosition = {}] = item.info.slice(-1).values()
+      const [{ position = 0 } = {}] = Object.values(lastPosition)
+      return position - item.position
+    }
+
     let result = await store.dispatch('openSearchDialog', to.params.id)
+    result.map(item => (item.trending = trending(item)))
+
     next(vm => (vm.items = result))
   },
 }
@@ -57,5 +114,18 @@ export default {
 <style lang="scss" scoped>
 .v-expansion-panel__container {
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+}
+.v-icon {
+  &.rotate {
+    transform: rotate(90deg);
+  }
+}
+.v-badge {
+  span {
+    font-size: 10px;
+  }
+}
+.v-chip__content {
+  font-size: 10px;
 }
 </style>
