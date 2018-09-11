@@ -18,7 +18,17 @@ export default function searchUtils(db) {
         .get()
 
       if (!querySnapshot.empty) {
-        acc[doc.id] = querySnapshot.docs.map(doc => doc.data())
+        acc[doc.id] = []
+        for (const docOpp of querySnapshot.docs) {
+          const dataOpp = docOpp.data()
+          let infoSnapShot = await docOpp.ref
+            .collection('positionMovements')
+            .get()
+          infoSnapShot = infoSnapShot.docs.map(item => ({
+            [item.id]: item.data(),
+          }))
+          acc[doc.id].push({ ...dataOpp, info: infoSnapShot })
+        }
       }
     }
     return acc
