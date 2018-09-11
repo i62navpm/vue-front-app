@@ -17,6 +17,7 @@ export default {
     setStats: async ({ commit }) => {
       let data = await stats.getStats([
         'assignmentList',
+        'citationList',
         'bilingualList',
         'normalList',
         'voluntaryList',
