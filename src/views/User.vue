@@ -114,7 +114,9 @@ export default {
             ;[item] = Object.keys(item)
             return item
           }),
-          label: this.$options.filters.specialty(list.specialty),
+          label: `${this.$options.filters.specialty(
+            list.specialty
+          )} - ${this.$options.filters.modality(list.modality)}`,
           values: list.info.map(item => {
             ;[item] = Object.values(item).map(({ position }) => position)
             return item
