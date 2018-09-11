@@ -24,9 +24,15 @@ export default function searchUtils(db) {
           let infoSnapShot = await docOpp.ref
             .collection('positionMovements')
             .get()
-          infoSnapShot = infoSnapShot.docs.map(item => ({
-            [item.id]: item.data(),
-          }))
+          infoSnapShot = infoSnapShot.docs.map((item, index) => {
+            let id = new Date(item.id)
+            if (index === 0) {
+              id = new Date('07/25/18')
+            } else if (index === 1) {
+              id = new Date('09/06/18')
+            }
+            return { [id.toLocaleDateString()]: item.data() }
+          })
           acc[doc.id].push({ ...dataOpp, info: infoSnapShot })
         }
       }
