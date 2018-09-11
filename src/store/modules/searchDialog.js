@@ -50,10 +50,12 @@ export default {
         .finally(() => dispatch('closeSearchDialog'))
     },
     closeSearchDialog: ({ commit }) => {
-      commit('startLoad', 'normalList')
-      commit('startLoad', 'bilingualList')
-      commit('startLoad', 'voluntaryList')
-      commit('setSearchDialog', false)
+      setTimeout(() => commit('setSearchDialog', false), 300)
+      setTimeout(() => {
+        commit('startLoad', 'normalList')
+        commit('startLoad', 'bilingualList')
+        commit('startLoad', 'voluntaryList')
+      }, 500)
     },
   },
   getters: {
