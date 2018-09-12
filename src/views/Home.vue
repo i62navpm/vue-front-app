@@ -21,8 +21,8 @@
             class="mb-5"/>
         </article>
         <article v-if="data.normalList">
-          <h3 class="font-weight-regular home-title mb-2">Lista normal</h3>
-          <h4 class="font-weight-regular home-subheading mb-4">Número de personas en el listado normal</h4>
+          <h3 class="font-weight-regular home-title mb-2">Lista ordinario</h3>
+          <h4 class="font-weight-regular home-subheading mb-4">Número de personas en el listado ordinario</h4>
           <v-stat-static-home-card 
             :data="data.normalList" 
             :list="'normalList'"

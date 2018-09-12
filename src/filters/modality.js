@@ -3,7 +3,7 @@ export default function(value) {
 
   const mapModality = {
     assignmentList: 'Listado de asignaciones',
-    normalList: 'Listado normal',
+    normalList: 'Listado ordinario',
     bilingualList: 'Listado bilingüe',
     voluntaryList: 'Listado de voluntarios',
     citationList: 'Listado de citaciones',
