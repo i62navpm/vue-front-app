@@ -7,7 +7,6 @@
       fill-height>
       <v-flex 
         xs12 
-        sm6 
       >
         <div class="section section-left">
           <v-layout 
@@ -16,48 +15,23 @@
             row 
             fill-height>
             <v-flex xs12>
-              <doughnut-chart :data="statObject"/>
+              <v-chart-bar :data="statObject"/>
             </v-flex>
           </v-layout>
         </div>
       </v-flex>
 
-      <v-flex 
-        xs12 
-        sm6
-      >
-        <div class="section section-right">
-          <v-list 
-            two-line 
-            dark>
-            <template v-for="(item, key) in data">
-              <v-list-tile
-                :key="item.createdAt"
-                @click="goToList(key)"
-              >
-                <v-list-tile-content>
-                  <v-list-tile-title> 
-                    {{ key |specialty }}
-                  </v-list-tile-title>
-                  <v-list-tile-sub-title>
-                    Fecha de creación: {{ parseDate(item.createdAt) }}
-                  </v-list-tile-sub-title>
-                </v-list-tile-content>
-              </v-list-tile>
-            </template>
-          </v-list>
-        </div>
-      </v-flex>
+      
     </v-layout>
   </v-card>
 </template>
 <script>
-import DoughnutChart from '@/components/DoughnutChart'
+import VChartBar from '@/components/VChartBar'
 
 export default {
-  name: 'StatDynamicHomeCard',
+  name: 'StatStaticHomeCard',
   components: {
-    DoughnutChart,
+    VChartBar,
   },
   props: {
     data: {
