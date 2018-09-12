@@ -75,4 +75,10 @@ export default {
 .v-chip__content {
   font-size: 10px;
 }
+.v-tooltip {
+  .v-icon {
+    border: 2px solid;
+    border-radius: 50%;
+  }
+}
 </style>
