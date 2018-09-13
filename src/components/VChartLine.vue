@@ -42,9 +42,10 @@ export default {
       }, [])
     )
     const datasets = this.data.reduce((acc, serie, index) => {
+      const dateIndex = [...labels].map(date => serie.labels.lastIndexOf(date))
       const datasets = {
         label: serie.label,
-        data: serie.values,
+        data: dateIndex.map(date => serie.values[date]),
         backgroundColor: colors[index],
         borderColor: colors[index] + '80',
         fill: false,
