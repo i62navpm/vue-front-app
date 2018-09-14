@@ -6,7 +6,7 @@
     
     <v-content :class="{collapse: $route.name !== 'home'}">
       <the-main-people-search/>
-      <router-view/>
+      <router-view :key="$route.fullPath"/>
     </v-content>
 
     <v-footer 
