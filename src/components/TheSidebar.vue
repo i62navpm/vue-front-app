@@ -48,6 +48,7 @@ export default {
   name: 'TheSidebar',
   computed: {
     items() {
+      if (!this.$store.state.home.data) return
       return Object.entries(this.$store.state.home.data).reduce((acc, curr) => {
         const [modality, specialties] = curr
         acc.push({ modality, specialties: Object.keys(specialties) })
