@@ -33,7 +33,7 @@
         <v-list-tile
           v-for="specialty in item.specialties"
           :key="specialty"
-          @click="$router.push('/')"
+          @click="$router.push( {name: 'specialtyTable', params: {modality: item.modality, specialty}})"
         >
           <v-list-tile-content>
             <v-list-tile-title>{{ specialty | specialty }}</v-list-tile-title>
