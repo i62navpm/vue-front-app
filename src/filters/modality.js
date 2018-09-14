@@ -6,7 +6,9 @@ export default function(value) {
     normalList: 'Listado ordinario',
     bilingualList: 'Listado bilingüe',
     voluntaryList: 'Listado de voluntarios',
-    citationList: 'Listado de citaciones',
+    citationList: 'Citaciones ordinarias',
+    voluntaryListDynamic: 'Citaciones de voluntarios',
+    incorporateList: 'Listado de incorporados',
   }
   return mapModality[value]
 }
