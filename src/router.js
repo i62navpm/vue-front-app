@@ -17,5 +17,11 @@ export default new Router({
       component: () =>
         import(/* webpackChunkName: "user" */ './views/User.vue'),
     },
+    {
+      path: '/:modality/:specialty',
+      name: 'specialtyTable',
+      component: () =>
+        import(/* webpackChunkName: "SpecialtyTable" */ './views/SpecialtyTable.vue'),
+    },
   ],
 })
