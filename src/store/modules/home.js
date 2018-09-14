@@ -18,6 +18,8 @@ export default {
       let data = await stats.getStats([
         'assignmentList',
         'citationList',
+        'voluntaryListDynamic',
+        'incorporateList',
         'bilingualList',
         'normalList',
         'voluntaryList',
