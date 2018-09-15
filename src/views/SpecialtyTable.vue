@@ -49,7 +49,6 @@
 
 <script>
 import { db } from '@/plugins/firestore'
-import store from '@/store'
 
 export default {
   name: 'SpecialtyTable',
