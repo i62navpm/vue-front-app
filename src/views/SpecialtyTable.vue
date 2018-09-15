@@ -13,6 +13,7 @@
             <v-spacer/>
             <v-text-field
               v-model="search"
+              disable-initial-sort
               append-icon="search"
               label="Search"
               single-line
@@ -121,20 +122,28 @@ export default {
       headers.unshift('orden')
       return headers.map(head => ({
         text: head,
-        sortable: true,
         value: head,
       }))
     },
     async getOpponents() {
-      const { sortBy, descending, page, rowsPerPage } = this.pagination
+      const { sortBy, descending, page, rowsPerPage } = Object.freeze(
+        this.pagination
+      )
 
-      const opponentRef = db
-        .collection(`${this.path}/opponents`)
-        .orderBy(sortBy, descending ? 'desc' : 'asc')
-        .startAt((page - 1) * rowsPerPage)
-        .limit(rowsPerPage)
+      const opponentRef =
+        page - 1
+          ? db
+              .collection(`${this.path}/opponents`)
+              .orderBy(sortBy || 'count', descending ? 'desc' : 'asc')
+              .startAt(page * rowsPerPage)
+              .limit(rowsPerPage)
+          : db
+              .collection(`${this.path}/opponents`)
+              .orderBy(sortBy || 'count', descending ? 'desc' : 'asc')
+              .limit(rowsPerPage)
 
       const querySnapshot = await opponentRef.get()
+
       return querySnapshot.docs.map(doc => doc.data())
     },
   },
