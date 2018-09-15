@@ -101,9 +101,9 @@ export default {
     cleanOpponents(opponents) {
       return opponents.map(opponent =>
         this.headers.reduce((acc, curr) => {
-          acc[curr.text] = opponent[curr.text]
+          acc.push(opponent[curr.text] || '-')
           return acc
-        }, {})
+        }, [])
       )
     },
     getHeaders(row) {
