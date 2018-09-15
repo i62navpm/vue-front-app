@@ -8,7 +8,6 @@
         fill-height>
         <v-card>
           <v-card-title>
-            
             <h4 class="title">Listado de opositores</h4>
             <v-spacer/>
             <v-text-field
@@ -26,7 +25,6 @@
             :items="opponents"
             :total-items="totalItems"
             :loading="loading"
-            :search="search"
           >
             <template 
               slot="items" 
@@ -42,7 +40,8 @@
               </td>
             </template>
             <v-alert 
-              slot="no-results" 
+              v-if="search" 
+              slot="no-results"
               :value="true"
               color="error" 
               icon="warning">
@@ -57,6 +56,7 @@
 
 <script>
 import { db } from '@/plugins/firestore'
+import debounce from 'lodash.debounce'
 
 export default {
   name: 'SpecialtyTable',
@@ -86,10 +86,36 @@ export default {
     },
   },
   watch: {
+    search: debounce(async function(value) {
+      if (!value || value.length < 3) return
+      this.isLoading = true
+      try {
+        this.loading = true
+        const opponentRef = db
+          .collection(`${this.path}/opponents`)
+          .where('apellidosynombre', '>=', this.search.trim())
+          .orderBy('apellidosynombre')
+          .limit(this.pagination.rowsPerPage)
+        const querySnapshot = await opponentRef.get()
+
+        const opponents = querySnapshot.docs.map(doc => doc.data())
+
+        if (!opponents.length) return
+
+        this.headers = this.getHeaders(opponents)
+        this.opponents = this.cleanOpponents(opponents)
+      } catch (err) {
+        this.headers = []
+        this.opponents = []
+      } finally {
+        this.loading = false
+      }
+    }, 2000),
     pagination: {
       async handler() {
         try {
           this.loading = true
+          this.search = ''
           let opponents = await this.getOpponents()
 
           if (!opponents.length) return
@@ -137,12 +163,8 @@ export default {
     async getOpponents() {
       const { sortBy, descending, page, rowsPerPage } = this.pagination
 
-      const opponentRef = this.search
-        ? db
-            .collection(`${this.path}/opponents`)
-            .where('apellidosynombre', '>=', this.search)
-            .orderBy('apellidosynombre')
-        : page - 1
+      const opponentRef =
+        page - 1
           ? db
               .collection(`${this.path}/opponents`)
               .orderBy(sortBy || 'count', descending ? 'desc' : 'asc')
