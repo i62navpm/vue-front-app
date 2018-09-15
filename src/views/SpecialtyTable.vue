@@ -15,7 +15,7 @@
               v-model="search"
               disable-initial-sort
               append-icon="search"
-              label="Search"
+              label="Busca por apellidos, nombre"
               single-line
               hide-details
             />
@@ -26,17 +26,24 @@
             :items="opponents"
             :total-items="totalItems"
             :loading="loading"
+            :search="search"
           >
             <template 
               slot="items" 
               slot-scope="props">
               <td 
                 v-for="(item, key) in props.item" 
-                :key="key">{{ item }}</td>
+                :key="key">
+                <router-link 
+                  v-if="key === indexName"
+                  :to="`/${item}`" 
+                  tag="a">{{ item }}</router-link>
+                <span v-else>{{ item }}</span>
+              </td>
             </template>
             <v-alert 
               slot="no-results" 
-              :value="true" 
+              :value="true"
               color="error" 
               icon="warning">
               No hay coincidencias para: "{{ search }}".
@@ -57,6 +64,7 @@ export default {
   data() {
     return {
       search: '',
+      indexName: 0,
       loading: false,
       pagination: {
         sortBy: 'count',
@@ -101,7 +109,8 @@ export default {
   methods: {
     cleanOpponents(opponents) {
       return opponents.map(opponent =>
-        this.headers.reduce((acc, curr) => {
+        this.headers.reduce((acc, curr, index) => {
+          if (curr.text === 'apellidosynombre') this.indexName = index
           acc.push(opponent[curr.text] || '-')
           return acc
         }, [])
@@ -126,12 +135,14 @@ export default {
       }))
     },
     async getOpponents() {
-      const { sortBy, descending, page, rowsPerPage } = Object.freeze(
-        this.pagination
-      )
+      const { sortBy, descending, page, rowsPerPage } = this.pagination
 
-      const opponentRef =
-        page - 1
+      const opponentRef = this.search
+        ? db
+            .collection(`${this.path}/opponents`)
+            .where('apellidosynombre', '>=', this.search)
+            .orderBy('apellidosynombre')
+        : page - 1
           ? db
               .collection(`${this.path}/opponents`)
               .orderBy(sortBy || 'count', descending ? 'desc' : 'asc')
@@ -153,5 +164,8 @@ export default {
 <style lang="scss" scoped>
 td {
   text-transform: capitalize;
+  a {
+    text-decoration: none;
+  }
 }
 </style>
