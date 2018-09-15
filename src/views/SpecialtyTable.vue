@@ -58,7 +58,6 @@ export default {
     return {
       search: '',
       loading: false,
-      totalItems: 0,
       pagination: {
         sortBy: 'count',
         descending: false,
@@ -70,6 +69,14 @@ export default {
       path: this.$store.state.route.path,
     }
   },
+  computed: {
+    totalItems() {
+      const result = this.$store.state.home.data
+      return result[this.$store.state.route.params.modality][
+        this.$store.state.route.params.specialty
+      ].total
+    },
+  },
   watch: {
     pagination: {
       async handler() {
@@ -79,8 +86,8 @@ export default {
 
           if (!opponents.length) return
 
+          this.headers = this.getHeaders(opponents)
           this.opponents = this.cleanOpponents(opponents)
-          this.headers = this.getHeaders(this.opponents[0])
         } catch (err) {
           this.headers = []
           this.opponents = []
@@ -91,22 +98,29 @@ export default {
       deep: true,
     },
   },
-  async beforeRouteEnter(to, from, next) {
-    const result = store.state.home.data
-    const totalItems = result[to.params.modality][to.params.specialty].total
-    next(vm => (vm.totalItems = totalItems))
-  },
   methods: {
     cleanOpponents(opponents) {
-      return opponents.map(({ orden, dni, ...rest }) => {
-        delete rest['position']
-        delete rest['count']
-
-        return { orden, dni, ...rest }
-      })
+      return opponents.map(opponent =>
+        this.headers.reduce((acc, curr) => {
+          acc[curr.text] = opponent[curr.text]
+          return acc
+        }, {})
+      )
     },
     getHeaders(row) {
-      return Object.keys(row).map(head => ({
+      let headers = [
+        ...row.reduce((acc, curr) => {
+          Object.keys(curr).forEach(head => {
+            if (['position', 'count', 'dni', 'orden'].includes(head)) return
+            acc.add(head)
+          })
+          return acc
+        }, new Set()),
+      ]
+
+      headers.unshift('dni')
+      headers.unshift('orden')
+      return headers.map(head => ({
         text: head,
         sortable: true,
         value: head,
