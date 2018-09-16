@@ -37,9 +37,22 @@ export default {
   },
   computed: {
     trending() {
-      const [lastPosition = {}] = this.data.info.slice(-1).values()
-      const [{ position = 0 } = {}] = Object.values(lastPosition)
-      return position - this.data.position
+      const dates = [
+        ...this.data.info.reduce((acc, curr) => {
+          const [date] = Object.keys(curr)
+          acc.add(date)
+          return acc
+        }, new Set()),
+      ]
+      const lastDate = dates[dates.length - 1]
+      const position = this.data.info.reduce((acc, curr) => {
+        let newDate = curr[lastDate]
+          ? curr[lastDate].position - this.data.position
+          : 0
+        return newDate > acc ? newDate : acc
+      }, 0)
+
+      return position
     },
   },
 }
