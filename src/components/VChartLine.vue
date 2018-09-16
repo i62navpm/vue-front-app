@@ -63,7 +63,7 @@ export default {
         responsive: true,
         maintainAspectRatio: false,
         legend: {
-          position: 'left',
+          position: 'top',
         },
         tooltips: {
           enabled: true,

@@ -317,17 +317,16 @@ export default {
       valuesAcc.reduce((acc, curr, index) => {
         let sum = acc - curr
         valuesAcc[index] = sum
-        debugger
         return sum
       }, this.totalItems)
       const color = colors.shift()
       datasets.push({
-        label: 'Número de opositores',
+        label: 'Número total de opositores',
         type: 'line',
-        backgroundColor: color,
+        backgroundColor: color + '1a',
         borderColor: color + '80',
         data: valuesAcc,
-        fill: false,
+        fill: true,
       })
       return { labels, datasets }
     },
