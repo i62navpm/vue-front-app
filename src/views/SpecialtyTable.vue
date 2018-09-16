@@ -6,6 +6,84 @@
         justify-space-between 
         column 
         fill-height>
+
+        <v-container 
+          fluid 
+          grid-list-md>
+          <v-layout 
+            row 
+            wrap>
+            <v-flex 
+              d-flex 
+              xs12 
+              sm8>
+              <v-card>
+                <v-card-title 
+                  class="title" 
+                  primary-title>
+                  Movimientos en las listas
+                </v-card-title>
+                <v-card-text>
+                  <v-chart-cumulative 
+                    v-if="stats"
+                    :chart-data="stats"/>
+                  <p v-else>No ha habido movmientos</p>
+                </v-card-text>
+              </v-card>
+            </v-flex>
+            <v-flex 
+              d-flex 
+              xs12 
+              sm4>
+              <v-layout 
+                row 
+                wrap>
+                <v-flex>
+                  <v-layout 
+                    row 
+                    wrap>
+                    <v-flex
+                      d-flex
+                      xs12
+                    >
+                      <v-card
+                      >
+                        <v-card-title 
+                          class="title" 
+                          primary-title>
+                          Número de personas
+                        </v-card-title>
+                        <v-card-text class="headline green--text text-xs-right"># {{ totalItems }}</v-card-text>
+                      </v-card>
+                    </v-flex>
+                    <v-flex
+                      d-flex
+                      xs12
+                    >
+                      <v-card
+                      >
+                        <v-card-title 
+                        
+                          primary-title>
+                          <div class="title">Último movimiento</div>
+                          <div v-if="lastEvent.list" >{{ lastEvent.list | modality }}</div>
+                          <div v-else>{{ 'No ha habido movimiento' }}</div>
+                        </v-card-title>
+                        <v-card-text 
+                          
+                          class="headline text-xs-right">
+                          <v-user-list-status-trending :trending="lastEvent.outputs" />
+                        </v-card-text>
+                      </v-card>
+                      
+                    </v-flex>
+                  </v-layout>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+          </v-layout>
+        </v-container>
+
         <v-card>
           <v-card-title>
             <h4 class="title">Listado de opositores</h4>
@@ -57,13 +135,18 @@
 <script>
 import { db } from '@/plugins/firestore'
 import debounce from 'lodash.debounce'
+import VChartCumulative from '@/components/VChartCumulative'
+import VUserListStatusTrending from '@/components/VUserListStatusTrending'
 
 export default {
   name: 'SpecialtyTable',
-  components: {},
+  components: { VChartCumulative, VUserListStatusTrending },
   data() {
     return {
       search: '',
+      lastEvent: {},
+      stats: null,
+      chartData: {},
       indexName: 0,
       loading: false,
       pagination: {
@@ -122,6 +205,7 @@ export default {
 
           this.headers = this.getHeaders(opponents)
           this.opponents = this.cleanOpponents(opponents)
+          if (!this.stats) this.stats = this.getStats(await this.getEvents())
         } catch (err) {
           this.headers = []
           this.opponents = []
@@ -132,7 +216,91 @@ export default {
       deep: true,
     },
   },
+
   methods: {
+    async getEvents() {
+      let eventsRef = await db.collection(`${this.$route.fullPath}/events`)
+      const querySnapshot = await eventsRef.get()
+
+      if (querySnapshot.empty) return {}
+      this.lastEvent = querySnapshot.docs[querySnapshot.docs.length - 1].data()
+
+      let stats = querySnapshot.docs
+        .map(doc => {
+          let date = new Date(doc.id)
+          date = date.toLocaleDateString()
+          const data = doc.data()
+          return { ...data, date }
+        })
+        .reduce((acc, curr) => {
+          acc[curr.list] = acc[curr.list]
+            ? [
+                ...acc[curr.list],
+                { data: curr.inputs - curr.outputs, date: curr.date },
+              ]
+            : [{ data: curr.inputs - curr.outputs, date: curr.date }]
+          return acc
+        }, {})
+
+      return {
+        stats,
+      }
+    },
+    getStats(data) {
+      if (!data.stats) return
+      const colors = [
+        '#3366CC',
+        '#DC3912',
+        '#FF9900',
+        '#109618',
+        '#990099',
+        '#3B3EAC',
+        '#0099C6',
+        '#DD4477',
+        '#66AA00',
+        '#B82E2E',
+        '#316395',
+        '#994499',
+        '#22AA99',
+        '#AAAA11',
+        '#6633CC',
+        '#E67300',
+        '#8B0707',
+        '#329262',
+        '#5574A6',
+        '#3B3EAC',
+      ]
+
+      const labels = Object.entries(data.stats).reduce((acc, [, value]) => {
+        value.forEach(({ date }) => {
+          acc.add(date)
+        })
+        return acc
+      }, new Set())
+
+      const datasets = Object.entries(data.stats).reduce(
+        (acc, [key, value], index) => {
+          let data = [...labels].map(
+            date =>
+              value.reduce(
+                (acc, curr) => (curr.date === date ? acc + curr.data : acc),
+                0
+              ),
+            {}
+          )
+          acc.push({
+            label: this.$options.filters.modality(key),
+            data: data.map(item => Math.abs(item)),
+            backgroundColor: colors[index],
+            borderColor: colors[index] + '80',
+            fill: false,
+          })
+          return acc
+        },
+        []
+      )
+      return { labels: [...labels], datasets }
+    },
     cleanOpponents(opponents) {
       return opponents.map(opponent =>
         this.headers.reduce((acc, curr, index) => {
@@ -168,7 +336,7 @@ export default {
           ? db
               .collection(`${this.path}/opponents`)
               .orderBy(sortBy || 'count', descending ? 'desc' : 'asc')
-              .startAt(page * rowsPerPage)
+              .startAt((page - 1) * rowsPerPage)
               .limit(rowsPerPage)
           : db
               .collection(`${this.path}/opponents`)
