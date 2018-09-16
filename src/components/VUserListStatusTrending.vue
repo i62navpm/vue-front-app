@@ -3,7 +3,7 @@
     :right="trending < 0" 
     :left="trending >= 0" 
     overlap>
-    <span slot="badge">{{ trendingAbs }}</span>
+    <span slot="badge">{{ trendingAbs || 0 }}</span>
     <v-tooltip 
       v-if="trending > 0" 
       bottom>

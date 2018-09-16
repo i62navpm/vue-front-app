@@ -21,7 +21,7 @@
                 <v-card-title 
                   class="title" 
                   primary-title>
-                  Movimientos en las listas
+                  Movimientos de salidas y entradas
                 </v-card-title>
                 <v-card-text>
                   <v-chart-cumulative 
@@ -72,7 +72,7 @@
                         <v-card-text 
                           
                           class="headline text-xs-right">
-                          <v-user-list-status-trending :trending="lastEvent.outputs" />
+                          <v-user-list-status-trending :trending="lastEvent.outputs || (lastEvent.inputs * -1)" />
                         </v-card-text>
                       </v-card>
                       
