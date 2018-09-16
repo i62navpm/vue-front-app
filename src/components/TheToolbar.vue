@@ -23,7 +23,7 @@
     </v-flex>
     
     <v-spacer/>
-
+    <the-feedback-button class="mx-3" />
     <the-logout-button v-if="user.email"/>
     <the-login-button v-else/>
     
@@ -34,6 +34,7 @@
 import firebase from 'firebase/app'
 import TheLoginButton from './TheLoginButton'
 import TheLogoutButton from './TheLogoutButton'
+import TheFeedbackButton from './TheFeedbackButton'
 import PeopleSearchSelect from './PeopleSearchSelect'
 import TheDialogPeopleSearch from './TheDialogPeopleSearch'
 
@@ -42,6 +43,7 @@ export default {
   components: {
     TheLoginButton,
     TheLogoutButton,
+    TheFeedbackButton,
     PeopleSearchSelect,
     TheDialogPeopleSearch,
   },
