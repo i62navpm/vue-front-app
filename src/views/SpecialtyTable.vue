@@ -271,16 +271,19 @@ export default {
         '#3B3EAC',
       ]
 
-      const labels = Object.entries(data.stats).reduce((acc, [, value]) => {
-        value.forEach(({ date }) => {
-          acc.add(date)
-        })
-        return acc
-      }, new Set())
+      const [...labels] = Object.entries(data.stats).reduce(
+        (acc, [, value]) => {
+          value.forEach(({ date }) => {
+            acc.add(date)
+          })
+          return acc
+        },
+        new Set()
+      )
 
       const datasets = Object.entries(data.stats).reduce(
-        (acc, [key, value], index) => {
-          let data = [...labels].map(
+        (acc, [key, value]) => {
+          let data = labels.map(
             date =>
               value.reduce(
                 (acc, curr) => (curr.date === date ? acc + curr.data : acc),
@@ -288,18 +291,44 @@ export default {
               ),
             {}
           )
+          const color = colors.shift()
           acc.push({
             label: this.$options.filters.modality(key),
             data: data.map(item => Math.abs(item)),
-            backgroundColor: colors[index],
-            borderColor: colors[index] + '80',
+            backgroundColor: color,
+            borderColor: color + '80',
             fill: false,
           })
           return acc
         },
         []
       )
-      return { labels: [...labels], datasets }
+
+      const valuesAcc = labels.reduce((acc, curr, index) => {
+        acc.push(
+          datasets.reduce((acc, curr) => {
+            acc = acc + curr.data[index]
+            return acc
+          }, 0)
+        )
+        return acc
+      }, [])
+      valuesAcc.reduce((acc, curr, index) => {
+        let sum = acc - curr
+        valuesAcc[index] = sum
+        debugger
+        return sum
+      }, this.totalItems)
+      const color = colors.shift()
+      datasets.push({
+        label: 'Número de opositores',
+        type: 'line',
+        backgroundColor: color,
+        borderColor: color + '80',
+        data: valuesAcc,
+        fill: false,
+      })
+      return { labels, datasets }
     },
     cleanOpponents(opponents) {
       return opponents.map(opponent =>
