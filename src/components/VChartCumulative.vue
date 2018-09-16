@@ -1,5 +1,6 @@
 <script>
 import { Line, mixins } from 'vue-chartjs'
+import zoom from 'chartjs-plugin-zoom'
 
 export default {
   extends: Line,
@@ -13,9 +14,12 @@ export default {
     options: { type: Object, default: () => ({}) },
   },
   mounted() {
+    this.addPlugin(zoom)
+
     this.renderChart(this.chartData, {
       responsive: true,
       maintainAspectRatio: false,
+      zoom: { enabled: true },
       legend: {
         position: 'top',
       },
