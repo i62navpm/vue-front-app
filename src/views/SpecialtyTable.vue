@@ -15,26 +15,7 @@
             wrap>
             <v-flex 
               d-flex 
-              xs12 
-              sm8>
-              <v-card>
-                <v-card-title 
-                  class="title" 
-                  primary-title>
-                  Movimientos de salidas y entradas
-                </v-card-title>
-                <v-card-text>
-                  <v-chart-cumulative 
-                    v-if="stats"
-                    :chart-data="stats"/>
-                  <p v-else>No ha habido movmientos</p>
-                </v-card-text>
-              </v-card>
-            </v-flex>
-            <v-flex 
-              d-flex 
-              xs12 
-              sm4>
+              xs12>
               <v-layout 
                 row 
                 wrap>
@@ -45,6 +26,7 @@
                     <v-flex
                       d-flex
                       xs12
+                      sm6
                     >
                       <v-card
                       >
@@ -59,20 +41,32 @@
                     <v-flex
                       d-flex
                       xs12
+                      sm6
                     >
                       <v-card
                       >
                         <v-card-title 
-                        
-                          primary-title>
+                          primary-title 
+                          class="pb-1">
                           <div class="title">Último movimiento</div>
-                          <div v-if="lastEvent.list" >{{ lastEvent.list | modality }}</div>
-                          <div v-else>{{ 'No ha habido movimiento' }}</div>
+
                         </v-card-title>
                         <v-card-text 
-                          
-                          class="headline text-xs-right">
-                          <v-user-list-status-trending :trending="lastEvent.outputs || (lastEvent.inputs * -1)" />
+                          class="caption pt-0">
+                          <p 
+                            v-if="lastEvent.list"
+                            class="mb-0" 
+                            xs12 >{{ lastEvent.list | modality }}</p>
+                          <p 
+                            v-else
+                            class="mb-0" 
+                            xs12>{{ 'No ha habido movimiento' }}</p>
+                          <div class="text-xs-right">
+
+                            <v-user-list-status-trending 
+                              :trending="lastEvent.outputs || (lastEvent.inputs * -1)"
+                            />
+                          </div>
                         </v-card-text>
                       </v-card>
                       
@@ -81,6 +75,24 @@
                 </v-flex>
               </v-layout>
             </v-flex>
+            <v-flex 
+              d-flex 
+              xs12>
+              <v-card>
+                <v-card-title 
+                  class="title" 
+                  primary-title>
+                  Movimientos de salidas y entradas
+                </v-card-title>
+                <v-card-text>
+                  <v-chart-cumulative 
+                    v-if="stats"
+                    :chart-data="stats"/>
+                  <p v-else>No ha habido movmientos</p>
+                </v-card-text>
+              </v-card>
+            </v-flex>
+            
           </v-layout>
         </v-container>
 
