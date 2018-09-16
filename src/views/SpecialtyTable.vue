@@ -76,9 +76,12 @@
               </v-layout>
             </v-flex>
             <v-flex 
-              d-flex 
-              xs12>
-              <v-card>
+              :class="{'show-stats': stats}" 
+              d-flex
+              xs12
+              class="block-stats"
+            >
+              <div>
                 <v-card-title 
                   class="title" 
                   primary-title>
@@ -90,7 +93,7 @@
                     :chart-data="stats"/>
                   <p v-else>No ha habido movmientos</p>
                 </v-card-text>
-              </v-card>
+              </div>
             </v-flex>
             
           </v-layout>
@@ -397,6 +400,13 @@ td {
   text-transform: capitalize;
   a {
     text-decoration: none;
+  }
+}
+.block-stats {
+  height: 0;
+  transition: all 0.2s linear;
+  &.show-stats {
+    height: 500px;
   }
 }
 </style>
