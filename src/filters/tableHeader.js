@@ -5,6 +5,8 @@ export default function(value) {
     apellidosynombre: 'Apellidos y nombre',
     tipodevacantes: 'Tipo de vacantes',
     'centroasignado/funciónasignada': 'Centro asignado/Funcón asignada',
+    datpresentación: 'Dat. presentación',
+    tipopuesto: 'Tipo de puesto',
   }
   return mapSpecialty[value] || value
 }

@@ -179,9 +179,11 @@ export default {
     totalItems() {
       const result = this.$store.state.home.data
       if (!result) return
-      return result[this.$store.state.route.params.modality][
-        this.$store.state.route.params.specialty
-      ].total
+      return (
+        result[this.$store.state.route.params.modality][
+          this.$store.state.route.params.specialty
+        ].total + 1
+      )
     },
   },
   watch: {
@@ -327,8 +329,8 @@ export default {
     cleanOpponents(opponents) {
       return opponents.map(opponent =>
         this.headers.reduce((acc, curr, index) => {
-          if (curr.text === 'apellidosynombre') this.indexName = index
-          acc.push(opponent[curr.text] || '-')
+          if (curr.value === 'apellidosynombre') this.indexName = index
+          acc.push(opponent[curr.value] || '-')
           return acc
         }, [])
       )
@@ -338,7 +340,7 @@ export default {
         ...row.reduce((acc, curr) => {
           Object.keys(curr).forEach(head => {
             if (['position', 'count', 'dni', 'orden'].includes(head)) return
-            acc.add(this.$options.filters.tableHeader(head))
+            acc.add(head)
           })
           return acc
         }, new Set()),
@@ -347,7 +349,7 @@ export default {
       headers.unshift('dni')
       headers.unshift('orden')
       return headers.map(head => ({
-        text: head,
+        text: this.$options.filters.tableHeader(head),
         value: head,
       }))
     },
@@ -374,7 +376,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 td {
   text-transform: capitalize;
   a {
@@ -388,5 +390,8 @@ td {
   &.show-stats {
     height: 500px;
   }
+}
+.v-datatable thead th.column {
+  text-transform: capitalize;
 }
 </style>
