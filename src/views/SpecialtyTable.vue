@@ -77,13 +77,12 @@
             </v-flex>
             <v-flex 
               :class="{'show-stats': stats}" 
-              d-flex
               xs12
               class="block-stats"
             >
               <div>
                 <v-card-title 
-                  class="title" 
+                  class="title text-xs-center text-sm-left" 
                   primary-title>
                   Movimientos de salidas y entradas
                 </v-card-title>
