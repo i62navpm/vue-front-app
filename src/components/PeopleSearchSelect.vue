@@ -6,6 +6,8 @@
     :search-input.sync="search"
     :color="isLoading ? 'accent' : 'primary'"
     :readonly="isLoading"
+    :class="{loading: isLoading}"
+    :append-icon="isLoading ? 'refresh' : 'search'"
     no-filter
     attach
     hide-no-data
@@ -16,7 +18,6 @@
     item-value="item"
     label="Escribe tu nombre o tu dni"
     class="main-select"
-    append-icon="search"
     dark
     solo-inverted  
     @change="goToPerson"
@@ -91,6 +92,9 @@ export default {
     }
   }
 }
+.loading .v-input__icon.v-input__icon--append {
+  animation: rotating 1s linear infinite;
+}
 .v-select.v-select--is-menu-active .v-input__icon--append .v-icon {
   transform: none;
 }
@@ -105,6 +109,22 @@ export default {
   :hover {
     transition: all 0.15s linear;
     background: rgb(238, 238, 238);
+  }
+}
+@keyframes rotating {
+  from {
+    transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
   }
 }
 </style>
