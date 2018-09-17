@@ -338,7 +338,7 @@ export default {
         ...row.reduce((acc, curr) => {
           Object.keys(curr).forEach(head => {
             if (['position', 'count', 'dni', 'orden'].includes(head)) return
-            acc.add(head)
+            acc.add(this.$options.filters.tableHeader(head))
           })
           return acc
         }, new Set()),
@@ -381,6 +381,7 @@ td {
     text-decoration: none;
   }
 }
+
 .block-stats {
   height: 0;
   transition: all 0.2s linear;
