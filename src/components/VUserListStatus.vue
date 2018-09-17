@@ -6,9 +6,9 @@
       avatar
     >
       <v-list-tile-avatar 
-        color="grey lighten-1 white--text" 
+        :color="$options.filters.materialColor(index)"
         size="38">
-        <span class="caption">{{ data.position }}</span>
+        <span class="caption white--text" >{{ data.position }}</span>
       </v-list-tile-avatar>
       <v-list-tile-content>
         <v-list-tile-title>{{ data.modality | modality }}</v-list-tile-title>
@@ -33,6 +33,10 @@ export default {
       type: Object,
       required: true,
       default: () => ({}),
+    },
+    index: {
+      type: Number,
+      default: 0,
     },
   },
   computed: {

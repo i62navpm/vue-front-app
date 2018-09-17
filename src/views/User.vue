@@ -19,7 +19,9 @@
             expand-icon=""
           >
             <div slot="header">
-              <v-user-list-status :data="item"/>
+              <v-user-list-status 
+                :data="item" 
+                :index="i"/>
             </div>
           </v-expansion-panel-content>
         </v-expansion-panel>
