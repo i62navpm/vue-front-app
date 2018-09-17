@@ -6,12 +6,15 @@
     app
     @input="toggleSidebar({open:$event})"
   >
-    <v-toolbar flat>
+    <v-toolbar 
+      flat 
+      color="primary">
       <v-list>
         <v-list-tile>
-          <v-list-tile-title class="title">
-            Title
-          </v-list-tile-title>
+          <router-link
+            :to="'/'" 
+            tag="v-list-tile-title" 
+            class="title white--text">Listando<span class="orange--text">Me</span></router-link>
         </v-list-tile>
       </v-list>
     </v-toolbar>
@@ -70,4 +73,7 @@ export default {
 </script>
 
 <style lang="scss">
+.title {
+  cursor: pointer;
+}
 </style>

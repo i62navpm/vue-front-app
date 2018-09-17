@@ -9,8 +9,8 @@
     <v-toolbar-side-icon @click.stop="toggleSidebar(!drawer)"/>
     <router-link
       :to="'/'" 
-      tag="v-toolbar-title" 
-      class="white--text">Title</router-link>
+      tag="v-toolbar-title"
+      class="white--text">Listando<span class="orange--text">Me</span></router-link>
 
     <v-spacer/>
     
