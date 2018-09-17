@@ -7,7 +7,7 @@
         column 
         fill-height>
         <v-flex xs12>
-          <p class="person-name display-1 mb-5">{{ $route.params.id | specialty }}</p>
+          <p class="person-name display-1 mb-5">{{ $route.params.id }}</p>
         </v-flex>
 
         <v-flex 
