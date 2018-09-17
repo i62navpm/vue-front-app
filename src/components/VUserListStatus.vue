@@ -37,14 +37,16 @@ export default {
   },
   computed: {
     trending() {
-      const dates = [
-        ...this.data.info.reduce((acc, curr) => {
-          const [date] = Object.keys(curr)
-          acc.add(date)
-          return acc
-        }, new Set()),
-      ]
-      const lastDate = dates[dates.length - 1]
+      // const dates = [
+      //   ...this.data.info.reduce((acc, curr) => {
+      //     const [date] = Object.keys(curr)
+      //     acc.add(date)
+      //     return acc
+      //   }, new Set()),
+      // ]
+      // const lastDate = dates[dates.length - 1]
+      const date = new Date()
+      const lastDate = date.toLocaleDateString()
       const position = this.data.info.reduce((acc, curr) => {
         let newDate = curr[lastDate]
           ? curr[lastDate].position - this.data.position
