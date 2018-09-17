@@ -318,6 +318,7 @@ export default {
       datasets.push({
         label: 'Número total de opositores',
         type: 'line',
+        pointHoverBackgroundColor: color,
         backgroundColor: color + '1a',
         borderColor: color + '80',
         data: valuesAcc,
