@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="user-details">
     <v-slide-y-transition mode="out-in">
       <v-layout 
         align-space-around 
@@ -10,7 +10,33 @@
           v-if="items.length" 
           xs12
           class="mb-5">
-          <v-chart-line :data="statObject"/>
+          
+          <v-chart-line 
+            v-if="!isWorking" 
+            :data="statObject"/>
+            
+          <v-flex v-else>
+            <h3 
+              class="display-3 font-weight-light">
+              !Está trabajando!
+            </h3>
+            <v-subheader>
+              Datos de la incorporación
+            </v-subheader>
+            <div class="incorporation-info text-xs-center">
+              <v-chip
+                v-for="(value, key) of items[0].working" 
+                :key="key"
+                label 
+                color="teal" 
+                text-color="white">
+                <v-icon left>label</v-icon>
+                <span class="incorporation-info">
+                  <strong>{{ key | tableHeader }}:</strong>&nbsp;{{ value | modality }}<span/>
+                </span>
+              </v-chip>
+            </div>
+          </v-flex>
         </v-flex>
         <v-expansion-panel popout>
           <v-expansion-panel-content
@@ -47,6 +73,9 @@ export default {
     }
   },
   computed: {
+    isWorking() {
+      return this.items.some(item => item.position < 0)
+    },
     statObject() {
       return this.items.map(list => {
         return {
@@ -73,8 +102,14 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.v-expansion-panel__container {
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+<style lang="scss">
+.user-details {
+  .v-expansion-panel__container {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+  }
+  .incorporation-info {
+    font-size: 12px;
+    text-transform: capitalize;
+  }
 }
 </style>

@@ -7,6 +7,7 @@ export default function(value) {
     'centroasignado/funciónasignada': 'Centro asignado/Funcón asignada',
     datpresentación: 'Dat. presentación',
     tipopuesto: 'Tipo de puesto',
+    listName: 'Listado',
   }
   return mapSpecialty[value] || value
 }

@@ -17,5 +17,5 @@ export default function(value) {
     '004-educacionfisica_ingles': '[004] Educación física_inglés',
     '005-ingles_ingles': '[005] Inglés inglés',
   }
-  return mapSpecialty[value]
+  return mapSpecialty[value] || value
 }

@@ -8,7 +8,12 @@
       <v-list-tile-avatar 
         :color="$options.filters.materialColor(index)"
         size="38">
-        <span class="caption white--text" >{{ data.position }}</span>
+        <span 
+          v-if="data.position >= 0" 
+          class="caption white--text">{{ data.position }}</span>
+        <v-icon 
+          v-else 
+          color="white">check</v-icon>
       </v-list-tile-avatar>
       <v-list-tile-content>
         <v-list-tile-title>{{ data.modality | modality }}</v-list-tile-title>

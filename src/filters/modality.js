@@ -10,5 +10,5 @@ export default function(value) {
     voluntaryListDynamic: 'Citaciones de voluntarios',
     incorporateList: 'Listado de incorporados',
   }
-  return mapModality[value]
+  return mapModality[value] || value
 }

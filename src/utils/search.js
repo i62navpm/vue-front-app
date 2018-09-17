@@ -24,6 +24,12 @@ export default function searchUtils(db) {
           let infoSnapShot = await docOpp.ref
             .collection('positionMovements')
             .get()
+
+          let working = null
+          if (dataOpp.position < 0) {
+            let workingSnapShot = await docOpp.ref.collection('info').get()
+            ;[working] = workingSnapShot.docs.slice(-1).map(item => item.data())
+          }
           infoSnapShot = infoSnapShot.docs.map((item, index) => {
             let id = new Date(item.id)
             if (index === 0) {
@@ -33,7 +39,11 @@ export default function searchUtils(db) {
             }
             return { [id.toLocaleDateString()]: item.data() }
           })
-          acc[doc.id].push({ ...dataOpp, info: infoSnapShot })
+          acc[doc.id].push({
+            ...dataOpp,
+            info: infoSnapShot,
+            working,
+          })
         }
       }
     }
