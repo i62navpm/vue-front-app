@@ -18,11 +18,11 @@
             :key="i"
             expand-icon=""
           >
-            <div slot="header">
+            <v-flex slot="header">
               <v-user-list-status 
                 :data="item" 
                 :index="i"/>
-            </div>
+            </v-flex>
           </v-expansion-panel-content>
         </v-expansion-panel>
       </v-layout>
