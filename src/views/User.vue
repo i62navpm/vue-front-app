@@ -6,6 +6,10 @@
         justify-space-between 
         column 
         fill-height>
+        <v-flex xs12>
+          <p class="person-name display-1 mb-5">{{ $route.params.id | specialty }}</p>
+        </v-flex>
+
         <v-flex 
           v-if="items.length" 
           xs12
@@ -104,12 +108,25 @@ export default {
 
 <style lang="scss">
 .user-details {
+  .person-name {
+    text-transform: capitalize;
+  }
   .v-expansion-panel__container {
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
   }
   .incorporation-info {
     font-size: 12px;
     text-transform: capitalize;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .v-chip__content {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .v-chip {
+    max-width: 100%;
   }
 }
 </style>

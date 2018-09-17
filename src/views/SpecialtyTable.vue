@@ -7,6 +7,10 @@
         column 
         fill-height>
 
+        <v-flex xs12>
+          <p class="display-1">{{ $route.params.specialty | specialty }}</p>
+          <p class="headline">{{ $route.params.modality | modality }}</p>
+        </v-flex>
         <v-container 
           fluid 
           grid-list-md>
