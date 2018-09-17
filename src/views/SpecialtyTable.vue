@@ -264,29 +264,6 @@ export default {
     },
     getStats(data) {
       if (!data.stats) return
-      const colors = [
-        '#3366CC',
-        '#DC3912',
-        '#FF9900',
-        '#109618',
-        '#990099',
-        '#3B3EAC',
-        '#0099C6',
-        '#DD4477',
-        '#66AA00',
-        '#B82E2E',
-        '#316395',
-        '#994499',
-        '#22AA99',
-        '#AAAA11',
-        '#6633CC',
-        '#E67300',
-        '#8B0707',
-        '#329262',
-        '#5574A6',
-        '#3B3EAC',
-      ]
-
       const [...labels] = Object.entries(data.stats).reduce(
         (acc, [, value]) => {
           value.forEach(({ date }) => {
@@ -298,7 +275,7 @@ export default {
       )
 
       const datasets = Object.entries(data.stats).reduce(
-        (acc, [key, value]) => {
+        (acc, [key, value], index) => {
           let data = labels.map(
             date =>
               value.reduce(
@@ -307,7 +284,7 @@ export default {
               ),
             {}
           )
-          const color = colors.shift()
+          const color = this.$options.filters.materialColor(index)
           acc.push({
             label: this.$options.filters.modality(key),
             data: data.map(item => Math.abs(item)),
@@ -334,7 +311,9 @@ export default {
         valuesAcc[index] = sum
         return sum
       }, this.totalItems)
-      const color = colors.shift()
+
+      const color = this.$options.filters.materialColor(valuesAcc.length)
+
       datasets.push({
         label: 'Número total de opositores',
         type: 'line',
