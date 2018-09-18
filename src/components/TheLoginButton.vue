@@ -19,6 +19,7 @@
 </template>
 <script>
 import { ui, uiConfig } from '@/plugins/firebaseUi'
+import { db } from '@/plugins/firestore'
 
 export default {
   name: 'TheLoginButton',
@@ -30,7 +31,7 @@ export default {
     ui.start('#firebaseui-auth-container', uiConfig)
   },
   methods: {
-    signInSuccess(authResult) {
+    async signInSuccess(authResult) {
       const {
         displayName,
         email,
@@ -40,8 +41,15 @@ export default {
         refreshToken,
       } = authResult.user
       const credential = authResult.credential
-
-      this.$store.commit('setAuth', {
+      if (authResult.additionalUserInfo.isNewUser) {
+        await db.collection('users').add({
+          name: displayName,
+          email,
+          phoneNumber,
+          photoURL,
+        })
+      }
+      this.$store.dispatch('setAuth', {
         user: {
           displayName,
           email,

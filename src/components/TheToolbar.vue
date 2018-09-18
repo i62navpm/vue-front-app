@@ -88,7 +88,7 @@ export default {
       photoURL,
       refreshToken,
     }) {
-      this.$store.commit('setAuth', {
+      this.$store.dispatch('setAuth', {
         user: {
           displayName,
           email,
