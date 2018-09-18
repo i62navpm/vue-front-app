@@ -1,10 +1,11 @@
 <template>
   <v-toolbar
     v-scroll="handleScroll"
+    :extended="$vuetify.breakpoint.smAndDown"
     color="primary"
     dark
     app
-  >
+  > 
     <the-dialog-people-search/>
     <v-toolbar-side-icon @click.stop="toggleSidebar(!drawer)"/>
     <router-link
@@ -12,10 +13,20 @@
       tag="v-toolbar-title"
       class="white--text">Listando<span class="orange--text">Me</span></router-link>
 
+    <v-flex  
+      v-if="$vuetify.breakpoint.smAndDown"
+      slot="extension" 
+      class="white--text">
+      <people-search-select 
+        v-scroll="handleScrollInput" 
+        class="search-toolbar"/>
+    </v-flex>
+
     <v-spacer/>
     
     <v-flex 
       xs6
+      hidden-sm-and-down
     >
       <people-search-select 
         v-scroll="handleScrollInput" 
@@ -23,7 +34,7 @@
     </v-flex>
     
     <v-spacer/>
-    <the-feedback-button class="mx-3" />
+    <the-feedback-button />
     <the-logout-button v-if="user.email"/>
     <the-login-button v-else/>
     
