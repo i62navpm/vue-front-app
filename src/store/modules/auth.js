@@ -19,6 +19,6 @@ export default {
     },
   },
   getters: {
-    getAuth: state => state.auth,
+    getAuth: state => state.user,
   },
 }
