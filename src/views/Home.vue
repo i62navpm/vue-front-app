@@ -58,18 +58,10 @@ export default {
     VStatStaticHomeCard,
     VStatDynamicHomeCard,
   },
-  data() {
-    return {}
-  },
   computed: {
     data() {
       return this.$store.state.home.data || {}
     },
-  },
-  beforeCreate() {
-    if (!this.$store.state.home.data) {
-      this.$store.dispatch('setStats')
-    }
   },
 }
 </script>
