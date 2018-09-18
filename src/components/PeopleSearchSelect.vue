@@ -6,7 +6,7 @@
     :search-input.sync="search"
     :color="isLoading ? 'accent' : 'primary'"
     :readonly="isLoading"
-    :class="{loading: isLoading}"
+    :class="{loading: isLoading, visible: $route.name !== 'home'}"
     :append-icon="isLoading ? 'refresh' : 'search'"
     no-filter
     attach
@@ -80,6 +80,12 @@ export default {
 </script>
 
 <style lang="scss">
+.main-select {
+  &.visible {
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+}
 .v-text-field.v-text-field--solo:not(.v-text-field--solo-flat) .v-input__slot {
   box-shadow: none;
   .v-label {

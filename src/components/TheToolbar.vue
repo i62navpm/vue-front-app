@@ -124,6 +124,8 @@ export default {
       )
     },
     handleScrollInput(evt, el) {
+      if (this.$route.name !== 'home') return
+
       el.setAttribute(
         'style',
         `opacity: ${window.scrollY >= 300 && 1};
