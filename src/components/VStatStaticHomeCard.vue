@@ -37,7 +37,7 @@
               >
                 <v-list-tile-content>
                   <v-list-tile-title> 
-                    {{ key |specialty }}
+                    {{ key | specialty }}
                   </v-list-tile-title>
                   <v-list-tile-sub-title>
                     Fecha de creación: {{ parseDate(item.createdAt) }}
@@ -89,8 +89,8 @@ export default {
     },
   },
   methods: {
-    goToList(list) {
-      console.log(list)
+    goToList(specialty) {
+      this.$router.push(`/${this.list}/${specialty}`)
     },
     parseDate(value) {
       const date = new Date(value)
