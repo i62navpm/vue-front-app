@@ -6,6 +6,7 @@
     dark
     app
   > 
+    <the-dialog-login v-if="!user.email"/>
     <the-dialog-people-search/>
     <v-toolbar-side-icon @click.stop="toggleSidebar(!drawer)"/>
     <router-link
@@ -48,6 +49,7 @@ import TheLogoutButton from './TheLogoutButton'
 import TheFeedbackButton from './TheFeedbackButton'
 import PeopleSearchSelect from './PeopleSearchSelect'
 import TheDialogPeopleSearch from './TheDialogPeopleSearch'
+import TheDialogLogin from './TheDialogLogin'
 
 export default {
   name: 'TheToolbar',
@@ -57,6 +59,7 @@ export default {
     TheFeedbackButton,
     PeopleSearchSelect,
     TheDialogPeopleSearch,
+    TheDialogLogin,
   },
   directives: {
     scroll: {

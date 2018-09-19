@@ -6,7 +6,7 @@ export default {
     setLoginDialog: (state, open) => (state.open = open),
   },
   actions: {
-    openLoginDialog: async ({ commit }) => commit('setLoginDialog', true),
+    openLoginDialog: ({ commit }) => commit('setLoginDialog', true),
     closeLoginDialog: ({ commit }) => commit('setLoginDialog', false),
   },
   getters: {
