@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 import sidebar from './modules/sidebar'
 import searchDialog from './modules/searchDialog'
+import loginDialog from './modules/loginDialog'
 import home from './modules/home'
 import auth from './modules/auth'
 Vue.use(Vuex)
@@ -13,6 +14,7 @@ export default new Vuex.Store({
   modules: {
     sidebar,
     searchDialog,
+    loginDialog,
     auth,
     home,
   },
