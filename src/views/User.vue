@@ -53,6 +53,21 @@
                 :data="item" 
                 :index="i"/>
             </v-flex>
+            <v-card v-if="!isWorking">
+              <v-card-text>
+                <v-chip
+                  v-for="(value, key) of getUserInfo(item)" 
+                  :key="key"
+                  label 
+                  color="teal" 
+                  text-color="white">
+                  <v-icon left>label</v-icon>
+                  <span class="incorporation-info">
+                    <strong>{{ key | tableHeader }}:</strong>&nbsp;{{ value | modality }}<span/>
+                  </span>
+                </v-chip>
+              </v-card-text>
+            </v-card>
           </v-expansion-panel-content>
         </v-expansion-panel>
       </v-layout>
@@ -97,6 +112,32 @@ export default {
         }
       })
     },
+  },
+  methods: {
+    getUserInfo(user) {
+      return Object.entries(user).reduce((acc, [key, value]) => {
+        if (
+          [
+            'info',
+            'working',
+            'specialty',
+            'modality',
+            'position',
+            'apellidosynombre',
+          ].includes(key)
+        )
+          return acc
+        acc[key] = value
+        return acc
+      }, {})
+    },
+  },
+  async beforeRouteUpdate(to, from, next) {
+    this.items = await store.dispatch(
+      'openSearchDialog',
+      this.$store.state.route.params.id
+    )
+    next()
   },
   async beforeRouteEnter(to, from, next) {
     let result = await store.dispatch('openSearchDialog', to.params.id)
