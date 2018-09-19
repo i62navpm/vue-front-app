@@ -62,7 +62,7 @@ export default {
     closeDialog() {
       this.$store.dispatch('closeLoginDialog')
     },
-    signInSuccess(authResult) {
+    signInSuccessWithAuthResult(authResult) {
       const {
         displayName,
         email,
