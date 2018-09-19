@@ -175,7 +175,6 @@ export default {
       },
       headers: [],
       opponents: [],
-      path: this.$store.state.route.path,
     }
   },
   computed: {
@@ -196,7 +195,7 @@ export default {
       try {
         this.loading = true
         const opponentRef = db
-          .collection(`${this.path}/opponents`)
+          .collection(`${this.$store.state.route.path}/opponents`)
           .where('apellidosynombre', '>=', this.search.trim())
           .orderBy('apellidosynombre')
           .limit(this.pagination.rowsPerPage)
@@ -216,28 +215,16 @@ export default {
       }
     }, 2000),
     pagination: {
-      async handler() {
-        try {
-          this.loading = true
-          this.search = ''
-          let opponents = await this.getOpponents()
-
-          if (!opponents.length) return
-
-          this.headers = this.getHeaders(opponents)
-          this.opponents = this.cleanOpponents(opponents)
-          if (!this.stats) this.stats = this.getStats(await this.getEvents())
-        } catch (err) {
-          this.headers = []
-          this.opponents = []
-        } finally {
-          this.loading = false
-        }
+      handler() {
+        this.getAsyncOpponents()
       },
       deep: true,
     },
   },
-
+  beforeRouteUpdate(to, from, next) {
+    next()
+    this.getAsyncOpponents()
+  },
   methods: {
     async getEvents() {
       let eventsRef = await db.collection(`${this.$route.fullPath}/events`)
@@ -363,18 +350,36 @@ export default {
       const opponentRef =
         page - 1
           ? db
-              .collection(`${this.path}/opponents`)
+              .collection(`${this.$store.state.route.path}/opponents`)
               .orderBy(sortBy || 'count', descending ? 'desc' : 'asc')
               .startAt((page - 1) * rowsPerPage)
               .limit(rowsPerPage)
           : db
-              .collection(`${this.path}/opponents`)
+              .collection(`${this.$store.state.route.path}/opponents`)
               .orderBy(sortBy || 'count', descending ? 'desc' : 'asc')
               .limit(rowsPerPage)
 
       const querySnapshot = await opponentRef.get()
 
       return querySnapshot.docs.map(doc => doc.data())
+    },
+    async getAsyncOpponents() {
+      try {
+        this.loading = true
+        this.search = ''
+        let opponents = await this.getOpponents()
+
+        if (!opponents.length) return
+
+        this.headers = this.getHeaders(opponents)
+        this.opponents = this.cleanOpponents(opponents)
+        this.stats = this.getStats(await this.getEvents())
+      } catch (err) {
+        this.headers = []
+        this.opponents = []
+      } finally {
+        this.loading = false
+      }
     },
   },
 }
