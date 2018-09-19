@@ -28,6 +28,9 @@ const router = new Router({
         import(/* webpackChunkName: "SpecialtyTable" */ './views/SpecialtyTable.vue'),
     },
   ],
+  scrollBehavior() {
+    return { x: 0, y: 0 }
+  },
 })
 
 router.beforeEach((to, from, next) => {
