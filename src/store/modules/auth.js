@@ -4,12 +4,14 @@ export default {
   state: {
     user: {},
     credential: {},
+    loading: false,
   },
   mutations: {
     setAuth: (state, { user, credential }) => {
       state.user = user
       state.credential = credential
     },
+    setLoading: (state, loading) => (state.loading = loading),
   },
   actions: {
     setAuth: ({ commit }, auth) => commit('setAuth', auth),

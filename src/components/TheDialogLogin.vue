@@ -57,12 +57,17 @@ export default {
       signInFailure: this.signInError,
     }
     ui.start('#firebaseui-auth-container', uiConfig)
+    const button = document.querySelector('#firebaseui-auth-container button')
+    button &&
+      button.addEventListener('click', () => {
+        this.$store.commit('setLoading', true)
+      })
   },
   methods: {
     closeDialog() {
       this.$store.dispatch('closeLoginDialog')
     },
-    signInSuccessWithAuthResult(authResult) {
+    signInSuccess(authResult) {
       const {
         displayName,
         email,
@@ -91,9 +96,11 @@ export default {
         },
         credential,
       })
+      this.$store.commit('setLoading', false)
       return false
     },
     signInError(error) {
+      this.$store.commit('setLoading', false)
       return error
     },
   },

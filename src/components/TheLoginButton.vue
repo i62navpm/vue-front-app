@@ -1,6 +1,7 @@
 <template>
   <v-btn 
-    small 
+    :loading="loading" 
+    small
     depressed
     color="primary"
     class="caption text-capitalize"
@@ -9,7 +10,11 @@
 <script>
 export default {
   name: 'TheLoginButton',
-
+  computed: {
+    loading() {
+      return this.$store.state.auth.loading
+    },
+  },
   methods: {
     open() {
       this.$store.dispatch('openLoginDialog')
