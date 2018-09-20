@@ -9,15 +9,13 @@
       <router-view/>
     </v-content>
 
-    <v-footer 
-      app>
-      <span>&copy; 2017</span>
-    </v-footer>
+    <the-footer/>
   </v-app>
 </template>
 
 <script>
 import TheToolbar from './components/TheToolbar'
+import TheFooter from './components/TheFooter'
 import TheSidebar from './components/TheSidebar'
 import TheMainPeopleSearch from './components/TheMainPeopleSearch'
 
@@ -27,6 +25,7 @@ export default {
     TheToolbar,
     TheSidebar,
     TheMainPeopleSearch,
+    TheFooter,
   },
 }
 </script>
