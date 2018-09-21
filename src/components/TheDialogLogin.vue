@@ -46,10 +46,25 @@ import { db } from '@/plugins/firestore'
 
 export default {
   name: 'TheDialogLogin',
+  data() {
+    return {
+      buttonListener: () => this.$store.commit('setLoading', true),
+    }
+  },
   computed: {
     dialog() {
       return this.$store.state.loginDialog.open
     },
+  },
+  beforeUpdate() {
+    setTimeout(() => {
+      const button = document.querySelector('#firebaseui-auth-container button')
+
+      if (button) {
+        button.removeEventListener('click', this.buttonListener, false)
+        button.addEventListener('click', this.buttonListener, false)
+      }
+    })
   },
   mounted() {
     uiConfig.callbacks = {
@@ -57,11 +72,6 @@ export default {
       signInFailure: this.signInError,
     }
     ui.start('#firebaseui-auth-container', uiConfig)
-    const button = document.querySelector('#firebaseui-auth-container button')
-    button &&
-      button.addEventListener('click', () => {
-        this.$store.commit('setLoading', true)
-      })
   },
   methods: {
     closeDialog() {
