@@ -8,6 +8,7 @@ export default function(value) {
     datpresentación: 'Dat. presentación',
     tipopuesto: 'Tipo de puesto',
     listName: 'Listado',
+    ptos: 'Puntuación',
   }
   return mapSpecialty[value] || value
 }
