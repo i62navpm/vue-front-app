@@ -7,18 +7,19 @@
       <v-card
         flat
         title
-        class="primary white--text text-xs-center"
+        class="white text-xs-center"
       >
-
         <v-card-text class="white--text pt-3">
+          <span class="grey--text mr-3">Powered by:</span>
           <img 
             src="@/assets/logo-google.png">
         </v-card-text>
 
         <v-divider/>
 
-        <v-card-text class="white--text">
-          <strong>Listando<span class="orange--text">Me</span></strong>
+        <v-card-text 
+          class="grey--text">
+          <span class="mr-2">{{ year }}</span><strong>Listando<span class="orange--text">Me</span></strong>
         </v-card-text>
       </v-card>
     </v-flex>
@@ -27,6 +28,11 @@
 <script>
 export default {
   name: 'TheFooter',
+  computed: {
+    year() {
+      return new Date().getFullYear()
+    },
+  },
 }
 </script>
 
