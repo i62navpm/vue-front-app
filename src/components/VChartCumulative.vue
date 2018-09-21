@@ -8,7 +8,7 @@ export default {
     chartData: {
       type: Object,
       required: true,
-      defualt: () => ({ labels: [], datasets: [] }),
+      default: () => ({ labels: [], datasets: [] }),
     },
     options: { type: Object, default: () => ({}) },
   },

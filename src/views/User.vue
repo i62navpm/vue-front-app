@@ -17,7 +17,7 @@
           
           <v-chart-line 
             v-if="!isWorking" 
-            :data="statObject"/>
+            :chart-data="statObject"/>
             
           <v-flex v-else>
             <h3 
@@ -96,7 +96,7 @@ export default {
       return this.items.some(item => item.position < 0)
     },
     statObject() {
-      return this.items.map(list => {
+      const data = this.items.map(list => {
         return {
           labels: list.info.map(item => {
             ;[item] = Object.keys(item)
@@ -111,6 +111,27 @@ export default {
           }),
         }
       })
+      const labels = new Set(
+        data.reduce((acc, serie) => {
+          acc.push(...serie.labels)
+          return acc
+        }, [])
+      )
+      const datasets = data.reduce((acc, serie, index) => {
+        const dateIndex = [...labels].map(date =>
+          serie.labels.lastIndexOf(date)
+        )
+        const datasets = {
+          label: serie.label,
+          data: dateIndex.map(date => serie.values[date]),
+          backgroundColor: this.$options.filters.materialColor(index),
+          borderColor: this.$options.filters.materialColor(index) + '80',
+          fill: false,
+        }
+        acc.push(datasets)
+        return acc
+      }, [])
+      return { datasets, labels: [...labels] }
     },
   },
   methods: {
@@ -119,6 +140,7 @@ export default {
         if (
           [
             'info',
+            'count',
             'working',
             'specialty',
             'modality',
@@ -133,10 +155,7 @@ export default {
     },
   },
   async beforeRouteUpdate(to, from, next) {
-    this.items = await store.dispatch(
-      'openSearchDialog',
-      this.$store.state.route.params.id
-    )
+    this.items = await store.dispatch('openSearchDialog', to.params.id)
     next()
   },
   async beforeRouteEnter(to, from, next) {
