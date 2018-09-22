@@ -107,13 +107,12 @@ export default {
       this.setMessagingToken(token)
     })
 
-    messaging.onMessage(({ data = {} }) => {
-      const notification = JSON.parse(data.notification)
+    messaging.onMessage(({ data }) => {
       this.$store.commit('addNotification', {
-        notification: notification,
+        notification: data,
         date: new Date().toLocaleString(),
       })
-      const { title, ...rest } = notification
+      const { title, ...rest } = data
       new Notification(title, rest)
     })
   },
