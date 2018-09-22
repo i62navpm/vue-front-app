@@ -1,5 +1,6 @@
 <template>
   <v-menu 
+    offset-y
     bottom 
     left>
     <v-avatar 
