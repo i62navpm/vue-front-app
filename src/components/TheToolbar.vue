@@ -35,6 +35,7 @@
     </v-flex>
     
     <v-spacer/>
+    <the-notification-button />
     <the-feedback-button />
     <the-logout-button v-if="user.email"/>
     <the-login-button v-else/>
@@ -44,12 +45,16 @@
 </template>
 <script>
 import firebase from 'firebase/app'
+import { messaging } from '@/plugins/firebaseMessaging'
+import { fb } from '@/plugins/firebaseFunctions'
 import TheLoginButton from './TheLoginButton'
 import TheLogoutButton from './TheLogoutButton'
 import TheFeedbackButton from './TheFeedbackButton'
+import TheNotificationButton from './TheNotificationButton'
 import PeopleSearchSelect from './PeopleSearchSelect'
 import TheDialogPeopleSearch from './TheDialogPeopleSearch'
 import TheDialogLogin from './TheDialogLogin'
+import { getMessagingToken } from '@/utils/messaging'
 
 export default {
   name: 'TheToolbar',
@@ -59,6 +64,7 @@ export default {
     TheFeedbackButton,
     PeopleSearchSelect,
     TheDialogPeopleSearch,
+    TheNotificationButton,
     TheDialogLogin,
   },
   directives: {
@@ -74,6 +80,7 @@ export default {
   data() {
     return {
       drawer: false,
+      setMessagingToken: fb.httpsCallable('setMessagingToken'),
     }
   },
   computed: {
@@ -93,6 +100,20 @@ export default {
       } else {
         this.$store.dispatch('logout')
       }
+    })
+
+    messaging.onTokenRefresh(async () => {
+      const token = await getMessagingToken()
+      this.setMessagingToken(token)
+    })
+
+    messaging.onMessage(payload => {
+      this.$store.commit('addNotification', {
+        notification: payload.notification,
+        date: new Date(),
+      })
+      const { title, ...rest } = payload.notification
+      new Notification(title, rest)
     })
   },
   methods: {
