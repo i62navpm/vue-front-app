@@ -35,8 +35,8 @@
     </v-flex>
     
     <v-spacer/>
-    <the-notification-button />
-    <the-feedback-button />
+    <the-notification-button v-if="user.email"/>
+    <the-feedback-button v-if="user.email"/>
     <the-logout-button v-if="user.email"/>
     <the-login-button v-else/>
     
