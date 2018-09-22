@@ -3,10 +3,12 @@ export default {
     data: [],
   },
   mutations: {
-    addNotification: (state, notification) =>
-      (state.data = [...state.data, notification]),
-    removeNotification: (state, index) =>
-      (state.data = state.data.splice(index, 1)),
+    addNotification: (state, notification) => {
+      state.data = [...state.data, { ...notification, viewed: false }]
+      state.new = true
+    },
+    setViewedNotification: (state, index) => (state.data[index].viewed = true),
+    removeNotification: (state, index) => state.data.splice(index, 1),
   },
 
   getters: {

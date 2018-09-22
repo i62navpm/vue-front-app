@@ -12,7 +12,7 @@
     <router-link
       :to="'/'" 
       tag="v-toolbar-title"
-      class="white--text">Listando<span class="orange--text">Me</span></router-link>
+      class="white--text ml-0">Listando<span class="orange--text">Me</span></router-link>
 
     <v-flex  
       v-if="$vuetify.breakpoint.smAndDown"
@@ -107,12 +107,13 @@ export default {
       this.setMessagingToken(token)
     })
 
-    messaging.onMessage(payload => {
+    messaging.onMessage(({ data = {} }) => {
+      const notification = JSON.parse(data.notification)
       this.$store.commit('addNotification', {
-        notification: payload.notification,
-        date: new Date(),
+        notification: notification,
+        date: new Date().toLocaleString(),
       })
-      const { title, ...rest } = payload.notification
+      const { title, ...rest } = notification
       new Notification(title, rest)
     })
   },
