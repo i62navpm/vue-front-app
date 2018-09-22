@@ -42,6 +42,8 @@
 </template>
 <script>
 import { ui, uiConfig } from '@/plugins/firebaseUi'
+import { getMessagingToken } from '@/utils/messaging'
+import { fb } from '@/plugins/firebaseFunctions'
 import { db } from '@/plugins/firestore'
 
 export default {
@@ -49,6 +51,7 @@ export default {
   data() {
     return {
       buttonListener: () => this.$store.commit('setLoading', true),
+      setMessagingToken: fb.httpsCallable('setMessagingToken'),
     }
   },
   computed: {
@@ -77,7 +80,15 @@ export default {
     closeDialog() {
       this.$store.dispatch('closeLoginDialog')
     },
-    signInSuccess(authResult) {
+    async signInSuccess(authResult) {
+      await this.saveUser(authResult)
+      return false
+    },
+    signInError(error) {
+      this.$store.commit('setLoading', false)
+      return error
+    },
+    async saveUser(authResult) {
       const {
         displayName,
         email,
@@ -87,6 +98,9 @@ export default {
         refreshToken,
       } = authResult.user
       const credential = authResult.credential
+      const messagingToken = await getMessagingToken()
+      this.setMessagingToken(messagingToken)
+
       if (authResult.additionalUserInfo.isNewUser) {
         db.collection('users').add({
           name: displayName,
@@ -104,14 +118,10 @@ export default {
           photoURL,
           refreshToken,
         },
+        messaging: messagingToken,
         credential,
       })
       this.$store.commit('setLoading', false)
-      return false
-    },
-    signInError(error) {
-      this.$store.commit('setLoading', false)
-      return error
     },
   },
 }
