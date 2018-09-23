@@ -25,4 +25,3 @@ yarn-error.log*
 *.rules
 firestore.indexes.json
 /functions/searchPerson/people.js
-firebase-messaging-sw.js
