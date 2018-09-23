@@ -2,9 +2,7 @@
 importScripts('https://www.gstatic.com/firebasejs/5.4.2/firebase-app.js')
 importScripts('https://www.gstatic.com/firebasejs/5.4.2/firebase-messaging.js')
 
-const { messagingSenderId } = require('./config/firebase')
-
-firebase.initializeApp({ messagingSenderId })
+firebase.initializeApp({ messagingSenderId: '635428808415' })
 
 const messaging = firebase.messaging()
 
