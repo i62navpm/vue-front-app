@@ -8,14 +8,21 @@ const messaging = firebase.messaging()
 
 messaging.setBackgroundMessageHandler(function({ data }) {
   const { title, ...rest } = data
+  messaging.sendMessageToWindowClients_({ data, showNotification: false })
   return self.registration.showNotification(title, rest)
 })
 
 self.addEventListener('notificationclick', function(event) {
-  const { title, body, icon } = event.notification
-  messaging.sendMessageToWindowClients_({
-    data: { title, body, icon },
-  })
   event.notification.close()
-  event.waitUntil(self.clients.openWindow(event.notification.data))
+  event.waitUntil(
+    self.clients
+      .matchAll({ includeUncontrolled: true, type: 'window' })
+      .then(clientsArr => {
+        let found = clientsArr.find(client =>
+          client.url.includes(event.notification.data)
+        )
+
+        found ? found.focus() : self.clients.openWindow(event.notification.data)
+      })
+  )
 })

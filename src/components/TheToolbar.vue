@@ -108,13 +108,13 @@ export default {
       this.$store.commit('setMessaging', { messaging: token })
     })
 
-    messaging.onMessage(({ data }) => {
+    messaging.onMessage(({ data, showNotification = true }) => {
       this.$store.commit('addNotification', {
         notification: data,
         date: new Date().toLocaleString(),
       })
       const { title, ...rest } = data
-      new Notification(title, rest)
+      showNotification && new Notification(title, rest)
     })
   },
   methods: {
