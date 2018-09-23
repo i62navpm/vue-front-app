@@ -1,6 +1,7 @@
 <template>
   <v-navigation-drawer
     :value="sidebarStatus"
+    class="sidebar"
     persistent 
     temporary
     app
@@ -73,7 +74,9 @@ export default {
 </script>
 
 <style lang="scss">
-.title {
-  cursor: pointer;
+.sidebar {
+  .title {
+    cursor: pointer;
+  }
 }
 </style>

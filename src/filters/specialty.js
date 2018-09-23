@@ -11,11 +11,11 @@ export default function(value) {
     'pri-primaria': '[PRI] Primaria',
     ps: '[PS] Pedagogía terapéutica',
     'pt-pedagogiaterapeutica': '[PT] Pedagogía terapéutica',
-    '001-primaria_ingles': '[001] Primaria inglés',
-    '002-educacioninfantil_ingles': '[002] Educación infantil inglés',
-    '003-musica_ingles': '[003] Música inglés',
-    '004-educacionfisica_ingles': '[004] Educación física_inglés',
-    '005-ingles_ingles': '[005] Inglés inglés',
+    '001-primaria_ingles': '[001] Primaria / inglés',
+    '002-educacioninfantil_ingles': '[002] Educación infantil / inglés',
+    '003-musica_ingles': '[003] Música / inglés',
+    '004-educacionfisica_ingles': '[004] Educación física / inglés',
+    '005-ingles_ingles': '[005] Inglés / inglés',
   }
   return mapSpecialty[value] || value
 }

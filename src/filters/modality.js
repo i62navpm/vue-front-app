@@ -2,7 +2,7 @@ export default function(value) {
   if (!value) return ''
 
   const mapModality = {
-    assignmentList: 'Listado de asignaciones',
+    assignmentList: 'Asignación definitiva',
     normalList: 'Listado ordinario',
     bilingualList: 'Listado bilingüe',
     voluntaryList: 'Listado de voluntarios',

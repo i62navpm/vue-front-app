@@ -16,7 +16,7 @@
     hide-selected
     item-text="item"
     item-value="item"
-    label="Escribe tu nombre o tu dni"
+    label="Escribe tu nombre"
     class="main-select"
     dark
     solo-inverted  

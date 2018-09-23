@@ -24,6 +24,7 @@
 
       <v-card v-if="notifications.length">
         <v-list 
+          class="py-0"
           two-line 
           dark>
           <template v-for="(data, index) in notifications">
@@ -68,7 +69,7 @@ export default {
   },
   computed: {
     notifications() {
-      return this.$store.state.notifications.data
+      return this.$store.getters.getNotifications
     },
     alertNotifications() {
       return this.notifications.filter(notification => !notification.viewed)

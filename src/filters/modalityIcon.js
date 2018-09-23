@@ -2,13 +2,13 @@ export default function(value) {
   if (!value) return ''
 
   const mapModality = {
-    assignmentList: 'sentiment_satisfied_alt',
+    assignmentList: 'assignment_ind',
     normalList: 'school',
     bilingualList: 'language',
     voluntaryList: 'directions_run',
     citationList: 'update',
     voluntaryListDynamic: 'pan_tool',
-    incorporateList: 'sentiment_very_dissatisfied',
+    incorporateList: 'autorenew',
   }
   return mapModality[value]
 }

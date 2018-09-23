@@ -8,8 +8,8 @@
         fill-height>
 
         <v-flex xs12>
-          <p class="display-1">{{ $route.params.specialty | specialty }}</p>
-          <p class="headline">{{ $route.params.modality | modality }}</p>
+          <p class="display-1">{{ $route.params.modality | modality }}</p>
+          <p class="headline">{{ $route.params.specialty | specialty }}</p>
         </v-flex>
         <v-container 
           fluid 
@@ -88,7 +88,7 @@
                 <v-card-title 
                   class="title text-xs-center text-sm-left" 
                   primary-title>
-                  Movimientos de salidas y entradas
+                  Evolución de entradas y salidas
                 </v-card-title>
                 <v-card-text>
                   <v-chart-cumulative 
@@ -104,7 +104,7 @@
 
         <v-card>
           <v-card-title>
-            <h4 class="title">Listado de opositores</h4>
+            <h4 class="title">Listado de interinos</h4>
             <v-spacer/>
             <v-text-field
               v-model="search"

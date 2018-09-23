@@ -4,7 +4,7 @@ export default {
   },
   mutations: {
     addNotification: (state, notification) => {
-      state.data = [...state.data, { ...notification, viewed: false }]
+      state.data = [{ ...notification, viewed: false }, ...state.data]
       state.new = true
     },
     setViewedNotification: (state, index) => (state.data[index].viewed = true),

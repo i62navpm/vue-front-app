@@ -35,7 +35,7 @@
 
               <v-list-tile-content>
                 <v-list-tile-title class="caption">
-                  Buscando en la lista normal
+                  Buscando en el listado ordinario
                 </v-list-tile-title >
               </v-list-tile-content>
             </v-list-tile>
@@ -58,7 +58,7 @@
 
               <v-list-tile-content>
                 <v-list-tile-title class="caption">
-                  Buscando en la lista bilingüe
+                  Buscando en el listado bilingüe
                 </v-list-tile-title >
               </v-list-tile-content>
             </v-list-tile>
@@ -81,7 +81,7 @@
 
               <v-list-tile-content>
                 <v-list-tile-title class="caption">
-                  Buscando en la lista de voluntarios
+                  Buscando en el listado de voluntarios
                 </v-list-tile-title >
               </v-list-tile-content>
             </v-list-tile>
