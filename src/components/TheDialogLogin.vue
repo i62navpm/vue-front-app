@@ -97,7 +97,6 @@ export default {
         photoURL,
         refreshToken,
       } = authResult.user
-      const credential = authResult.credential
       const messagingToken = await getMessagingToken()
       this.setMessagingToken(messagingToken)
 
@@ -118,9 +117,8 @@ export default {
           photoURL,
           refreshToken,
         },
-        messaging: messagingToken,
-        credential,
       })
+      this.$store.commit('setMessaging', { messaging: messagingToken })
       this.$store.commit('setLoading', false)
     },
   },

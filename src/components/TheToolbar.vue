@@ -105,6 +105,7 @@ export default {
     messaging.onTokenRefresh(async () => {
       const token = await getMessagingToken()
       this.setMessagingToken(token)
+      this.$store.commit('setMessaging', { messaging: token })
     })
 
     messaging.onMessage(({ data }) => {

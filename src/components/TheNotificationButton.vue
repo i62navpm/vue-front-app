@@ -6,7 +6,6 @@
       offset-y
       bottom
       left
-      attach
     >
       
       <v-btn 
