@@ -3,14 +3,14 @@ import firebase from 'firebase/app'
 export default {
   state: {
     user: {},
-    credential: {},
     messaging: null,
     loading: false,
   },
   mutations: {
-    setAuth: (state, { user, credential, messaging }) => {
+    setAuth: (state, { user }) => {
       state.user = user
-      state.credential = credential
+    },
+    setMessaging: (state, { messaging }) => {
       state.messaging = messaging
     },
     setLoading: (state, loading) => (state.loading = loading),
@@ -19,7 +19,8 @@ export default {
     setAuth: ({ commit }, auth) => commit('setAuth', auth),
     logout: async ({ commit }) => {
       await firebase.auth().signOut()
-      commit('setAuth', { user: {}, credential: {}, messaging: {} })
+      commit('setAuth', { user: {} })
+      commit('setMessaging', { messaging: null })
     },
   },
   getters: {
