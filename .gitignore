@@ -26,3 +26,4 @@ yarn-error.log*
 firestore.indexes.json
 /functions/searchPerson/people.js
 firebase-messaging-sw.js
+/public/index.html
