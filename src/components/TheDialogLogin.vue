@@ -1,43 +1,59 @@
 <template>
-  <div class="text-xs-center">
-    <v-dialog
-      :value="dialog"
-      width="500"
-      @input="closeDialog"
-    >
-      <v-card light>
-        <v-card-title
-          class="headline primary white--text"
-          primary-title
-        >
-          Entra y registrate
-          <v-spacer/>
-          <v-btn 
-            flat 
-            icon
-            @click.native="closeDialog">
+  <v-dialog
+    :value="dialog"
+    width="400"
+    @input="closeDialog"
+  >
+    <v-card 
+      class="login-dialog" 
+      light>
+      <v-card-title
+        class="headline primary white--text"
+        primary-title
+      >
+        Entra y registrate
+        <v-spacer/>
+        <v-btn 
+          flat 
+          icon
+          @click.native="closeDialog">
             
-            <v-icon 
-              class="white--text" 
-            >
-              close
-            </v-icon>
-          </v-btn>
-        </v-card-title>
+          <v-icon 
+            class="white--text" 
+          >
+            close
+          </v-icon>
+        </v-btn>
+      </v-card-title>
 
-        <v-card-text>
-          <p class="subheading">Empieza a consultar las listas y tu posición en ellas</p>
-        </v-card-text>
+      <v-card-text>
+        <p class="title text-xs-center">Empieza a consultar las listas y tu posición en ellas</p>
+        <p 
+          class="body-1 mb-2">
+          <v-icon color="green">thumb_up</v-icon> Descubre tu posición en todas las listas
+        </p>
+        <p 
+          class="body-1 mb-2">
+          <v-icon color="blue">list_alt</v-icon> Consulta todos los listados
+        </p>
+        <p 
+          class="body-1 mb-2">
+          <v-icon color="orange">email</v-icon> Recibe notificaciones mails cuando haya novedades en el portal de educación
+        </p>
+        <p 
+          class="body-1 mb-2">
+          <v-icon color="red">notifications</v-icon> Recibe notificaciones Push en el móvil
+        </p>
+      </v-card-text>
 
-        <v-divider/>
+      <v-divider/>
 
-        <v-card-actions>
-          <v-spacer/>
-          <div id="firebaseui-auth-container"/>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-  </div>
+      <v-card-actions>
+        <v-spacer/>
+        <div id="firebaseui-auth-container"/>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
 
 </template>
 <script>
