@@ -93,7 +93,6 @@ export default {
   },
   beforeCreate() {
     if (!this.$store.state.home.data) this.$store.dispatch('setStats')
-
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.setStoreUser(user)
@@ -101,21 +100,26 @@ export default {
         this.$store.dispatch('logout')
       }
     })
-
-    messaging.onTokenRefresh(async () => {
-      const token = await getMessagingToken()
-      this.setMessagingToken(token)
-      this.$store.commit('setMessaging', { messaging: token })
-    })
-
-    messaging.onMessage(({ data, showNotification = true }) => {
-      this.$store.commit('addNotification', {
-        notification: data,
-        date: new Date().toLocaleString(),
+    try {
+      messaging.onTokenRefresh(async () => {
+        const token = await getMessagingToken()
+        this.setMessagingToken(token)
+        this.$store.commit('setMessaging', { messaging: token })
       })
-      const { title, ...rest } = data
-      showNotification && new Notification(title, rest)
-    })
+
+      messaging.onMessage(({ data, showNotification = true }) => {
+        this.$store.commit('addNotification', {
+          notification: data,
+          date: new Date().toLocaleString(),
+        })
+        const { title, ...rest } = data
+        showNotification && new Notification(title, rest)
+      })
+    } catch (err) {
+      console.info(
+        'Este navegador no soporta eventos onTokenRefresh y onMessage'
+      )
+    }
   },
   methods: {
     setStoreUser({
