@@ -5,12 +5,12 @@ module.exports = (data, context) => {
   const options = {
     shouldSort: true,
     includeMatches: true,
-    threshold: 0.6,
+    threshold: 0.8,
     location: 0,
     distance: 100,
     maxPatternLength: 32,
-    minMatchCharLength: 1,
-    keys: ['apellidosynombre', 'nombre', 'apellidos', 'dni'],
+    minMatchCharLength: 3,
+    keys: ['apellidos', 'dni', 'nombre'],
   }
   const fuse = new Fuse(people, options)
   return fuse.search(data).slice(0, 10)
