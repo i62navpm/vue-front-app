@@ -203,8 +203,6 @@ export default {
 
         const opponents = querySnapshot.docs.map(doc => doc.data())
 
-        if (!opponents.length) return
-
         this.headers = this.getHeaders(opponents)
         this.opponents = this.cleanOpponents(opponents)
       } catch (err) {
@@ -368,8 +366,6 @@ export default {
         this.loading = true
         this.search = ''
         let opponents = await this.getOpponents()
-
-        if (!opponents.length) return
 
         this.headers = this.getHeaders(opponents)
         this.opponents = this.cleanOpponents(opponents)
