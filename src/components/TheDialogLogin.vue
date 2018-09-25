@@ -28,6 +28,14 @@
 
       <v-card-text>
         <p class="title text-xs-center">Empieza a consultar las listas y tu posición en ellas</p>
+        <v-layout 
+          mb-3
+          align-center 
+          justify-center 
+          row 
+          fill-height>
+          <div id="firebaseui-auth-container"/>
+        </v-layout>
         <div class="px-3">
           <p 
             class="body-1 mb-2">
@@ -47,13 +55,6 @@
           </p>
         </div>
       </v-card-text>
-
-      <v-divider/>
-
-      <v-card-actions class="actions-dialog">
-        <v-spacer/>
-        <div id="firebaseui-auth-container"/>
-      </v-card-actions>
     </v-card>
   </v-dialog>
 
@@ -79,11 +80,14 @@ export default {
   },
   beforeUpdate() {
     setTimeout(() => {
-      const button = document.querySelector('#firebaseui-auth-container button')
-
-      if (button) {
-        button.removeEventListener('click', this.buttonListener, false)
-        button.addEventListener('click', this.buttonListener, false)
+      const buttons = document.querySelectorAll(
+        '#firebaseui-auth-container button'
+      )
+      if (buttons.length) {
+        ;[...buttons].forEach(button => {
+          button.removeEventListener('click', this.buttonListener, false)
+          button.addEventListener('click', this.buttonListener, false)
+        })
       }
     })
   },
