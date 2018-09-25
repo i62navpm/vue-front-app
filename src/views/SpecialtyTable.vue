@@ -7,144 +7,147 @@
         column 
         fill-height>
 
-        <v-flex xs12>
+        <v-flex>
           <p class="display-1">{{ $route.params.modality | modality }}</p>
           <p class="headline">{{ $route.params.specialty | specialty }}</p>
         </v-flex>
-        <v-container 
-          fluid 
-          grid-list-md>
-          <v-layout 
-            row 
-            wrap>
-            <v-flex 
-              d-flex 
-              xs12>
-              <v-layout 
-                row 
-                wrap>
-                <v-flex>
-                  <v-layout 
-                    row 
-                    wrap>
-                    <v-flex
-                      d-flex
-                      xs12
-                      sm6
-                    >
-                      <v-card
+        <v-flex>
+          <v-container 
+            fluid 
+            grid-list-md>
+            <v-layout 
+              row 
+              wrap>
+              <v-flex 
+                d-flex 
+                xs12>
+                <v-layout 
+                  row 
+                  wrap>
+                  <v-flex>
+                    <v-layout 
+                      row 
+                      wrap>
+                      <v-flex
+                        d-flex
+                        xs12
+                        sm6
                       >
-                        <v-card-title 
-                          class="title" 
-                          primary-title>
-                          Número de personas
-                        </v-card-title>
-                        <v-card-text class="headline green--text text-xs-right"># {{ totalItems }}</v-card-text>
-                      </v-card>
-                    </v-flex>
-                    <v-flex
-                      d-flex
-                      xs12
-                      sm6
-                    >
-                      <v-card
+                        <v-card
+                        >
+                          <v-card-title 
+                            class="title" 
+                            primary-title>
+                            Número de personas
+                          </v-card-title>
+                          <v-card-text class="headline green--text text-xs-right"># {{ totalItems }}</v-card-text>
+                        </v-card>
+                      </v-flex>
+                      <v-flex
+                        d-flex
+                        xs12
+                        sm6
                       >
-                        <v-card-title 
-                          primary-title 
-                          class="pb-1">
-                          <div class="title">Último movimiento</div>
+                        <v-card
+                        >
+                          <v-card-title 
+                            primary-title 
+                            class="pb-1">
+                            <div class="title">Último movimiento</div>
 
-                        </v-card-title>
-                        <v-card-text 
-                          class="caption pt-0">
-                          <p 
-                            v-if="lastEvent.list"
-                            class="mb-0" 
-                            xs12 >{{ lastEvent.list | modality }}</p>
-                          <p 
-                            v-else
-                            class="mb-0" 
-                            xs12>{{ 'No ha habido movimiento' }}</p>
-                          <div class="text-xs-right">
+                          </v-card-title>
+                          <v-card-text 
+                            class="caption pt-0">
+                            <p 
+                              v-if="lastEvent.list"
+                              class="mb-0" 
+                              xs12 >{{ lastEvent.list | modality }}</p>
+                            <p 
+                              v-else
+                              class="mb-0" 
+                              xs12>{{ 'No ha habido movimiento' }}</p>
+                            <div class="text-xs-right">
 
-                            <v-user-list-status-trending 
-                              :trending="lastEvent.outputs || (lastEvent.inputs * -1)"
-                            />
-                          </div>
-                        </v-card-text>
-                      </v-card>
+                              <v-user-list-status-trending 
+                                :trending="lastEvent.outputs || (lastEvent.inputs * -1)"
+                              />
+                            </div>
+                          </v-card-text>
+                        </v-card>
                       
-                    </v-flex>
-                  </v-layout>
-                </v-flex>
-              </v-layout>
-            </v-flex>
-            <v-flex 
-              :class="{'show-stats': stats}" 
-              xs12
-              class="block-stats"
-            >
-              <div>
-                <v-card-title 
-                  class="title text-xs-center text-sm-left" 
-                  primary-title>
-                  Evolución de entradas y salidas
-                </v-card-title>
-                <v-card-text>
-                  <v-chart-cumulative 
-                    v-if="stats"
-                    :chart-data="stats"/>
-                  <p v-else>No ha habido movmientos</p>
-                </v-card-text>
-              </div>
-            </v-flex>
+                      </v-flex>
+                    </v-layout>
+                  </v-flex>
+                </v-layout>
+              </v-flex>
+              <v-flex 
+                :class="{'show-stats': stats}" 
+                xs12
+                class="block-stats"
+              >
+                <div>
+                  <v-card-title 
+                    class="title text-xs-center text-sm-left" 
+                    primary-title>
+                    Evolución de entradas y salidas
+                  </v-card-title>
+                  <v-card-text>
+                    <v-chart-cumulative 
+                      v-if="stats"
+                      :chart-data="stats"/>
+                    <p v-else>No ha habido movmientos</p>
+                  </v-card-text>
+                </div>
+              </v-flex>
             
-          </v-layout>
-        </v-container>
-
-        <v-card>
-          <v-card-title>
-            <h4 class="title">Listado de interinos</h4>
-            <v-spacer/>
-            <v-text-field
-              v-model="search"
-              disable-initial-sort
-              append-icon="search"
-              label="Busca por apellidos, nombre"
-              single-line
-              hide-details
-            />
-          </v-card-title>
-          <v-data-table
-            :headers="headers"
-            :pagination.sync="pagination"
-            :items="opponents"
-            :total-items="totalItems"
-            :loading="loading"
-          >
-            <template 
-              slot="items" 
-              slot-scope="props">
-              <td 
-                v-for="(item, key) in props.item" 
-                :key="key">
-                <router-link 
-                  v-if="key === indexName"
-                  :to="`/${item}`" 
-                  tag="a">{{ item }}</router-link>
-                <span v-else>{{ item }}</span>
-              </td>
-            </template>
-            <v-alert 
-              v-if="search" 
-              slot="no-results"
-              :value="true"
-              color="error" 
-              icon="warning">
-              No hay coincidencias para: "{{ search }}".
-            </v-alert>
-          </v-data-table>
-        </v-card>
+            </v-layout>
+          </v-container>
+        </v-flex>
+        <v-flex>
+          <v-card>
+            <v-card-title>
+              <h4 class="title">Listado de interinos</h4>
+              <v-spacer/>
+              <v-text-field
+                v-model="search"
+                disable-initial-sort
+                append-icon="search"
+                label="Busca por apellidos, nombre"
+                single-line
+                hide-details
+              />
+            </v-card-title>
+            <v-data-table
+              :headers="headers"
+              :pagination.sync="pagination"
+              :items="opponents"
+              :total-items="totalItems"
+              :loading="loading"
+            >
+              <template 
+                slot="items" 
+                slot-scope="props">
+                <td 
+                  v-for="(item, key) in props.item" 
+                  :key="key">
+                  <router-link 
+                    v-if="key === indexName"
+                    :to="`/${item}`" 
+                    tag="a">{{ item }}</router-link>
+                  <span v-else>{{ item }}</span>
+                </td>
+              </template>
+              <v-alert 
+                v-if="search" 
+                slot="no-results"
+                :value="true"
+                color="error" 
+                icon="warning">
+                No hay coincidencias para: "{{ search }}".
+              </v-alert>
+            </v-data-table>
+          </v-card>
+        </v-flex>
       </v-layout>
     </v-slide-y-transition>
   </v-container>

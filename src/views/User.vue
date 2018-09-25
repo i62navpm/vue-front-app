@@ -6,7 +6,7 @@
         justify-space-between 
         column 
         fill-height>
-        <v-flex xs12>
+        <v-flex>
           <p class="person-name display-1 mb-5">{{ $route.params.id }}</p>
         </v-flex>
 
@@ -42,34 +42,36 @@
             </div>
           </v-flex>
         </v-flex>
-        <v-expansion-panel popout>
-          <v-expansion-panel-content
-            v-for="(item,i) in items"
-            :key="i"
-            expand-icon=""
-          >
-            <v-flex slot="header">
-              <v-user-list-status 
-                :data="item" 
-                :index="i"/>
-            </v-flex>
-            <v-card v-if="!isWorking">
-              <v-card-text>
-                <v-chip
-                  v-for="(value, key) of getUserInfo(item)" 
-                  :key="key"
-                  label 
-                  color="teal" 
-                  text-color="white">
-                  <v-icon left>label</v-icon>
-                  <span class="incorporation-info">
-                    <strong>{{ key | tableHeader }}:</strong>&nbsp;{{ value | modality }}<span/>
-                  </span>
-                </v-chip>
-              </v-card-text>
-            </v-card>
-          </v-expansion-panel-content>
-        </v-expansion-panel>
+        <v-flex>
+          <v-expansion-panel popout>
+            <v-expansion-panel-content
+              v-for="(item,i) in items"
+              :key="i"
+              expand-icon=""
+            >
+              <v-flex slot="header">
+                <v-user-list-status 
+                  :data="item" 
+                  :index="i"/>
+              </v-flex>
+              <v-card v-if="!isWorking">
+                <v-card-text>
+                  <v-chip
+                    v-for="(value, key) of getUserInfo(item)" 
+                    :key="key"
+                    label 
+                    color="teal" 
+                    text-color="white">
+                    <v-icon left>label</v-icon>
+                    <span class="incorporation-info">
+                      <strong>{{ key | tableHeader }}:</strong>&nbsp;{{ value | modality }}<span/>
+                    </span>
+                  </v-chip>
+                </v-card-text>
+              </v-card>
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+        </v-flex>
       </v-layout>
     </v-slide-y-transition>
   </v-container>
