@@ -12,7 +12,6 @@
 
         <v-flex 
           v-if="items.length" 
-          xs12
           class="mb-5">
           
           <v-chart-line 
