@@ -107,7 +107,7 @@ export default {
             list.specialty
           )} - ${this.$options.filters.modality(list.modality)}`,
           values: list.info.map(item => {
-            ;[item] = Object.values(item).map(({ position }) => position)
+            ;[item] = Object.values(item).map(({ position }) => position + 1)
             return item
           }),
         }
