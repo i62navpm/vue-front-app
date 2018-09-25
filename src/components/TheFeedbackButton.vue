@@ -68,9 +68,9 @@ export default {
         try {
           this.loading = true
           await this.sendMessage({
-            message: `Email: ${
-              this.$store.state.auth.user.email
-            }<br><br>Mensaje: ${this.message}`,
+            message: `Email: ${this.$store.state.auth.user.email}
+            <br><br>Browser: ${navigator.userAgent}
+            <br><br>Mensaje: ${this.message}`,
           })
           this.close()
         } catch (err) {
