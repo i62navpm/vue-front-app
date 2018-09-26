@@ -27,6 +27,18 @@ const router = new Router({
       component: () =>
         import(/* webpackChunkName: "SpecialtyTable" */ './views/SpecialtyTable.vue'),
     },
+    {
+      path: '/legal/doc/terms-of-service',
+      name: 'termsOfService',
+      component: () =>
+        import(/* webpackChunkName: "TermsOfService" */ './views/TermsOfService.vue'),
+    },
+    {
+      path: '/legal/doc/privacy-policy',
+      name: 'privacyPolicy',
+      component: () =>
+        import(/* webpackChunkName: "PrivacyPolicy" */ './views/PrivacyPolicy.vue'),
+    },
   ],
   scrollBehavior() {
     return { x: 0, y: 0 }

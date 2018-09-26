@@ -28,14 +28,6 @@
 
       <v-card-text>
         <p class="title text-xs-center">Empieza a consultar las listas y tu posición en ellas</p>
-        <v-layout 
-          mb-3
-          align-center 
-          justify-center 
-          row 
-          fill-height>
-          <div id="firebaseui-auth-container"/>
-        </v-layout>
         <div class="px-3">
           <p 
             class="body-1 mb-2">
@@ -54,6 +46,14 @@
             <v-icon color="red">notifications</v-icon> Recibe notificaciones Push en el móvil
           </p>
         </div>
+        <v-layout 
+          mb-3
+          align-center 
+          justify-center 
+          row 
+          fill-height>
+          <div id="firebaseui-auth-container"/>
+        </v-layout>
       </v-card-text>
     </v-card>
   </v-dialog>
