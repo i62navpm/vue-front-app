@@ -128,6 +128,7 @@ export default {
           email,
           phoneNumber,
           photoURL,
+          createdAt: new Date().toISOString()
         })
       }
       this.$store.dispatch('setAuth', {
