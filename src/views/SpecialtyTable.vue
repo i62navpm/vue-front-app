@@ -199,7 +199,7 @@ export default {
         this.loading = true
         const opponentRef = db
           .collection(`${this.$store.state.route.path}/opponents`)
-          .where('apellidosynombre', '>=', this.search.trim())
+          .where('apellidosynombre', '>=', this.search.toLowerCase().trim())
           .orderBy('apellidosynombre')
           .limit(this.pagination.rowsPerPage)
         const querySnapshot = await opponentRef.get()
