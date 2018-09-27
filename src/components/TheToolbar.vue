@@ -92,7 +92,7 @@ export default {
     },
   },
   beforeCreate() {
-    if (!this.$store.state.home.data) this.$store.dispatch('setStats')
+    this.$store.dispatch('setStats')
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.setStoreUser(user)

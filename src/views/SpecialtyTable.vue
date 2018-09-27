@@ -182,13 +182,11 @@ export default {
   },
   computed: {
     totalItems() {
-      const result = this.$store.state.home.data
-      if (!result) return
-      return (
-        result[this.$store.state.route.params.modality][
-          this.$store.state.route.params.specialty
-        ].total + 1
-      )
+      const result = this.$store.state.home.data || {}
+      if (!result) return 0
+      return result[this.$store.state.route.params.modality][
+        this.$store.state.route.params.specialty
+      ].total
     },
   },
   watch: {
