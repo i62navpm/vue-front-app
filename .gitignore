@@ -25,5 +25,6 @@ yarn-error.log*
 *.rules
 firestore.indexes.json
 /functions/searchPerson/people.js
+/functions/removeUser/firebase.js
 firebase-messaging-sw.js
 /public/index.html
