@@ -1,45 +1,46 @@
 <template>
-  <v-autocomplete
-    v-model="model"
-    :items="items"
-    :loading="isLoading"
-    :search-input.sync="search"
-    :color="isLoading ? 'accent' : 'primary'"
-    :readonly="isLoading"
-    :class="{loading: isLoading, visible: $route.name !== 'home'}"
-    :append-icon="isLoading ? 'refresh' : 'search'"
-    no-filter
-    attach
-    hide-no-data
-    clearable
-    hide-details
-    hide-selected
-    item-text="item"
-    item-value="item"
-    label="Escribe tu nombre"
-    class="main-select"
-    dark
-    solo-inverted  
-    @change="goToPerson"
-  >
-    <template
-      slot="selection"
-      slot-scope="{ item, selected }"
+  <div class="main-select">
+    <v-autocomplete
+      v-model="model"
+      :items="items"
+      :loading="isLoading"
+      :search-input.sync="search"
+      :color="isLoading ? 'accent' : 'primary'"
+      :readonly="isLoading"
+      :class="{loading: isLoading, visible: $route.name !== 'home'}"
+      :append-icon="isLoading ? 'refresh' : 'search'"
+      no-filter
+      attach
+      hide-no-data
+      clearable
+      hide-details
+      hide-selected
+      item-text="item"
+      item-value="item"
+      label="Escribe tu nombre"
+      dark
+      solo-inverted  
+      @change="goToPerson"
     >
-      {{ item.item.apellidosynombre }}
-    </template>
-    <template
-      slot="item"
-      slot-scope="{ item, tile }"
-    >
-      <v-list-tile-content>
-        <v-list-tile-title v-text="item.item.apellidosynombre"/>
-        <v-list-tile-sub-title v-text="`*****${item.item.dni}`"/>
-      </v-list-tile-content>
-    </template>
-  </v-autocomplete>
-
+      <template
+        slot="selection"
+        slot-scope="{ item, selected }"
+      >
+        {{ item.item.apellidosynombre }}
+      </template>
+      <template
+        slot="item"
+        slot-scope="{ item, tile }"
+      >
+        <v-list-tile-content>
+          <v-list-tile-title v-text="item.item.apellidosynombre"/>
+          <v-list-tile-sub-title v-text="`*****${item.item.dni}`"/>
+        </v-list-tile-content>
+      </template>
+    </v-autocomplete>
+  </div>
 </template>
+
 <script>
 import debounce from 'lodash.debounce'
 import { fb } from '@/plugins/firebaseFunctions'
@@ -85,52 +86,54 @@ export default {
     opacity: 1 !important;
     visibility: visible !important;
   }
-}
-.v-text-field.v-text-field--solo:not(.v-text-field--solo-flat) .v-input__slot {
-  box-shadow: none;
-  .v-label {
-    color: white;
-  }
-  input {
-    transition: color 0.15s linear;
-    &[readonly] {
-      color: rgba(0, 0, 0, 0.5);
+
+  .v-text-field.v-text-field--solo:not(.v-text-field--solo-flat)
+    .v-input__slot {
+    box-shadow: none;
+    .v-label {
+      color: white;
+    }
+    input {
+      transition: color 0.15s linear;
+      &[readonly] {
+        color: rgba(0, 0, 0, 0.5);
+      }
     }
   }
-}
-.loading .v-input__icon.v-input__icon--append {
-  animation: rotating 1s linear infinite;
-}
-.v-select.v-select--is-menu-active .v-input__icon--append .v-icon {
-  transform: none;
-}
-.theme--dark.v-list {
-  background: white;
-  color: rgba(0, 0, 0, 0.87);
-  text-transform: capitalize;
-  .v-list__tile__sub-title {
-    color: rgba(0, 0, 0, 0.5);
+  .loading .v-input__icon.v-input__icon--append {
+    animation: rotating 1s linear infinite;
   }
-  .v-list__tile--highlighted,
-  :hover {
-    transition: all 0.15s linear;
-    background: rgb(238, 238, 238);
+  .v-select.v-select--is-menu-active .v-input__icon--append .v-icon {
+    transform: none;
   }
-}
-@keyframes rotating {
-  from {
-    transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-    -ms-transform: rotate(0deg);
-    -moz-transform: rotate(0deg);
-    -webkit-transform: rotate(0deg);
+  .theme--dark.v-list {
+    background: white;
+    color: rgba(0, 0, 0, 0.87);
+    text-transform: capitalize;
+    .v-list__tile__sub-title {
+      color: rgba(0, 0, 0, 0.5);
+    }
+    .v-list__tile--highlighted,
+    :hover {
+      transition: all 0.15s linear;
+      background: rgb(238, 238, 238);
+    }
   }
-  to {
-    transform: rotate(360deg);
-    -o-transform: rotate(360deg);
-    -ms-transform: rotate(360deg);
-    -moz-transform: rotate(360deg);
-    -webkit-transform: rotate(360deg);
+  @keyframes rotating {
+    from {
+      transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+      -moz-transform: rotate(0deg);
+      -webkit-transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+      -o-transform: rotate(360deg);
+      -ms-transform: rotate(360deg);
+      -moz-transform: rotate(360deg);
+      -webkit-transform: rotate(360deg);
+    }
   }
 }
 </style>
