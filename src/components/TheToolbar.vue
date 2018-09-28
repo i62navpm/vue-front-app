@@ -37,7 +37,7 @@
     <v-spacer/>
     <the-notification-button v-if="user.email"/>
     <the-feedback-button v-if="user.email"/>
-    <the-logout-button v-if="user.email"/>
+    <the-profile-button v-if="user.email"/>
     <the-login-button v-else/>
     
   </v-toolbar>
@@ -49,6 +49,7 @@ import { messaging } from '@/plugins/firebaseMessaging'
 import { fb } from '@/plugins/firebaseFunctions'
 import TheLoginButton from './TheLoginButton'
 import TheLogoutButton from './TheLogoutButton'
+import TheProfileButton from './TheProfileButton'
 import TheFeedbackButton from './TheFeedbackButton'
 import TheNotificationButton from './TheNotificationButton'
 import PeopleSearchSelect from './PeopleSearchSelect'
@@ -66,6 +67,7 @@ export default {
     TheDialogPeopleSearch,
     TheNotificationButton,
     TheDialogLogin,
+    TheProfileButton,
   },
   directives: {
     scroll: {
@@ -122,23 +124,9 @@ export default {
     }
   },
   methods: {
-    setStoreUser({
-      displayName,
-      email,
-      emailVerified,
-      phoneNumber,
-      photoURL,
-      refreshToken,
-    }) {
+    setStoreUser({ displayName, email, refreshToken }) {
       this.$store.dispatch('setAuth', {
-        user: {
-          displayName,
-          email,
-          emailVerified,
-          phoneNumber,
-          photoURL,
-          refreshToken,
-        },
+        user: { ...(this.user || {}), displayName, email, refreshToken },
       })
     },
     toggleSidebar(value) {

@@ -115,8 +115,6 @@ export default {
         displayName,
         email,
         emailVerified,
-        phoneNumber,
-        photoURL,
         refreshToken,
       } = authResult.user
       const messagingToken = await getMessagingToken()
@@ -126,8 +124,8 @@ export default {
         db.collection('users').add({
           name: displayName,
           email,
-          phoneNumber,
-          photoURL,
+          emailNotifications: true,
+          pushNotifications: true,
           createdAt: new Date().toISOString(),
         })
       }
@@ -136,9 +134,9 @@ export default {
           displayName,
           email,
           emailVerified,
-          phoneNumber,
-          photoURL,
           refreshToken,
+          emailNotifications: true,
+          pushNotifications: true,
         },
       })
       this.$store.commit('setMessaging', { messaging: messagingToken })
