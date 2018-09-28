@@ -87,7 +87,7 @@ export default {
           this.dialog = false
           this.$router.push({ name: 'home' })
         } catch (err) {
-          console.log(err)
+          console.error(err)
         } finally {
           this.loading = false
         }
