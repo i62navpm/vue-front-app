@@ -29,7 +29,7 @@
         <div class="section section-right">
           <v-list 
             two-line 
-            dark>
+          >
             <template v-for="(item, key) in data">
               <v-list-tile
                 :key="item.createdAt"
