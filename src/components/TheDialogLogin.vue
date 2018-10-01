@@ -11,6 +11,10 @@
         class="headline primary white--text"
         primary-title
       >
+        <v-icon 
+          color="white" 
+          class="mr-2" 
+        >input</v-icon>
         Entra y registrate
         <v-spacer/>
         <v-btn 

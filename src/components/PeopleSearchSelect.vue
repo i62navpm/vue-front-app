@@ -60,6 +60,11 @@ export default {
   watch: {
     search: debounce(async function(value) {
       if (!value || value.length < 3) return
+      if (!this.$store.getters.getAuth.email) {
+        this.open()
+        return
+      }
+
       this.isLoading = true
       try {
         const { data } = await this.searchPerson(value)
@@ -72,6 +77,9 @@ export default {
     }, 1000),
   },
   methods: {
+    open() {
+      this.$store.dispatch('openLoginDialog')
+    },
     goToPerson() {
       if (!this.model) return
       this.$router.push(`/${this.model.apellidosynombre}`)
