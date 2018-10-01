@@ -121,6 +121,9 @@ export default {
         emailVerified,
         refreshToken,
       } = authResult.user
+      let emailNotifications = false
+      let pushNotifications = true
+
       const messagingToken = await getMessagingToken()
       this.setMessagingToken(messagingToken)
 
@@ -128,19 +131,33 @@ export default {
         db.collection('users').add({
           name: displayName,
           email,
-          emailNotifications: true,
-          pushNotifications: true,
+          emailNotifications,
+          pushNotifications,
           createdAt: new Date().toISOString(),
         })
+      } else {
+        let query = await db
+          .collection('users')
+          .where('email', '==', email)
+          .get()
+
+        if (!query.isEmpty) {
+          const [doc] = query.docs
+          ;({
+            emailNotifications = false,
+            pushNotifications = false,
+          } = doc.data())
+        }
       }
+
       this.$store.dispatch('setAuth', {
         user: {
           displayName,
           email,
           emailVerified,
           refreshToken,
-          emailNotifications: true,
-          pushNotifications: true,
+          emailNotifications,
+          pushNotifications,
         },
       })
       this.$store.commit('setMessaging', { messaging: messagingToken })
