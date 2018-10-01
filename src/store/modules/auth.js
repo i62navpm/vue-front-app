@@ -6,6 +6,7 @@ export default {
   state: {
     user: {},
     messaging: null,
+    myUser: null,
     loading: false,
   },
   mutations: {
@@ -20,6 +21,7 @@ export default {
       (state.user.emailNotifications = value),
     setPushNotifications: (state, value = false) =>
       (state.user.pushNotifications = value),
+    setMyUser: (state, value) => (state.myUser = value),
   },
   actions: {
     setAuth: ({ commit }, auth) => commit('setAuth', auth),
@@ -68,6 +70,38 @@ export default {
       await firebase.auth().signOut()
       commit('setAuth', { user: {} })
       commit('setMessaging', { messaging: null })
+      commit('setMyUser', null)
+    },
+    setMyUser: async ({ commit, state }, { privateProfile, myUser }) => {
+      const query = await db
+        .collection('users')
+        .where('email', '==', state.user.email)
+        .get()
+      if (!query.isEmpty) {
+        const [doc] = query.docs
+        await doc.ref.update({
+          myUser: {
+            ...myUser,
+            privateProfile,
+          },
+        })
+      }
+
+      if (privateProfile) {
+        db.collection('privateProfiles')
+          .doc(state.user.email)
+          .set({
+            ...myUser,
+            createdAt: new Date().toISOString(),
+          })
+      } else {
+        await db
+          .collection('privateProfiles')
+          .doc(state.user.email)
+          .delete()
+      }
+
+      commit('setMyUser', { ...myUser, privateProfile })
     },
     remove: async ({ dispatch, state }) => {
       try {
@@ -79,6 +113,10 @@ export default {
 
         await fb.httpsCallable('deleteMessagingToken')(state.messaging)
         await querySnapshot.forEach(doc => doc.ref.delete())
+        await db
+          .collection('privateProfiles')
+          .doc(state.user.email)
+          .delete()
         await fb.httpsCallable('removeUser')({ uid: user.uid })
         return dispatch('logout')
       } catch (err) {

@@ -7,6 +7,7 @@
     app
   > 
     <the-dialog-login v-if="!user.email"/>
+    <the-dialog-new-user v-else/>
     <the-dialog-people-search/>
     <v-toolbar-side-icon @click.stop="toggleSidebar(!drawer)"/>
     <router-link
@@ -55,6 +56,7 @@ import TheNotificationButton from './TheNotificationButton'
 import PeopleSearchSelect from './PeopleSearchSelect'
 import TheDialogPeopleSearch from './TheDialogPeopleSearch'
 import TheDialogLogin from './TheDialogLogin'
+import TheDialogNewUser from './TheDialogNewUser'
 import { getMessagingToken } from '@/utils/messaging'
 
 export default {
@@ -67,6 +69,7 @@ export default {
     TheDialogPeopleSearch,
     TheNotificationButton,
     TheDialogLogin,
+    TheDialogNewUser,
     TheProfileButton,
   },
   directives: {

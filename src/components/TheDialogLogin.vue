@@ -123,6 +123,7 @@ export default {
       } = authResult.user
       let emailNotifications = false
       let pushNotifications = true
+      let myUser = null
 
       const messagingToken = await getMessagingToken()
       this.setMessagingToken(messagingToken)
@@ -135,6 +136,7 @@ export default {
           pushNotifications,
           createdAt: new Date().toISOString(),
         })
+        this.$store.dispatch('openNewUserDialog')
       } else {
         let query = await db
           .collection('users')
@@ -143,10 +145,12 @@ export default {
 
         if (!query.isEmpty) {
           const [doc] = query.docs
+          const data = doc.data()
           ;({
             emailNotifications = false,
             pushNotifications = false,
-          } = doc.data())
+            myUser = null,
+          } = data)
         }
       }
 
@@ -161,6 +165,7 @@ export default {
         },
       })
       this.$store.commit('setMessaging', { messaging: messagingToken })
+      this.$store.commit('setMyUser', myUser)
       this.$store.commit('setLoading', false)
     },
   },
