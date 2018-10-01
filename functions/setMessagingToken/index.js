@@ -8,6 +8,10 @@ instance.defaults.headers.common[
 ] = functions.config().server.key
 
 module.exports = (data, context) => {
-  instance.post(`/${data}/rel/topics/maestros`)
-  return true
+  try {
+    instance.post(`/${data}/rel/topics/maestros`)
+    return true
+  } catch (err) {
+    return err
+  }
 }

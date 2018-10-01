@@ -8,6 +8,10 @@ instance.defaults.headers.common[
 ] = functions.config().server.key
 
 module.exports = (data, context) => {
-  instance.delete(`/${data}`)
-  return true
+  try {
+    instance.delete(`/${data}`)
+    return true
+  } catch (err) {
+    return err
+  }
 }
