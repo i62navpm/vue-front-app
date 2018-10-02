@@ -127,7 +127,7 @@ export default {
       try {
         await this.$store.dispatch('toggleEmailNotifications', value)
       } catch (err) {
-        console.err(err)
+        console.error(err)
       } finally {
         this.loadingEmailNotifications = false
       }
@@ -137,7 +137,7 @@ export default {
       try {
         await this.$store.dispatch('togglePushNotifications', value)
       } catch (err) {
-        console.err(err)
+        console.error(err)
       } finally {
         this.loadingPushNotifications = false
       }
