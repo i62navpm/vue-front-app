@@ -10,10 +10,16 @@
           <p class="person-name display-1 mb-5">{{ $route.params.id }}</p>
         </v-flex>
 
+        <v-flex v-if="privateProfile">
+          <h3 
+            class="display-1 font-weight-light">
+            Este perfil es privado
+          </h3>
+        </v-flex>
+        
         <v-flex 
           v-if="items.length" 
           class="mb-5">
-          
           <v-chart-line 
             v-if="!isWorking" 
             :chart-data="statObject"/>
@@ -78,6 +84,7 @@
 
 <script>
 import store from '@/store'
+import { db } from '@/plugins/firestore'
 import VChartLine from '@/components/VChartLine'
 import VUserListStatus from '@/components/VUserListStatus'
 
@@ -90,6 +97,7 @@ export default {
   data() {
     return {
       items: [],
+      privateProfile: false,
     }
   },
   computed: {
@@ -136,6 +144,19 @@ export default {
     },
   },
   methods: {
+    async checkIfPrivate(user) {
+      const query = await db
+        .collection('privateProfiles')
+        .where('apellidosynombre', '==', user.toLowerCase().trim())
+        .get()
+      return !query.empty
+    },
+    isMyUser(user) {
+      const myUser = this.$store.state.auth.myUser
+        ? this.$store.state.auth.myUser.apellidosynombre
+        : null
+      return myUser === user
+    },
     getUserInfo(user) {
       return Object.entries(user).reduce((acc, [key, value]) => {
         if (
@@ -156,13 +177,36 @@ export default {
     },
   },
   async beforeRouteUpdate(to, from, next) {
-    this.items = await store.dispatch('openSearchDialog', to.params.id)
+    const user = to.params.id
+
+    if ((await this.checkIfPrivate(user)) && !this.isMyUser(user)) {
+      this.privateProfile = true
+    } else {
+      this.privateProfile = false
+      this.items = await store.dispatch('openSearchDialog', to.params.id)
+    }
     next()
   },
   async beforeRouteEnter(to, from, next) {
-    let result = await store.dispatch('openSearchDialog', to.params.id)
+    const user = to.params.id
+    const query = await db
+      .collection('privateProfiles')
+      .where('apellidosynombre', '==', user.toLowerCase().trim())
+      .get()
+    const isPrivate = !query.empty
+    const myUser = store.state.auth.myUser
+      ? store.state.auth.myUser.apellidosynombre
+      : null
 
-    next(vm => (vm.items = result))
+    if (isPrivate && myUser !== user) {
+      next(vm => (vm.privateProfile = true))
+    } else {
+      let result = await store.dispatch('openSearchDialog', to.params.id)
+      next(vm => {
+        vm.items = result
+        vm.privateProfile = false
+      })
+    }
   },
 }
 </script>
