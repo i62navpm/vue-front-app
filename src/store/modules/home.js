@@ -23,6 +23,7 @@ export default {
         'bilingualList',
         'normalList',
         'voluntaryList',
+        'nextCitationList',
       ])
       commit('setHome', data)
     },

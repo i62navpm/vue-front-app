@@ -9,6 +9,7 @@ export default function(value) {
     citationList: 'update',
     voluntaryListDynamic: 'pan_tool',
     incorporateList: 'autorenew',
+    nextCitationList: 'mood',
   }
   return mapModality[value]
 }

@@ -9,6 +9,7 @@ export default function(value) {
     citationList: 'Citaciones ordinarias',
     voluntaryListDynamic: 'Citaciones de voluntarios',
     incorporateList: 'Listado de incorporados',
+    nextCitationList: 'Siguientes a citar',
   }
   return mapModality[value] || value
 }
