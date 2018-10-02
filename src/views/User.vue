@@ -13,6 +13,7 @@
         <v-flex v-if="privateProfile">
           <h3 
             class="display-1 font-weight-light">
+            <v-icon large>lock</v-icon>
             Este perfil es privado
           </h3>
         </v-flex>
