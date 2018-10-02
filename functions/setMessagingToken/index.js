@@ -9,7 +9,7 @@ instance.defaults.headers.common[
 
 module.exports = (data, context) => {
   try {
-    instance.post(`/${data}/rel/topics/maestros`)
+    instance.post(`/${data}/rel/topics/listandome-maestros`)
     return true
   } catch (err) {
     return err
