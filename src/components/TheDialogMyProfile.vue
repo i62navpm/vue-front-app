@@ -21,7 +21,7 @@
             color="white" 
             class="mr-2" 
           >search</v-icon>
-          Búscate en los listados
+          <span class="headline">Búscate en las listas</span>
           <v-spacer/>
           <v-btn 
             flat 
