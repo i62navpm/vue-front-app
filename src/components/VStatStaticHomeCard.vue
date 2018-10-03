@@ -55,7 +55,7 @@
 import VChartDoughnut from '@/components/VChartDoughnut'
 
 export default {
-  name: 'StatDynamicHomeCard',
+  name: 'VStatStaticHomeCard',
   components: {
     VChartDoughnut,
   },

@@ -70,7 +70,7 @@ export default {
         const { data } = await this.searchPerson(value)
         this.items = data
       } catch (err) {
-        console.log(err)
+        console.error(err)
       } finally {
         this.isLoading = false
       }
