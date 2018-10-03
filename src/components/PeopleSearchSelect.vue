@@ -42,6 +42,7 @@
 </template>
 
 <script>
+import { captureException } from '@sentry/browser'
 import debounce from 'lodash.debounce'
 import { fb } from '@/plugins/firebaseFunctions'
 
@@ -70,7 +71,7 @@ export default {
         const { data } = await this.searchPerson(value)
         this.items = data
       } catch (err) {
-        console.error(err)
+        captureException(err)
       } finally {
         this.isLoading = false
       }

@@ -49,6 +49,7 @@
 </template>
 <script>
 import { fb } from '@/plugins/firebaseFunctions'
+import { captureException } from '@sentry/browser'
 
 export default {
   name: 'TheFeedbackButton',
@@ -74,7 +75,7 @@ export default {
           })
           this.close()
         } catch (err) {
-          console.error(err)
+          captureException(err)
         } finally {
           this.loading = false
         }

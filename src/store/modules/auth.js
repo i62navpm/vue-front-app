@@ -1,4 +1,5 @@
 import firebase from 'firebase/app'
+import { captureException } from '@sentry/browser'
 import { db } from '@/plugins/firestore'
 import { fb } from '@/plugins/firebaseFunctions'
 
@@ -39,6 +40,7 @@ export default {
         commit('setEmailNotifications', value)
         return true
       } catch (err) {
+        captureException(err)
         return err
       }
     },
@@ -63,6 +65,7 @@ export default {
         commit('setPushNotifications', value)
         return true
       } catch (err) {
+        captureException(err)
         throw new Error(err)
       }
     },
@@ -120,6 +123,7 @@ export default {
         await fb.httpsCallable('removeUser')({ uid: user.uid })
         return dispatch('logout')
       } catch (err) {
+        captureException(err)
         throw new Error(err)
       }
     },

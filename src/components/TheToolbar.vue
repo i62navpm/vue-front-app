@@ -46,6 +46,7 @@
 </template>
 <script>
 import firebase from 'firebase/app'
+import { captureException } from '@sentry/browser'
 import { messaging } from '@/plugins/firebaseMessaging'
 import { fb } from '@/plugins/firebaseFunctions'
 import TheLoginButton from './TheLoginButton'
@@ -121,6 +122,7 @@ export default {
         showNotification && new Notification(title, rest)
       })
     } catch (err) {
+      captureException(err)
       console.info(
         'Este navegador no soporta eventos onTokenRefresh y onMessage'
       )

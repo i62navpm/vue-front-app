@@ -93,6 +93,7 @@
 <script>
 import TheRemoveUserButton from '@/components/TheRemoveUserButton'
 import TheDialogMyProfile from '@/components/TheDialogMyProfile'
+import { captureException } from '@sentry/browser'
 
 export default {
   name: 'TheProfileButton',
@@ -127,7 +128,7 @@ export default {
       try {
         await this.$store.dispatch('toggleEmailNotifications', value)
       } catch (err) {
-        console.error(err)
+        captureException(err)
       } finally {
         this.loadingEmailNotifications = false
       }
@@ -137,7 +138,7 @@ export default {
       try {
         await this.$store.dispatch('togglePushNotifications', value)
       } catch (err) {
-        console.error(err)
+        captureException(err)
       } finally {
         this.loadingPushNotifications = false
       }

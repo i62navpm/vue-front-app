@@ -155,6 +155,7 @@
 
 <script>
 import { db } from '@/plugins/firestore'
+import { captureException } from '@sentry/browser'
 import debounce from 'lodash.debounce'
 import VChartCumulative from '@/components/VChartCumulative'
 import VUserListStatusTrending from '@/components/VUserListStatusTrending'
@@ -207,6 +208,7 @@ export default {
         this.headers = this.getHeaders(opponents)
         this.opponents = this.cleanOpponents(opponents)
       } catch (err) {
+        captureException(err)
         this.headers = []
         this.opponents = []
       } finally {
@@ -372,6 +374,7 @@ export default {
         this.opponents = this.cleanOpponents(opponents)
         this.stats = this.getStats(await this.getEvents())
       } catch (err) {
+        captureException(err)
         this.headers = []
         this.opponents = []
       } finally {

@@ -52,6 +52,8 @@
 </template>
 
 <script>
+import { captureException } from '@sentry/browser'
+
 export default {
   name: 'TheRemoveUserButton',
   data() {
@@ -89,7 +91,7 @@ export default {
           this.dialog = false
           this.$router.push({ name: 'home' })
         } catch (err) {
-          console.error(err)
+          captureException(err)
         } finally {
           this.loading = false
         }

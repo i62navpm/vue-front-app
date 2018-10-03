@@ -119,6 +119,7 @@
 
 </template>
 <script>
+import { captureException } from '@sentry/browser'
 import debounce from 'lodash.debounce'
 import { fb } from '@/plugins/firebaseFunctions'
 import PeopleSearchSelect from '@/components/PeopleSearchSelect'
@@ -154,7 +155,7 @@ export default {
         const { data } = await this.searchPerson(value)
         this.items = data.map(({ item }) => item)
       } catch (err) {
-        console.error(err)
+        captureException(err)
       } finally {
         this.isLoading = false
       }
@@ -181,7 +182,7 @@ export default {
 
           this.closeDialog()
         } catch (err) {
-          console.error(err)
+          captureException(err)
         } finally {
           this.loading = false
         }
