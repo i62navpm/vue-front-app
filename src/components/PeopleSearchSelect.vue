@@ -17,7 +17,7 @@
       hide-selected
       item-text="item"
       item-value="item"
-      label="Escribe tu nombre"
+      label="Intruduce tus apellidos, nombre"
       dark
       solo-inverted  
       @change="goToPerson"
@@ -89,24 +89,22 @@ export default {
 </script>
 
 <style lang="scss">
+.v-text-field.v-text-field--solo:not(.v-text-field--solo-flat) .v-input__slot {
+  box-shadow: none;
+  .v-label {
+    color: white;
+  }
+  input {
+    transition: color 0.15s linear;
+    &[readonly] {
+      color: rgba(0, 0, 0, 0.5);
+    }
+  }
+}
 .main-select {
   &.visible {
     opacity: 1 !important;
     visibility: visible !important;
-  }
-
-  .v-text-field.v-text-field--solo:not(.v-text-field--solo-flat)
-    .v-input__slot {
-    box-shadow: none;
-    .v-label {
-      color: white;
-    }
-    input {
-      transition: color 0.15s linear;
-      &[readonly] {
-        color: rgba(0, 0, 0, 0.5);
-      }
-    }
   }
   .loading .v-input__icon.v-input__icon--append {
     animation: rotating 1s linear infinite;

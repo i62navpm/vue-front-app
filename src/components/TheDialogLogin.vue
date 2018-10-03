@@ -39,11 +39,15 @@
           </p>
           <p 
             class="body-1 mb-2">
+            <v-icon color="purple">lock</v-icon> Mantén la privacidad de tu perfil
+          </p>
+          <p 
+            class="body-1 mb-2">
             <v-icon color="blue">list_alt</v-icon> Consulta todos los listados
           </p>
           <p 
             class="body-1 mb-2">
-            <v-icon color="orange">email</v-icon> Recibe notificaciones mails cuando haya novedades en el portal de educación
+            <v-icon color="orange">email</v-icon> Recibe mails cuando tengamos actualizaciones
           </p>
           <p 
             class="body-1 mb-2">

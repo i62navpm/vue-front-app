@@ -12,7 +12,7 @@
           v-if="data.position >= 0" 
           class="caption white--text">{{ data.position }}</span>
         <v-icon 
-          v-else-if="data.position < -4" 
+          v-else-if="data.position > -4" 
           color="white">check</v-icon>
         <v-icon 
           v-else 
