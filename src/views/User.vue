@@ -21,11 +21,7 @@
         <v-flex 
           v-if="items.length" 
           class="mb-5">
-          <v-chart-line 
-            v-if="!isWorking" 
-            :chart-data="statObject"/>
-            
-          <v-flex v-else>
+          <v-flex v-if="isWorking">
             <h3 
               class="display-3 font-weight-light">
               !Está trabajando!
@@ -47,6 +43,19 @@
               </v-chip>
             </div>
           </v-flex>
+          <v-flex v-else-if="isExtrange">
+            <h3 
+              class="display-3 font-weight-light">
+              No podemos determinar su estado
+            </h3>
+            <h4 
+              class="display-1 font-weight-light">
+              Podría estar congelado en la lista
+            </h4>
+          </v-flex>
+          <v-chart-line 
+            v-else 
+            :chart-data="statObject"/>
         </v-flex>
         <v-flex>
           <v-expansion-panel popout>
@@ -103,7 +112,10 @@ export default {
   },
   computed: {
     isWorking() {
-      return this.items.some(item => item.position < 0)
+      return this.items.some(item => item.position < 0 && item.position > -4)
+    },
+    isExtrange() {
+      return this.items.some(item => item.position === -4)
     },
     statObject() {
       const data = this.items.map(list => {

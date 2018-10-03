@@ -12,8 +12,11 @@
           v-if="data.position >= 0" 
           class="caption white--text">{{ data.position }}</span>
         <v-icon 
-          v-else 
+          v-else-if="data.position < -4" 
           color="white">check</v-icon>
+        <v-icon 
+          v-else 
+          color="white">remove_circle_outline</v-icon>
       </v-list-tile-avatar>
       <v-list-tile-content>
         <v-list-tile-title>{{ data.modality | modality }}</v-list-tile-title>

@@ -26,7 +26,7 @@ export default function searchUtils(db) {
             .get()
 
           let working = null
-          if (dataOpp.position < 0) {
+          if (dataOpp.position < 0 && dataOpp.position > -4) {
             let workingSnapShot = await docOpp.ref.collection('info').get()
             ;[working] = workingSnapShot.docs.slice(-1).map(item => item.data())
           }
