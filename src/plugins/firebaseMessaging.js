@@ -5,6 +5,7 @@ let messaging = {}
 try {
   messaging = firebase.messaging()
 } catch (err) {
+  // eslint-disable-next-line
   console.info('Este navegador no soporta notificaciones push')
 }
 

@@ -123,6 +123,7 @@ export default {
       })
     } catch (err) {
       captureException(err)
+      // eslint-disable-next-line
       console.info(
         'Este navegador no soporta eventos onTokenRefresh y onMessage'
       )
