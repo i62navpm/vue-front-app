@@ -232,7 +232,8 @@ export default {
       const querySnapshot = await eventsRef.get()
 
       if (querySnapshot.empty) return {}
-      this.lastEvent = querySnapshot.docs[querySnapshot.docs.length - 2].data()
+      this.lastEvent =
+        querySnapshot.docs[querySnapshot.docs.length - 2].data() || {}
       let stats = querySnapshot.docs
         .map(doc => {
           let date = new Date(doc.id)
