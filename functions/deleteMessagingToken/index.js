@@ -1,17 +1,15 @@
-const functions = require('firebase-functions')
-const axios = require('axios')
-const instance = axios.create({
-  baseURL: 'https://iid.googleapis.com/v1/web/iid',
-})
-instance.defaults.headers.common[
-  'Authorization'
-] = functions.config().server.key
+const admin = require('firebase-admin')
 
 module.exports = (data, context) => {
-  try {
-    instance.delete(`/${data}`)
-    return true
-  } catch (err) {
-    return err
-  }
+  return admin
+    .messaging()
+    .unsubscribeFromTopic([data], '/topics/listandome-maestros')
+    .then(response => {
+      console.log('Successfully unsubscribed to topic:', response)
+      return response
+    })
+    .catch(error => {
+      console.log('Error unsubscribing to topic:', error)
+      return error
+    })
 }

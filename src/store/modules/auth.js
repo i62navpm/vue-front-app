@@ -44,6 +44,12 @@ export default {
     },
     togglePushNotifications: async ({ commit, state }, value) => {
       try {
+        let googleFn = value
+          ? fb.httpsCallable('setMessagingToken')
+          : fb.httpsCallable('deleteMessagingToken')
+
+        await googleFn(state.messaging)
+
         let querySnapshot = await db
           .collection('users')
           .where('email', '==', state.user.email)
@@ -53,12 +59,6 @@ export default {
             pushNotifications: value,
           })
         })
-
-        let googleFn = value
-          ? fb.httpsCallable('setMessagingToken')
-          : fb.httpsCallable('deleteMessagingToken')
-
-        await googleFn(state.messaging)
 
         commit('setPushNotifications', value)
         return true

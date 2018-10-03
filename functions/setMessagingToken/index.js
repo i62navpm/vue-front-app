@@ -1,17 +1,15 @@
-const functions = require('firebase-functions')
-const axios = require('axios')
-const instance = axios.create({
-  baseURL: 'https://iid.googleapis.com/iid/v1',
-})
-instance.defaults.headers.common[
-  'Authorization'
-] = functions.config().server.key
+const admin = require('firebase-admin')
 
 module.exports = (data, context) => {
-  try {
-    instance.post(`/${data}/rel/topics/listandome-maestros`)
-    return true
-  } catch (err) {
-    return err
-  }
+  return admin
+    .messaging()
+    .subscribeToTopic([data], '/topics/listandome-maestros')
+    .then(response => {
+      console.log('Successfully subscribed to topic:', response)
+      return response
+    })
+    .catch(error => {
+      console.log('Error subscribing to topic:', error)
+      return error
+    })
 }
