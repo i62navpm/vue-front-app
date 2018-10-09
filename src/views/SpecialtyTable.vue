@@ -313,8 +313,7 @@ export default {
         return sum
       }, this.totalItems)
 
-      const color = this.$options.filters.materialColor(valuesAcc.length)
-
+      const color = this.$options.filters.materialColor(datasets.length)
       datasets.push({
         label: 'Número total de opositores',
         type: 'line',
