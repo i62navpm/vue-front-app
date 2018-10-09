@@ -45,12 +45,14 @@
           </v-flex>
           <v-flex v-else-if="isExtrange">
             <h3 
-              class="display-3 font-weight-light">
-              No podemos determinar su estado
+              class="headline font-weight-regular">
+              <span class="yellow">
+                Aparece en listas en las que han citado a personas con un orden superior al suyo
+              </span>
             </h3>
             <h4 
-              class="display-1 font-weight-light">
-              Podría estar congelado en la lista
+              class="subheading font-weight-regular">
+              Podría ser por renuncia, haber causado baja médica, ... o no complir con los requisitos de la citación
             </h4>
           </v-flex>
           <v-chart-line 
@@ -194,6 +196,7 @@ export default {
 
     if ((await this.checkIfPrivate(user)) && !this.isMyUser(user)) {
       this.privateProfile = true
+      this.items = []
     } else {
       this.privateProfile = false
       this.items = await store.dispatch('openSearchDialog', to.params.id)
@@ -212,7 +215,10 @@ export default {
       : null
 
     if (isPrivate && myUser !== user) {
-      next(vm => (vm.privateProfile = true))
+      next(vm => {
+        vm.items = []
+        vm.privateProfile = true
+      })
     } else {
       let result = await store.dispatch('openSearchDialog', to.params.id)
       next(vm => {
