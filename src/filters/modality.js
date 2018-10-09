@@ -10,6 +10,7 @@ export default function(value) {
     voluntaryListDynamic: 'Citaciones de voluntarios',
     incorporateList: 'Listado de incorporados',
     nextCitationList: 'Siguientes a citar',
+    nextVoluntaryList: 'Siguientes voluntarios a citar',
   }
   return mapModality[value] || value
 }
