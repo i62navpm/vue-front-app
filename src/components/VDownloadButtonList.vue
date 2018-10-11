@@ -48,7 +48,7 @@
                 v-model="date"
                 :max="today"
                 locale="es"
-                color="primary" 
+                color="error" 
                 header-color="primary"/>
             </v-flex>
           </v-layout>
