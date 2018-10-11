@@ -57,9 +57,10 @@
         <v-card-actions>
           <v-spacer/>
           <v-btn
+            :loading="loadingDownload"
             color="primary"
             flat
-            @click="dialog = false"
+            @click="downloadFile"
           >
             Descargar
             <v-icon class="pl-3">cloud_download</v-icon>
@@ -84,6 +85,7 @@ export default {
     return {
       dialog: false,
       loading: false,
+      loadingDownload: false,
       date: new Date().toISOString().substring(0, 10),
     }
   },
@@ -99,6 +101,14 @@ export default {
       setTimeout(() => {
         this.dialog = true
         this.loading = false
+      }, 1000)
+    },
+    downloadFile() {
+      this.loadingDownload = true
+
+      setTimeout(() => {
+        this.closeDialog()
+        this.loadingDownload = false
       }, 1000)
     },
     closeDialog() {
