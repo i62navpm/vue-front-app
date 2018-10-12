@@ -8,7 +8,12 @@
         fill-height>
 
         <v-flex>
-          <p class="display-1">{{ $route.params.modality | modality }}</p>
+          <p class="display-1">
+            {{ $route.params.modality | modality }}
+            <v-download-button-list 
+              :list="$route.params.modality === 'nextCitationList' ? 'incorporateList' : $route.params.modality" 
+              class="float-right"/>
+          </p>
           <p class="headline">{{ $route.params.specialty | specialty }}</p>
         </v-flex>
         <v-flex>
@@ -159,10 +164,15 @@ import { captureException } from '@sentry/browser'
 import debounce from 'lodash.debounce'
 import VChartCumulative from '@/components/VChartCumulative'
 import VUserListStatusTrending from '@/components/VUserListStatusTrending'
+import VDownloadButtonList from '@/components/VDownloadButtonList'
 
 export default {
   name: 'SpecialtyTable',
-  components: { VChartCumulative, VUserListStatusTrending },
+  components: {
+    VChartCumulative,
+    VUserListStatusTrending,
+    VDownloadButtonList,
+  },
   data() {
     return {
       search: '',
@@ -393,6 +403,9 @@ export default {
 </script>
 
 <style lang="scss">
+.float-right {
+  float: right;
+}
 td {
   text-transform: capitalize;
   a {
