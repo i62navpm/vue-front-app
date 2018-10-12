@@ -20,7 +20,7 @@
           class="headline primary white--text"
           primary-title
         >
-          PDF {{ list | modality }}
+          {{ list | modality }}
           <v-spacer/>
           <v-btn 
             flat 
@@ -67,6 +67,7 @@
           </v-btn>
           <v-spacer/>
           <v-btn
+            v-if="$vuetify.breakpoint.smAndUp"
             :href="url"
             color="primary"
             flat
