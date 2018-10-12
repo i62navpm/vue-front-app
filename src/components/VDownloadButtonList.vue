@@ -46,8 +46,9 @@
               class="text-xs-center">
               <v-date-picker 
                 v-model="date"
-                :max="today"
+                :allowed-dates="allowedDates"
                 locale="es"
+                first-day-of-week="1"
                 color="error" 
                 header-color="primary"/>
             </v-flex>
@@ -55,15 +56,24 @@
         </v-card-text>
 
         <v-card-actions>
-          <v-spacer/>
           <v-btn
             :loading="loadingDownload"
             color="primary"
             flat
             @click="downloadFile"
           >
+            <v-icon class="pr-3">cloud_download</v-icon>
             Descargar
-            <v-icon class="pl-3">cloud_download</v-icon>
+          </v-btn>
+          <v-spacer/>
+          <v-btn
+            :href="url"
+            color="primary"
+            flat
+            target="_blank"
+          >
+            Abrir
+            <v-icon class="pl-3">open_in_browser</v-icon>
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -72,6 +82,11 @@
 </template>
 
 <script>
+import { captureException } from '@sentry/browser'
+import { fb } from '@/plugins/firebaseFunctions'
+import { storage } from '@/plugins/firebaseStorage'
+import axios from 'axios'
+
 export default {
   name: 'VDownloadButtonList',
   props: {
@@ -86,30 +101,69 @@ export default {
       dialog: false,
       loading: false,
       loadingDownload: false,
+      availableFiles: [],
       date: new Date().toISOString().substring(0, 10),
+      getListFiles: fb.httpsCallable('getListFiles'),
+      url: '',
     }
   },
-  computed: {
-    today() {
-      return new Date().toISOString().substring(0, 10)
+  watch: {
+    date: async function() {
+      this.url = await this.getFileUrl(`${this.list}/${this.date}.pdf`)
     },
   },
   methods: {
-    openDialog() {
+    allowedDates(val) {
+      return this.availableFiles.includes(val)
+    },
+    async openDialog() {
+      if (!this.$store.getters.getAuth.email) {
+        this.$store.dispatch('openLoginDialog')
+        return
+      }
       this.loading = true
-
-      setTimeout(() => {
+      try {
+        const { data = [] } = await this.getListFiles(this.list)
+        this.availableFiles = data
+        this.date = this.availableFiles[this.availableFiles.length - 1]
+      } catch (err) {
+        captureException(err)
+      } finally {
         this.dialog = true
         this.loading = false
-      }, 1000)
+      }
     },
-    downloadFile() {
+    async downloadFile() {
       this.loadingDownload = true
 
-      setTimeout(() => {
+      try {
+        const url = await this.getFileUrl(`${this.list}/${this.date}.pdf`)
+        axios({
+          url,
+          responseType: 'blob',
+        }).then(response => {
+          const url = window.URL.createObjectURL(new Blob([response.data]))
+          const link = document.createElement('a')
+          link.href = url
+          link.setAttribute(
+            'download',
+            `${this.$options.filters.modality(this.list)}/${this.date}.pdf`
+          )
+          document.body.appendChild(link)
+          link.click()
+        })
+      } catch (err) {
+        captureException(err)
+      } finally {
         this.closeDialog()
         this.loadingDownload = false
-      }, 1000)
+      }
+    },
+    getFileUrl(file) {
+      var storageRef = storage.ref()
+      var fileRef = storageRef.child(file)
+
+      return fileRef.getDownloadURL()
     },
     closeDialog() {
       this.dialog = false
