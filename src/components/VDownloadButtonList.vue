@@ -127,6 +127,7 @@ export default {
         const { data = [] } = await this.getListFiles(this.list)
         this.availableFiles = data
         this.date = this.availableFiles[this.availableFiles.length - 1]
+        this.url = await this.getFileUrl(`${this.list}/${this.date}.pdf`)
       } catch (err) {
         captureException(err)
       } finally {
