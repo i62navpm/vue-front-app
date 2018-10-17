@@ -21,6 +21,14 @@
       <v-list-tile-content>
         <v-list-tile-title>{{ data.modality | modality }}</v-list-tile-title>
         <v-list-tile-sub-title>{{ data.specialty | specialty }}</v-list-tile-sub-title>
+        <v-list-tile-sub-title 
+          v-if="data.position === -4" 
+          class="caption">
+          <v-icon 
+            small 
+            class="warning--text">warning</v-icon>
+          Última posición conocida: {{ lastPosition }}
+        </v-list-tile-sub-title>
       </v-list-tile-content>
       <v-list-tile-action>
         <v-user-list-status-trending :trending="trending" />
@@ -48,15 +56,13 @@ export default {
     },
   },
   computed: {
+    lastPosition() {
+      let [{ position }] = Object.values(
+        this.data.info[this.data.info.length - 1]
+      ) || [{}]
+      return position
+    },
     trending() {
-      // const dates = [
-      //   ...this.data.info.reduce((acc, curr) => {
-      //     const [date] = Object.keys(curr)
-      //     acc.add(date)
-      //     return acc
-      //   }, new Set()),
-      // ]
-      // const lastDate = dates[dates.length - 1]
       const date = new Date()
       const lastDate = date.toLocaleDateString()
       const position = this.data.info.reduce((acc, curr) => {

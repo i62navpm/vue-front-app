@@ -52,7 +52,7 @@
             </h3>
             <h4 
               class="subheading font-weight-regular">
-              Podría ser por renuncia, haber causado baja médica, ... o no complir con los requisitos de la citación
+              Podría ser por renuncia, haber causado baja médica, ... o no complir con los requisitos de la citación (que hayan llamado a alguien con otra DAT diferente)
             </h4>
           </v-flex>
           <v-chart-line 
