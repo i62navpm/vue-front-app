@@ -16,7 +16,7 @@
     hide-selected
     item-text="item"
     item-value="item"
-    label="Intruduce tus apellidos, nombre"
+    label="Introduce tus apellidos, nombre"
     class="main-select"
     dark
     solo-inverted  
