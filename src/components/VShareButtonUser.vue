@@ -33,8 +33,7 @@ export default {
         .join(' ')
     },
     share() {
-      debugger
-      if (navigator.share === undefined) {
+      if (!this.supportShare) {
         // eslint-disable-next-line
         console.info( 'Este navegador no soporta API share')
         return
