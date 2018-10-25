@@ -4,10 +4,27 @@
       <v-layout 
         align-space-around 
         justify-space-between 
-        column 
+        column
         fill-height>
         <v-flex>
-          <p class="person-name display-1 mb-5">{{ $route.params.id }}</p>
+          <v-layout 
+            align-start 
+            justify-space-between 
+            row 
+            fill-height>
+            <v-flex 
+              xs10
+              md12>
+              <p class="person-name display-1 mb-5">
+                {{ $route.params.id }}
+              </p>
+            </v-flex>
+            <v-flex 
+              xs2 
+              class="text-xs-right">
+              <v-share-button-user :name="$route.params.id" />
+            </v-flex>
+          </v-layout>
         </v-flex>
 
         <v-flex v-if="privateProfile">
@@ -99,12 +116,14 @@ import store from '@/store'
 import { db } from '@/plugins/firestore'
 import VChartLine from '@/components/VChartLine'
 import VUserListStatus from '@/components/VUserListStatus'
+import VShareButtonUser from '@/components/VShareButtonUser'
 
 export default {
   name: 'User',
   components: {
     VChartLine,
     VUserListStatus,
+    VShareButtonUser,
   },
   data() {
     return {
