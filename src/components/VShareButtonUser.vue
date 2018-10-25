@@ -43,7 +43,7 @@ export default {
         title: 'Maestros ListandoMe',
         text: `${this.capitalize(
           this.name
-        )} quiere compartir su posición contigo`,
+        )} quiere compartir su posición contigo:`,
         url: window.location.href,
       }
       navigator.share(data)
