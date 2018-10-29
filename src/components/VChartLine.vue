@@ -16,6 +16,15 @@ export default {
     this.renderChart(this.chartData, {
       responsive: true,
       maintainAspectRatio: false,
+      scales: {
+        yAxes: [
+          {
+            ticks: {
+              beginAtZero: true,
+            },
+          },
+        ],
+      },
       legend: {
         position: 'top',
       },

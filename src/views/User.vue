@@ -67,6 +67,12 @@
                 Aparece en listas en las que han citado a personas con un orden superior al suyo
               </span>
             </h3>
+            <p 
+              class="caption font-weight-regular blue--text">
+              <v-icon 
+                color="info" 
+                small>help</v-icon> No quiere decir que te hayan sacado de la lista, sólo es que no podemos determinar tu posición con exactitud.
+            </p>
             <h4 
               class="subheading font-weight-regular">
               Podría ser por renuncia, haber causado baja médica, ... o no complir con los requisitos de la citación (que hayan citado a alguien con una DAT diferente)
