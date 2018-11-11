@@ -24,7 +24,7 @@
           <v-card-title primary-title>
             <div>
               <div class="headline">Suscripción de 1 mes</div>
-              <span class="grey--text">Accede a ListandoMe durante 1 mes</span>
+              <span class="grey--text">Accede a Listando<span class="orange--text">Me</span> durante 1 mes</span>
             </div>
           </v-card-title>
           <v-card-text class="pt-0">
@@ -84,7 +84,7 @@
           <v-card-title primary-title>
             <div>
               <div class="headline">Suscripción de 3 mes</div>
-              <span class="grey--text">Accede a ListandoMe durante 3 mes</span>
+              <span class="grey--text">Accede a Listando<span class="orange--text">Me</span> durante 3 mes</span>
             </div>
           </v-card-title>
           <v-card-text class="pt-0">
