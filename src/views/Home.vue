@@ -45,6 +45,11 @@
               :list="'voluntaryList'"
               class="mb-5"/>
           </article>
+
+          <article>
+            <the-pricing/>
+          </article>
+            
         </v-layout>
         <the-spinner v-else/>
       </div>
@@ -56,6 +61,7 @@
 import VStatStaticHomeCard from '@/components/VStatStaticHomeCard'
 import VStatDynamicHomeCard from '@/components/VStatDynamicHomeCard'
 import VDownloadButtonList from '@/components/VDownloadButtonList'
+import ThePricing from '@/components/ThePricing'
 import TheSpinner from '@/components/TheSpinner'
 
 export default {
@@ -65,6 +71,7 @@ export default {
     VStatDynamicHomeCard,
     VDownloadButtonList,
     TheSpinner,
+    ThePricing,
   },
   computed: {
     data() {
