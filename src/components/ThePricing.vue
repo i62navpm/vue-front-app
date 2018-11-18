@@ -189,6 +189,8 @@ export default {
       }
     },
     buyOneMonth() {
+      if (!this.$store.state.auth.user.email)
+        return this.$store.dispatch('openLoginDialog')
       this.paymentType = 'monthly'
       this.checkout.open({
         email: this.$store.state.auth.user.email || '',
@@ -199,6 +201,8 @@ export default {
       })
     },
     buyThreeMonths() {
+      if (!this.$store.state.auth.user.email)
+        return this.$store.dispatch('openLoginDialog')
       this.paymentType = 'termly'
       this.checkout.open({
         email: this.$store.state.auth.user.email || '',
