@@ -15,5 +15,5 @@ module.exports = (data, context) => {
     months: months[data.paymentType],
   }).ts
 
-  return { charge: charge.data, expired }
+  return { charge, expired }
 }
