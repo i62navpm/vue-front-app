@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import VueScrollTo from 'vue-scrollto'
 import Home from './views/Home.vue'
+import { fb } from '@/plugins/firebaseFunctions'
 import store from '@/store'
 
 Vue.use(Router)
@@ -45,10 +47,21 @@ const router = new Router({
   },
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (!store.getters.getAuth.email) {
       store.dispatch('openLoginDialog')
+      next({ name: 'home' })
+    } else if (
+      !(await fb.httpsCallable('hasPaid')({
+        email: store.getters.getAuth.email,
+        time: new Date().getTime(),
+      })).data
+    ) {
+      VueScrollTo.scrollTo('#pricing', 200, {
+        easing: 'ease-in',
+        offset: -125,
+      })
       next({ name: 'home' })
     } else {
       next()
