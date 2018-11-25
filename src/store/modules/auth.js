@@ -80,7 +80,7 @@ export default {
         .collection('users')
         .where('email', '==', state.user.email)
         .get()
-      if (!query.isEmpty) {
+      if (!query.empty) {
         const [doc] = query.docs
         await doc.ref.update({
           myUser: {

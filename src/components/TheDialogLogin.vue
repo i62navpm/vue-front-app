@@ -147,7 +147,7 @@ export default {
           .where('email', '==', email)
           .get()
 
-        if (!query.isEmpty) {
+        if (!query.empty) {
           const [doc] = query.docs
           const data = doc.data()
           ;({
