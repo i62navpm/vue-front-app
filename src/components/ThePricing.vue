@@ -1,6 +1,4 @@
 <template>
-
-
   <v-container 
     fluid 
     grid-list-xl
@@ -10,8 +8,11 @@
       justify-space-around
       row 
       wrap>
-      <v-flex xs12>
-        <p class="headline">
+      <v-flex 
+        xs12>
+        <p 
+          id="pricing" 
+          class="headline">
           Plan de suscripciones
         </p>
       </v-flex>
