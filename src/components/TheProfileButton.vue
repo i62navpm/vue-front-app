@@ -1,9 +1,8 @@
 <template>
   <div>
-    <the-dialog-my-profile ref="dialogMyProfile"/>
-  
+    <the-dialog-my-profile ref="dialogMyProfile" />
     <v-menu
-      :close-on-content-click="false" 
+      :close-on-content-click="false"
       :nudge-width="300"
       attach
       offset-y
@@ -11,18 +10,28 @@
       left
       light
     >
-      <v-avatar 
+      <v-progress-circular
+        v-if="isCheckingPay"
         slot="activator"
-        color="red darken-4" 
+        :width="2"
+        indeterminate
+        size="26"
+        color="white"
+      />
+      <v-avatar
+        v-else
+        slot="activator"
+        color="red darken-4"
         class="ma-1"
-        size="32">
+        size="32"
+      >
         <span class="white--text">{{ user.displayName.charAt(0).toUpperCase() }}</span>
       </v-avatar>
 
       <v-card>
         <v-list>
           <v-list-tile avatar>
-            <v-list-tile-avatar color="red darken-4" >
+            <v-list-tile-avatar color="red darken-4">
               <span class="white--text">{{ user.displayName.charAt(0).toUpperCase() }}</span>
             </v-list-tile-avatar>
 
@@ -43,17 +52,18 @@
           </v-list-tile>
         </v-list>
 
-        <v-divider/>
+        <v-divider />
 
         <v-list>
           <v-list-tile>
             <v-list-tile-action>
-              <v-switch 
+              <v-switch
                 :input-value="user.emailNotifications"
                 :loading="loadingEmailNotifications"
                 :disabled="loadingEmailNotifications"
                 color="primary"
-                @change="toggleEmailNotifications"/>
+                @change="toggleEmailNotifications"
+              />
             </v-list-tile-action>
             <v-list-tile-title>Notificaciones email</v-list-tile-title>
           </v-list-tile>
@@ -65,23 +75,26 @@
                 :loading="loadingPushNotifications"
                 :disabled="loadingPushNotifications"
                 color="primary"
-                @change="togglePushNotifications"/>
+                @change="togglePushNotifications"
+              />
             </v-list-tile-action>
             <v-list-tile-title>Notificaciones push</v-list-tile-title>
           </v-list-tile>
         </v-list>
 
         <v-card-actions>
-          <the-remove-user-button/>
-          <v-spacer/>
-          <v-btn 
-            flat 
+          <the-remove-user-button />
+          <v-spacer />
+          <v-btn
+            flat
             color="primary"
             small
-            @click.native="openDialogNewUser">
-            <v-icon 
-              class="mr-2" 
-              small>person</v-icon>
+            @click.native="openDialogNewUser"
+          >
+            <v-icon
+              class="mr-2"
+              small
+            >person</v-icon>
             Mi perfil
           </v-btn>
         </v-card-actions>
@@ -108,6 +121,9 @@ export default {
     }
   },
   computed: {
+    isCheckingPay() {
+      return this.$store.state.auth.loading
+    },
     auth() {
       return this.$store.state.auth
     },
