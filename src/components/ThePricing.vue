@@ -1,27 +1,28 @@
 <template>
-  <v-container 
-    fluid 
+  <v-container
+    fluid
     grid-list-xl
   >
-    <v-layout 
-      align-center 
+    <v-layout
+      align-center
       justify-space-around
-      row 
-      wrap>
-      <v-flex 
-        xs12>
-        <p 
-          id="pricing" 
-          class="headline">
+      row
+      wrap
+    >
+      <v-flex xs12>
+        <p
+          id="pricing"
+          class="headline"
+        >
           Plan de suscripciones
         </p>
       </v-flex>
-      <v-flex 
-        xs12 
+      <v-flex
+        xs12
         sm6
-        md5>
-        <v-card 
-        >
+        md5
+      >
+        <v-card>
           <v-card-title primary-title>
             <div>
               <div class="headline">Suscripción de 1 mes</div>
@@ -30,45 +31,40 @@
           </v-card-title>
           <v-card-text class="pt-0">
             <div class="px-3">
-              <p 
-                class="body-1 mb-2 text-xs-center">
+              <p class="body-1 mb-2 text-xs-center">
                 <span class="display-3">1</span>
-                <span 
-                  class="display-1">.49€</span>
+                <span class="display-1">.49€</span>
               </p>
-              <p 
-                class="body-1 mb-2">
+              <p class="body-1 mb-2">
                 <v-icon color="green">check</v-icon> Descubre tu posición en todas las listas
               </p>
-              <p 
-                class="body-1 mb-2">
+              <p class="body-1 mb-2">
                 <v-icon color="green">check</v-icon> Mantén la privacidad de tu perfil
               </p>
-              <p 
-                class="body-1 mb-2">
+              <p class="body-1 mb-2">
                 <v-icon color="green">check</v-icon> Consulta todos los listados
               </p>
-              <p 
-                class="body-1 mb-2">
+              <p class="body-1 mb-2">
                 <v-icon color="green">check</v-icon> Recibe mails cuando tengamos actualizaciones
               </p>
-              <p 
-                class="body-1 mb-2">
+              <p class="body-1 mb-2">
                 <v-icon color="green">check</v-icon> Recibe notificaciones Push en el móvil
               </p>
             </div>
           </v-card-text>
-          <v-card-actions >
-            <v-layout 
+          <v-card-actions>
+            <v-layout
               mb-3
-              align-center 
-              justify-center 
-              row 
-              fill-height>
-              <v-btn 
+              align-center
+              justify-center
+              row
+              fill-height
+            >
+              <v-btn
                 :loading="loading"
-                color="primary" 
-                @click.prevent="buyOneMonth()">
+                color="primary"
+                @click.prevent="buyOneMonth()"
+              >
                 <v-icon class="mr-2">shopping_cart</v-icon>
                 Comprar
               </v-btn>
@@ -76,12 +72,12 @@
           </v-card-actions>
         </v-card>
       </v-flex>
-      <v-flex 
-        xs12 
+      <v-flex
+        xs12
         sm6
-        md5>
-        <v-card 
-        >
+        md5
+      >
+        <v-card>
           <v-card-title primary-title>
             <div>
               <div class="headline">Suscripción de 3 mes</div>
@@ -90,48 +86,41 @@
           </v-card-title>
           <v-card-text class="pt-0">
             <div class="px-3">
-              <p 
-                class="body-1 mb-2 text-xs-center">
+              <p class="body-1 mb-2 text-xs-center">
                 <span class="display-3">3</span>
-                <span 
-                  class="display-1">.49€</span>
+                <span class="display-1">.49€</span>
               </p>
-              <p 
-                class="body-1 mb-2">
+              <p class="body-1 mb-2">
                 <v-icon color="green">check</v-icon> Descubre tu posición en todas las listas
               </p>
-              <p 
-                class="body-1 mb-2">
+              <p class="body-1 mb-2">
                 <v-icon color="green">check</v-icon> Mantén la privacidad de tu perfil
               </p>
-              <p 
-                class="body-1 mb-2">
+              <p class="body-1 mb-2">
                 <v-icon color="green">check</v-icon> Consulta todos los listados
               </p>
-              <p 
-                class="body-1 mb-2">
+              <p class="body-1 mb-2">
                 <v-icon color="green">check</v-icon> Recibe mails cuando tengamos actualizaciones
               </p>
-              <p 
-                class="body-1 mb-2">
+              <p class="body-1 mb-2">
                 <v-icon color="green">check</v-icon> Recibe notificaciones Push en el móvil
               </p>
             </div>
           </v-card-text>
-          <v-card-actions >
-            <v-layout 
+          <v-card-actions>
+            <v-layout
               mb-3
-              align-center 
-              justify-center 
-              row 
-              fill-height>
-              <v-btn 
+              align-center
+              justify-center
+              row
+              fill-height
+            >
+              <v-btn
                 :loading="loading"
-                color="primary" 
-                @click.prevent="buyThreeMonths()">
-                <v-icon 
-                  class="mr-2" 
-                >shopping_cart</v-icon>
+                color="primary"
+                @click.prevent="buyThreeMonths()"
+              >
+                <v-icon class="mr-2">shopping_cart</v-icon>
                 Comprar
               </v-btn>
             </v-layout>
@@ -154,12 +143,13 @@
       dismissible
       transition="scale-transition"
     >
-      Se ha producido un error en el pago, si vuelve a repetirse, por favor póngase en contacto con 
-      <a 
-        href="mailto:listandome@gmail.com" 
-        class="yellow--text">listandome@gmail.com</a>
+      Se ha producido un error en el pago, si vuelve a repetirse, por favor póngase en contacto con
+      <a
+        href="mailto:listandome@gmail.com"
+        class="yellow--text"
+      >listandome@gmail.com</a>
     </v-alert>
-  </v-container>  
+  </v-container>
 </template>
 <script>
 import { fb } from '@/plugins/firebaseFunctions'
@@ -180,6 +170,7 @@ export default {
   methods: {
     async payToServer(token) {
       this.loading = true
+      this.$store.commit('setLoading', true)
       try {
         await this.pay({ paymentType: this.paymentType, token })
         this.success = true
@@ -187,6 +178,7 @@ export default {
         this.error = true
       } finally {
         this.loading = false
+        this.$store.commit('setLoading', true)
       }
     },
     buyOneMonth() {

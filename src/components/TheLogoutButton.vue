@@ -1,30 +1,29 @@
 <template>
-  <v-menu 
+  <v-menu
     offset-y
-    bottom 
-    left>
-    <v-avatar 
+    bottom
+    left
+  >
+    <v-avatar
       slot="activator"
-      color="red darken-4" 
-      size="32">
+      color="red darken-4"
+      size="32"
+    >
       <span class="white--text">{{ user.displayName.charAt(0).toUpperCase() }}</span>
     </v-avatar>
 
     <v-list light>
-      <v-list-tile
-        @click="logout"
-      >
-        <v-list-tile-title 
-          v-text="'Salir'"/>
+      <v-list-tile @click="logout">
+        <v-list-tile-title v-text="'Salir'" />
         <v-list-tile-action>
-          <v-icon 
-            right 
-            class="ml-3" >logout</v-icon>
+          <v-icon
+            right
+            class="ml-3"
+          >logout</v-icon>
         </v-list-tile-action>
       </v-list-tile>
     </v-list>
   </v-menu>
-
 
 </template>
 <script>
