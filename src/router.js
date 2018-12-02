@@ -1,9 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import VueScrollTo from 'vue-scrollto'
-import { captureException } from '@sentry/browser'
 import Home from './views/Home.vue'
-import { fb } from '@/plugins/firebaseFunctions'
 import store from '@/store'
 
 Vue.use(Router)
@@ -19,14 +17,14 @@ const router = new Router({
     {
       path: '/:id',
       name: 'user',
-      meta: { requiresAuth: true },
+      meta: { requiresAuth: true, requiresPaid: true },
       component: () =>
         import(/* webpackChunkName: "user" */ './views/User.vue'),
     },
     {
       path: '/:modality/:specialty',
       name: 'specialtyTable',
-      meta: { requiresAuth: true },
+      meta: { requiresAuth: true, requiresPaid: true },
       component: () =>
         import(/* webpackChunkName: "SpecialtyTable" */ './views/SpecialtyTable.vue'),
     },
@@ -53,26 +51,16 @@ router.beforeEach(async (to, from, next) => {
     if (!store.getters.getAuth.email) {
       store.dispatch('openLoginDialog')
       next({ name: 'home' })
-    } else {
-      store.commit('setLoading', true)
-      try {
-        const { data } = await fb.httpsCallable('hasPaid')({
-          email: store.getters.getAuth.email,
-          time: new Date().getTime(),
+    } else if (to.matched.some(record => record.meta.requiresPaid)) {
+      if (!store.getters.hasPaid) {
+        next({ name: 'home' })
+        store.commit('setSidebar', false)
+        VueScrollTo.scrollTo('#pricing', 200, {
+          easing: 'ease-in',
+          offset: -125,
         })
-        if (!data) {
-          VueScrollTo.scrollTo('#pricing', 200, {
-            easing: 'ease-in',
-            offset: -125,
-          })
-          next({ name: 'home' })
-        } else {
-          next()
-        }
-      } catch (err) {
-        captureException(err)
-      } finally {
-        store.commit('setLoading', false)
+      } else {
+        next()
       }
     }
   } else {
