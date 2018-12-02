@@ -74,6 +74,7 @@ export default {
       commit('setAuth', { user: {} })
       commit('setMessaging', { messaging: null })
       commit('setMyUser', null)
+      commit('setPaid', false)
     },
     setMyUser: async ({ commit, state }, { privateProfile, myUser }) => {
       const query = await db
@@ -130,5 +131,6 @@ export default {
   },
   getters: {
     getAuth: state => state.user,
+    getAuthLoading: state => state.loading,
   },
 }
