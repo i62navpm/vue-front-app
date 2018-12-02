@@ -122,7 +122,7 @@ export default {
   },
   computed: {
     isCheckingPay() {
-      return this.$store.state.auth.loading
+      return this.$store.state.payStatus.loading
     },
     auth() {
       return this.$store.state.auth
