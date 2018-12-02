@@ -4,27 +4,27 @@
     width="400"
     @input="closeDialog"
   >
-    <v-card 
-      class="login-dialog" 
-      light>
+    <v-card
+      class="login-dialog"
+      light
+    >
       <v-card-title
         class="headline primary white--text"
         primary-title
       >
-        <v-icon 
-          color="white" 
-          class="mr-2" 
+        <v-icon
+          color="white"
+          class="mr-2"
         >input</v-icon>
         Entra y registrate
-        <v-spacer/>
-        <v-btn 
-          flat 
+        <v-spacer />
+        <v-btn
+          flat
           icon
-          @click.native="closeDialog">
-            
-          <v-icon 
-            class="white--text" 
-          >
+          @click.native="closeDialog"
+        >
+
+          <v-icon class="white--text">
             close
           </v-icon>
         </v-btn>
@@ -33,34 +33,30 @@
       <v-card-text>
         <p class="title text-xs-center">Empieza a consultar las listas y tu posición en ellas</p>
         <div class="px-3">
-          <p 
-            class="body-1 mb-2">
+          <p class="body-1 mb-2">
             <v-icon color="green">thumb_up</v-icon> Descubre tu posición en todas las listas
           </p>
-          <p 
-            class="body-1 mb-2">
+          <p class="body-1 mb-2">
             <v-icon color="purple">lock</v-icon> Mantén la privacidad de tu perfil
           </p>
-          <p 
-            class="body-1 mb-2">
+          <p class="body-1 mb-2">
             <v-icon color="blue">list_alt</v-icon> Consulta todos los listados
           </p>
-          <p 
-            class="body-1 mb-2">
+          <p class="body-1 mb-2">
             <v-icon color="orange">email</v-icon> Recibe mails cuando tengamos actualizaciones
           </p>
-          <p 
-            class="body-1 mb-2">
+          <p class="body-1 mb-2">
             <v-icon color="red">notifications</v-icon> Recibe notificaciones Push en el móvil
           </p>
         </div>
-        <v-layout 
+        <v-layout
           mb-3
-          align-center 
-          justify-center 
-          row 
-          fill-height>
-          <div id="firebaseui-auth-container"/>
+          align-center
+          justify-center
+          row
+          fill-height
+        >
+          <div id="firebaseui-auth-container" />
         </v-layout>
       </v-card-text>
     </v-card>
