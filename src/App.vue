@@ -3,14 +3,14 @@
 
     <the-toolbar />
     <the-sidebar />
-    
+
     <v-content :class="{collapse: $route.name !== 'home'}">
-      <the-main-people-search/>
-      <router-view/>
+      <the-main-people-search />
+      <router-view />
     </v-content>
 
     <the-fab-button />
-    <the-footer/>
+    <the-footer />
   </v-app>
 </template>
 
@@ -29,6 +29,9 @@ export default {
     TheMainPeopleSearch,
     TheFooter,
     TheFabButton,
+  },
+  async beforeMount() {
+    await this.$store.dispatch('checkPaid')
   },
 }
 </script>
