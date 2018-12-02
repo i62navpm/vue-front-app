@@ -5,42 +5,46 @@
     color="primary"
     dark
     app
-  > 
-    <the-dialog-login v-if="!user.email"/>
-    <the-dialog-new-user v-else/>
-    <the-dialog-people-search/>
-    <v-toolbar-side-icon @click.stop="toggleSidebar(!drawer)"/>
+  >
+    <the-dialog-login v-if="!user.email" />
+    <the-dialog-new-user v-else />
+    <the-dialog-people-search />
+    <v-toolbar-side-icon @click.stop="toggleSidebar(!drawer)" />
     <router-link
-      :to="'/'" 
+      :to="'/'"
       tag="v-toolbar-title"
-      class="white--text ml-0">Listando<span class="orange--text">Me</span></router-link>
+      class="white--text ml-0"
+    >Listando<span class="orange--text">Me</span></router-link>
 
-    <v-flex  
+    <v-flex
       v-if="$vuetify.breakpoint.smAndDown"
-      slot="extension" 
-      class="white--text">
-      <people-search-select 
-        v-scroll="handleScrollInput" 
-        class="search-toolbar"/>
+      slot="extension"
+      class="white--text"
+    >
+      <people-search-select
+        v-scroll="handleScrollInput"
+        class="search-toolbar"
+      />
     </v-flex>
 
-    <v-spacer/>
-    
-    <v-flex 
+    <v-spacer />
+
+    <v-flex
       xs6
       hidden-sm-and-down
     >
-      <people-search-select 
-        v-scroll="handleScrollInput" 
-        class="search-toolbar"/>
+      <people-search-select
+        v-scroll="handleScrollInput"
+        class="search-toolbar"
+      />
     </v-flex>
-    
-    <v-spacer/>
-    <the-notification-button v-if="user.email"/>
-    <the-feedback-button v-if="user.email"/>
-    <the-profile-button v-if="user.email"/>
-    <the-login-button v-else/>
-    
+
+    <v-spacer />
+    <the-notification-button v-if="user.email" />
+    <the-feedback-button v-if="user.email" />
+    <the-profile-button v-if="user.email" />
+    <the-login-button v-else />
+
   </v-toolbar>
 
 </template>
@@ -134,6 +138,7 @@ export default {
       this.$store.dispatch('setAuth', {
         user: { ...(this.user || {}), displayName, email, refreshToken },
       })
+      this.$store.dispatch('checkPaid')
     },
     toggleSidebar(value) {
       this.$store.commit('setSidebar', value)
