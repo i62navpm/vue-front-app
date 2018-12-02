@@ -7,6 +7,8 @@ import loginDialog from './modules/loginDialog'
 import home from './modules/home'
 import notifications from './modules/notifications'
 import auth from './modules/auth'
+import payStatus from './modules/payStatus'
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -23,6 +25,7 @@ export default new Vuex.Store({
     auth,
     home,
     notifications,
+    payStatus,
   },
   state: {},
   mutations: {},
