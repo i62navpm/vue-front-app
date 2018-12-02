@@ -178,7 +178,7 @@ export default {
         this.error = true
       } finally {
         this.loading = false
-        this.$store.commit('setLoading', true)
+        this.$store.commit('setLoading', false)
       }
     },
     buyOneMonth() {
