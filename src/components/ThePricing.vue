@@ -61,6 +61,7 @@
               fill-height
             >
               <v-btn
+                :disabled="isDisabled"
                 :loading="loading"
                 color="primary"
                 @click.prevent="buyOneMonth()"
@@ -116,6 +117,7 @@
               fill-height
             >
               <v-btn
+                :disabled="isDisabled"
                 :loading="loading"
                 color="primary"
                 @click.prevent="buyThreeMonths()"
@@ -167,18 +169,28 @@ export default {
       pay: fb.httpsCallable('stripePayment'),
     }
   },
+  computed: {
+    isDisabled() {
+      return (
+        this.$store.getters.hasPaid ||
+        this.$store.getters.isLoading ||
+        this.$store.getters.getAuthLoading
+      )
+    },
+  },
   methods: {
     async payToServer(token) {
       this.loading = true
-      this.$store.commit('setLoading', true)
+      this.$store.commit('setPaidLoading', true)
       try {
         await this.pay({ paymentType: this.paymentType, token })
+        this.$store.commit('setPaid', true)
         this.success = true
       } catch (err) {
         this.error = true
       } finally {
         this.loading = false
-        this.$store.commit('setLoading', false)
+        this.$store.commit('setPaidLoading', false)
       }
     },
     buyOneMonth() {
