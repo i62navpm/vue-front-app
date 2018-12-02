@@ -53,7 +53,7 @@
             />
           </article>
 
-          <article v-if="!hasPaid">
+          <article>
             <the-pricing />
           </article>
 
@@ -65,7 +65,6 @@
 </template>
 
 <script>
-import { fb } from '@/plugins/firebaseFunctions'
 import VStatStaticHomeCard from '@/components/VStatStaticHomeCard'
 import VStatDynamicHomeCard from '@/components/VStatDynamicHomeCard'
 import VDownloadButtonList from '@/components/VDownloadButtonList'
@@ -81,22 +80,10 @@ export default {
     TheSpinner,
     ThePricing,
   },
-  data: () => {
-    return {
-      hasPaid: false,
-    }
-  },
   computed: {
     data() {
       return this.$store.state.home.data || {}
     },
-  },
-  async created() {
-    const { data } = await fb.httpsCallable('hasPaid')({
-      email: this.$store.getters.getAuth.email,
-      time: new Date().getTime(),
-    })
-    this.hasPaid = !!data
   },
 }
 </script>
