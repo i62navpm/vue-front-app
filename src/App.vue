@@ -78,9 +78,6 @@ export default {
   mounted() {
     this.snackbar = false
   },
-  async beforeMount() {
-    await this.$store.dispatch('checkPaid')
-  },
   methods: {
     goToPrizes() {
       this.snackbar = false

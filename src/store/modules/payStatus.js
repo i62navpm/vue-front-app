@@ -4,7 +4,7 @@ import { captureException } from '@sentry/browser'
 export default {
   state: {
     paid: false,
-    loading: false,
+    loading: true,
   },
   mutations: {
     setPaid: (state, status) => (state.paid = status),

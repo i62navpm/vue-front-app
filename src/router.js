@@ -52,6 +52,9 @@ router.beforeEach(async (to, from, next) => {
       store.dispatch('openLoginDialog')
       next({ name: 'home' })
     } else if (to.matched.some(record => record.meta.requiresPaid)) {
+      if (!store.getters.hasPaid && store.getters.isLoading) {
+        await store.dispatch('checkPaid')
+      }
       if (!store.getters.hasPaid) {
         next({ name: 'home' })
         store.commit('setSidebar', false)
