@@ -89,7 +89,9 @@ export default {
     visibility: visible !important;
   }
 }
-.v-text-field.v-text-field--solo:not(.v-text-field--solo-flat) .v-input__slot {
+.v-text-field.v-text-field--solo:not(.v-text-field--solo-flat)
+  .v-input__control
+  .v-input__slot {
   box-shadow: none;
   .v-label {
     color: white;
