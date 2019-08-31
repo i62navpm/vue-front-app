@@ -1,5 +1,13 @@
 <template>
   <v-navigation-drawer v-model="sidebarStatus" absolute temporary>
+    <v-toolbar flat color="primary">
+      <router-link to="/">
+        <v-toolbar-title class="white--text font-weight-medium">
+          Listando<span class="orange--text">Me</span>
+        </v-toolbar-title>
+      </router-link>
+    </v-toolbar>
+
     <v-list nav dense>
       <v-list-item-group active-class="deep-purple--text text--accent-4">
         <v-list-item>
