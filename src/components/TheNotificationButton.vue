@@ -1,38 +1,27 @@
 <template>
   <div class="notification-button">
     <v-menu
-      :class="{disabled: !alertNotifications.length}"
-      :close-on-content-click="false" 
+      :class="{ disabled: !alertNotifications.length }"
+      :close-on-content-click="false"
       offset-y
       bottom
       left
     >
-      
-      <v-btn 
-        slot="activator" 
-        :disabled="!alertNotifications.length"
-        icon>
-        <v-badge 
-          left 
-          color="accent">
-          <span 
-            v-if="alertNotifications.length" 
-            slot="badge">{{ alertNotifications.length }}</span>
+      <v-btn slot="activator" :disabled="!alertNotifications.length" icon>
+        <v-badge left color="accent">
+          <span v-if="alertNotifications.length" slot="badge">{{
+            alertNotifications.length
+          }}</span>
           <v-icon>notifications</v-icon>
         </v-badge>
       </v-btn>
 
       <v-card v-if="notifications.length">
-        <v-list 
-          class="py-0"
-          two-line 
-          dark>
+        <v-list class="py-0" two-line dark>
           <template v-for="(data, index) in notifications">
-            <v-list-tile
-              :key="data.date"
-            >
+            <v-list-tile :key="data.date">
               <v-list-tile-content>
-                <v-list-tile-title> 
+                <v-list-tile-title>
                   {{ data.notification.body }}
                 </v-list-tile-title>
                 <v-list-tile-sub-title>
@@ -40,23 +29,20 @@
                 </v-list-tile-sub-title>
               </v-list-tile-content>
               <v-list-tile-action>
-                <v-icon 
+                <v-icon
                   class="ml-5"
                   color="grey"
-                  @click="removeNotification(index)">close</v-icon>
+                  @click="removeNotification(index)"
+                  >close</v-icon
+                >
               </v-list-tile-action>
             </v-list-tile>
-            <v-divider
-              :key="index"
-              light
-            />
+            <v-divider :key="index" light />
           </template>
         </v-list>
-
       </v-card>
     </v-menu>
   </div>
-
 </template>
 
 <script>

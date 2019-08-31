@@ -1,32 +1,23 @@
 <template>
-  <v-list 
-    two-line 
-    subheader>
-    <v-list-tile
-      avatar
-    >
-      <v-list-tile-avatar 
+  <v-list two-line subheader>
+    <v-list-tile avatar>
+      <v-list-tile-avatar
         :color="$options.filters.materialColor(index)"
-        size="38">
-        <span 
-          v-if="data.position >= 0" 
-          class="caption white--text">{{ data.position }}</span>
-        <v-icon 
-          v-else-if="data.position > -4" 
-          color="white">check</v-icon>
-        <v-icon 
-          v-else 
-          color="white">remove_circle_outline</v-icon>
+        size="38"
+      >
+        <span v-if="data.position >= 0" class="caption white--text">{{
+          data.position
+        }}</span>
+        <v-icon v-else-if="data.position > -4" color="white">check</v-icon>
+        <v-icon v-else color="white">remove_circle_outline</v-icon>
       </v-list-tile-avatar>
       <v-list-tile-content>
         <v-list-tile-title>{{ data.modality | modality }}</v-list-tile-title>
-        <v-list-tile-sub-title>{{ data.specialty | specialty }}</v-list-tile-sub-title>
-        <v-list-tile-sub-title 
-          v-if="data.position === -4" 
-          class="caption">
-          <v-icon 
-            small 
-            class="warning--text">warning</v-icon>
+        <v-list-tile-sub-title>{{
+          data.specialty | specialty
+        }}</v-list-tile-sub-title>
+        <v-list-tile-sub-title v-if="data.position === -4" class="caption">
+          <v-icon small class="warning--text">warning</v-icon>
           Última posición conocida: {{ lastPosition }}
         </v-list-tile-sub-title>
       </v-list-tile-content>

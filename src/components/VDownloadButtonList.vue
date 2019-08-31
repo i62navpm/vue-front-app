@@ -1,56 +1,38 @@
 <template>
-  <v-layout 
-    row 
-    justify-center>
-    <v-btn 
+  <v-layout row justify-center>
+    <v-btn
       :loading="loading"
-      flat 
+      flat
       icon
       large
       color="grey"
-      @click.native="openDialog">
-      <v-icon large >picture_as_pdf</v-icon>
-    </v-btn>
-    <v-dialog
-      v-model="dialog"
-      width="400"
+      @click.native="openDialog"
     >
+      <v-icon large>picture_as_pdf</v-icon>
+    </v-btn>
+    <v-dialog v-model="dialog" width="400">
       <v-card>
-        <v-card-title
-          class="headline primary white--text"
-          primary-title
-        >
+        <v-card-title class="headline primary white--text" primary-title>
           {{ list | modality }}
-          <v-spacer/>
-          <v-btn 
-            flat 
-            icon
-            @click.native="closeDialog">
-            
-            <v-icon 
-              class="white--text" 
-            >
+          <v-spacer />
+          <v-btn flat icon @click.native="closeDialog">
+            <v-icon class="white--text">
               close
             </v-icon>
           </v-btn>
         </v-card-title>
 
         <v-card-text>
-          <v-layout 
-            align-center 
-            justify-center
-            row 
-            wrap>
-            <v-flex 
-              xs12
-              class="text-xs-center">
-              <v-date-picker 
+          <v-layout align-center justify-center row wrap>
+            <v-flex xs12 class="text-xs-center">
+              <v-date-picker
                 v-model="date"
                 :allowed-dates="allowedDates"
                 locale="es"
                 first-day-of-week="1"
-                color="error" 
-                header-color="primary"/>
+                color="error"
+                header-color="primary"
+              />
             </v-flex>
           </v-layout>
         </v-card-text>
@@ -65,7 +47,7 @@
             <v-icon class="pr-3">cloud_download</v-icon>
             Descargar
           </v-btn>
-          <v-spacer/>
+          <v-spacer />
           <v-btn
             v-if="$vuetify.breakpoint.smAndUp"
             :href="url"
@@ -174,5 +156,4 @@ export default {
 }
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>

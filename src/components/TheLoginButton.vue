@@ -1,11 +1,13 @@
 <template>
-  <v-btn 
-    :loading="loading" 
+  <v-btn
+    :loading="loading"
     small
     depressed
     color="primary"
     class="caption text-capitalize"
-    @click.native="open">Iniciar sesión</v-btn>
+    @click.native="open"
+    >Iniciar sesión</v-btn
+  >
 </template>
 <script>
 export default {
@@ -23,5 +25,4 @@ export default {
 }
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>

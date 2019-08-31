@@ -1,12 +1,6 @@
 <template>
-  <v-dialog 
-    v-model="dialog" 
-    persistent 
-    dark
-    max-width="500px">
-    <v-btn 
-      slot="activator" 
-      icon>
+  <v-dialog v-model="dialog" persistent dark max-width="500px">
+    <v-btn slot="activator" icon>
       <v-icon>feedback</v-icon>
     </v-btn>
     <v-card color="primary">
@@ -14,10 +8,7 @@
         <span class="headline">Enviar comentarios</span>
       </v-card-title>
       <v-card-text>
-        <v-form 
-          ref="form" 
-          v-model="valid" 
-          lazy-validation>
+        <v-form ref="form" v-model="valid" lazy-validation>
           <v-textarea
             v-model="message"
             :rules="messageRules"
@@ -32,20 +23,18 @@
         </v-form>
       </v-card-text>
       <v-card-actions>
-        <v-spacer/>
-        <v-btn 
-          flat 
-          @click.native="close">Cerrar</v-btn>
-        <v-btn 
+        <v-spacer />
+        <v-btn flat @click.native="close">Cerrar</v-btn>
+        <v-btn
           :loading="loading"
           :disabled="!valid || loading"
           flat
-          @click.native="submit">Enviar</v-btn>
+          @click.native="submit"
+          >Enviar</v-btn
+        >
       </v-card-actions>
     </v-card>
   </v-dialog>
-
-
 </template>
 <script>
 import { fb } from '@/plugins/firebaseFunctions'
@@ -89,5 +78,4 @@ export default {
 }
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>

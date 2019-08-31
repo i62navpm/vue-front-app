@@ -6,7 +6,7 @@
     :search-input.sync="search"
     :color="isLoading ? 'accent' : 'primary'"
     :readonly="isLoading"
-    :class="{loading: isLoading, visible: $route.name !== 'home'}"
+    :class="{ loading: isLoading, visible: $route.name !== 'home' }"
     :append-icon="isLoading ? 'refresh' : 'search'"
     no-filter
     attach
@@ -19,22 +19,16 @@
     label="Introduce tus apellidos, nombre"
     class="main-select"
     dark
-    solo-inverted  
+    solo-inverted
     @change="goToPerson"
   >
-    <template
-      slot="selection"
-      slot-scope="{ item, selected }"
-    >
+    <template slot="selection" slot-scope="{ item }">
       {{ item.item.apellidosynombre }}
     </template>
-    <template
-      slot="item"
-      slot-scope="{ item, tile }"
-    >
+    <template slot="item" slot-scope="{ item }">
       <v-list-tile-content>
-        <v-list-tile-title v-text="item.item.apellidosynombre"/>
-        <v-list-tile-sub-title v-text="`*****${item.item.dni}`"/>
+        <v-list-tile-title v-text="item.item.apellidosynombre" />
+        <v-list-tile-sub-title v-text="`*****${item.item.dni}`" />
       </v-list-tile-content>
     </template>
   </v-autocomplete>

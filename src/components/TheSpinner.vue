@@ -1,21 +1,12 @@
 <template>
   <div class="spinner-block">
-
-    <v-layout 
-      align-center 
-      justify-center 
-      row 
-      fill-height>
-      <v-flex 
-        xs12 
-        class="text-xs-center">
-
-        <google/>  
+    <v-layout align-center justify-center row fill-height>
+      <v-flex xs12 class="text-xs-center">
+        <google />
       </v-flex>
     </v-layout>
   </div>
 </template>
-
 
 <script>
 import { Google } from 'vue-loading-spinner'

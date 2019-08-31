@@ -1,42 +1,28 @@
 <template>
   <v-card>
-    <v-layout 
-      v-bind="binding" 
-      align-space-around 
+    <v-layout
+      v-bind="binding"
+      align-space-around
       justify-space-around
-      fill-height>
-      <v-flex 
-        xs12 
-        sm6 
-      >
+      fill-height
+    >
+      <v-flex xs12 sm6>
         <div class="section section-left">
-          <v-layout 
-            align-center 
-            justify-center 
-            row 
-            fill-height>
+          <v-layout align-center justify-center row fill-height>
             <v-flex xs12>
-              <v-chart-doughnut :data="statObject"/>
+              <v-chart-doughnut :data="statObject" />
             </v-flex>
           </v-layout>
         </div>
       </v-flex>
 
-      <v-flex 
-        xs12 
-        sm6
-      >
+      <v-flex xs12 sm6>
         <div class="section section-right">
-          <v-list 
-            two-line 
-          >
+          <v-list two-line>
             <template v-for="(item, key) in data">
-              <v-list-tile
-                :key="item.createdAt"
-                @click="goToList(key)"
-              >
+              <v-list-tile :key="item.createdAt" @click="goToList(key)">
                 <v-list-tile-content>
-                  <v-list-tile-title> 
+                  <v-list-tile-title>
                     {{ key | specialty }}
                   </v-list-tile-title>
                   <v-list-tile-sub-title>

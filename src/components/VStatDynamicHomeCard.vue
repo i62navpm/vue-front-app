@@ -1,27 +1,20 @@
 <template>
   <v-card>
-    <v-layout 
-      v-bind="binding" 
-      align-space-around 
+    <v-layout
+      v-bind="binding"
+      align-space-around
       justify-space-around
-      fill-height>
-      <v-flex 
-        xs12 
-      >
+      fill-height
+    >
+      <v-flex xs12>
         <div class="section section-left">
-          <v-layout 
-            align-center 
-            justify-center 
-            row 
-            fill-height>
+          <v-layout align-center justify-center row fill-height>
             <v-flex xs12>
-              <v-chart-bar :data="statObject"/>
+              <v-chart-bar :data="statObject" />
             </v-flex>
           </v-layout>
         </div>
       </v-flex>
-
-      
     </v-layout>
   </v-card>
 </template>

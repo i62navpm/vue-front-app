@@ -2,20 +2,15 @@
   <v-container>
     <v-slide-y-transition mode="out-in">
       <div class="home-relative">
-        <v-layout
-          v-if="data.normalList"
-          column
-          align-left
-        >
+        <v-layout v-if="data.normalList" column align-left>
           <article v-if="data.normalList">
             <h3 class="font-weight-regular home-title mb-2">
               Listado definitivo de carácter ordinario
-              <v-download-button-list
-                class="float-right"
-                list="normalList"
-              />
+              <v-download-button-list class="float-right" list="normalList" />
             </h3>
-            <h4 class="font-weight-regular home-subheading mb-4">Distribución de personas por especialidades</h4>
+            <h4 class="font-weight-regular home-subheading mb-4">
+              Distribución de personas por especialidades
+            </h4>
             <v-stat-static-home-card
               :data="data.normalList"
               :list="'normalList'"
@@ -30,7 +25,9 @@
                 list="bilingualList"
               />
             </h3>
-            <h4 class="font-weight-regular home-subheading mb-4">Distribución de personas por especialidades</h4>
+            <h4 class="font-weight-regular home-subheading mb-4">
+              Distribución de personas por especialidades
+            </h4>
             <v-stat-static-home-card
               :data="data.bilingualList"
               :list="'bilingualList'"
@@ -45,7 +42,9 @@
                 list="voluntaryList"
               />
             </h3>
-            <h4 class="font-weight-regular home-subheading mb-4">Distribución de personas por especialidades</h4>
+            <h4 class="font-weight-regular home-subheading mb-4">
+              Distribución de personas por especialidades
+            </h4>
             <v-stat-static-home-card
               :data="data.voluntaryList"
               :list="'voluntaryList'"
@@ -56,7 +55,6 @@
           <article>
             <the-pricing />
           </article>
-
         </v-layout>
         <the-spinner v-else />
       </div>
@@ -66,7 +64,6 @@
 
 <script>
 import VStatStaticHomeCard from '@/components/VStatStaticHomeCard'
-import VStatDynamicHomeCard from '@/components/VStatDynamicHomeCard'
 import VDownloadButtonList from '@/components/VDownloadButtonList'
 import ThePricing from '@/components/ThePricing'
 import TheSpinner from '@/components/TheSpinner'
@@ -75,7 +72,6 @@ export default {
   name: 'Home',
   components: {
     VStatStaticHomeCard,
-    VStatDynamicHomeCard,
     VDownloadButtonList,
     TheSpinner,
     ThePricing,

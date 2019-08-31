@@ -1,12 +1,6 @@
 <template>
-  <v-btn 
-    v-if="supportShare"
-    flat 
-    icon
-    large
-    color="grey"
-    @click.native="share">
-    <v-icon large >share</v-icon>
+  <v-btn v-if="supportShare" flat icon large color="grey" @click.native="share">
+    <v-icon large>share</v-icon>
   </v-btn>
 </template>
 
@@ -51,5 +45,4 @@ export default {
 }
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>

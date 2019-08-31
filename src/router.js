@@ -26,19 +26,25 @@ const router = new Router({
       name: 'specialtyTable',
       meta: { requiresAuth: true, requiresPaid: true },
       component: () =>
-        import(/* webpackChunkName: "SpecialtyTable" */ './views/SpecialtyTable.vue'),
+        import(
+          /* webpackChunkName: "SpecialtyTable" */ './views/SpecialtyTable.vue'
+        ),
     },
     {
       path: '/legal/doc/terms-of-service',
       name: 'termsOfService',
       component: () =>
-        import(/* webpackChunkName: "TermsOfService" */ './views/TermsOfService.vue'),
+        import(
+          /* webpackChunkName: "TermsOfService" */ './views/TermsOfService.vue'
+        ),
     },
     {
       path: '/legal/doc/privacy-policy',
       name: 'privacyPolicy',
       component: () =>
-        import(/* webpackChunkName: "PrivacyPolicy" */ './views/PrivacyPolicy.vue'),
+        import(
+          /* webpackChunkName: "PrivacyPolicy" */ './views/PrivacyPolicy.vue'
+        ),
     },
   ],
   scrollBehavior() {

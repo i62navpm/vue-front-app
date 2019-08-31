@@ -10,11 +10,9 @@
     <the-dialog-new-user v-else />
     <the-dialog-people-search />
     <v-toolbar-side-icon @click.stop="toggleSidebar(!drawer)" />
-    <router-link
-      :to="'/'"
-      tag="v-toolbar-title"
-      class="white--text ml-0"
-    >Listando<span class="orange--text">Me</span></router-link>
+    <router-link :to="'/'" tag="v-toolbar-title" class="white--text ml-0"
+      >Listando<span class="orange--text">Me</span></router-link
+    >
 
     <v-flex
       v-if="$vuetify.breakpoint.smAndDown"
@@ -29,10 +27,7 @@
 
     <v-spacer />
 
-    <v-flex
-      xs6
-      hidden-sm-and-down
-    >
+    <v-flex xs6 hidden-sm-and-down>
       <people-search-select
         v-scroll="handleScrollInput"
         class="search-toolbar"
@@ -44,9 +39,7 @@
     <the-feedback-button v-if="user.email" />
     <the-profile-button v-if="user.email" />
     <the-login-button v-else />
-
   </v-toolbar>
-
 </template>
 <script>
 import firebase from 'firebase/app'
@@ -54,7 +47,6 @@ import { captureException } from '@sentry/browser'
 import { messaging } from '@/plugins/firebaseMessaging'
 import { fb } from '@/plugins/firebaseFunctions'
 import TheLoginButton from './TheLoginButton'
-import TheLogoutButton from './TheLogoutButton'
 import TheProfileButton from './TheProfileButton'
 import TheFeedbackButton from './TheFeedbackButton'
 import TheNotificationButton from './TheNotificationButton'
@@ -68,7 +60,6 @@ export default {
   name: 'TheToolbar',
   components: {
     TheLoginButton,
-    TheLogoutButton,
     TheFeedbackButton,
     PeopleSearchSelect,
     TheDialogPeopleSearch,

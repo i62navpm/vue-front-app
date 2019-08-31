@@ -25,14 +25,18 @@
         class="ma-1"
         size="32"
       >
-        <span class="white--text">{{ user.displayName.charAt(0).toUpperCase() }}</span>
+        <span class="white--text">{{
+          user.displayName.charAt(0).toUpperCase()
+        }}</span>
       </v-avatar>
 
       <v-card>
         <v-list>
           <v-list-tile avatar>
             <v-list-tile-avatar color="red darken-4">
-              <span class="white--text">{{ user.displayName.charAt(0).toUpperCase() }}</span>
+              <span class="white--text">{{
+                user.displayName.charAt(0).toUpperCase()
+              }}</span>
             </v-list-tile-avatar>
 
             <v-list-tile-content>
@@ -41,11 +45,7 @@
             </v-list-tile-content>
 
             <v-list-tile-action>
-              <v-btn
-                class="grey--text"
-                icon
-                @click="logout"
-              >
+              <v-btn class="grey--text" icon @click="logout">
                 <v-icon>logout</v-icon>
               </v-btn>
             </v-list-tile-action>
@@ -85,16 +85,8 @@
         <v-card-actions>
           <the-remove-user-button />
           <v-spacer />
-          <v-btn
-            flat
-            color="primary"
-            small
-            @click.native="openDialogNewUser"
-          >
-            <v-icon
-              class="mr-2"
-              small
-            >person</v-icon>
+          <v-btn flat color="primary" small @click.native="openDialogNewUser">
+            <v-icon class="mr-2" small>person</v-icon>
             Mi perfil
           </v-btn>
         </v-card-actions>
@@ -167,5 +159,4 @@ export default {
 }
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>

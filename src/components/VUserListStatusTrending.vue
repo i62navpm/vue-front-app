@@ -1,43 +1,27 @@
 <template>
-  <v-badge 
-    :right="trending < 0" 
-    :left="trending >= 0" 
-    overlap>
+  <v-badge :right="trending < 0" :left="trending >= 0" overlap>
     <span slot="badge">{{ trendingAbs || 0 }}</span>
-    <v-tooltip 
-      v-if="trending > 0" 
-      bottom>
-      <span slot="activator"><v-icon
-        large
-        color="green"
-      >
-        trending_up
-      </v-icon>
+    <v-tooltip v-if="trending > 0" bottom>
+      <span slot="activator"
+        ><v-icon large color="green">
+          trending_up
+        </v-icon>
       </span>
       <span>Estás más cerca! 🎉</span>
     </v-tooltip>
-    <v-tooltip 
-      v-else-if="trending < 0" 
-      bottom>
-      <span slot="activator"><v-icon
-        large
-        color="red"
-      >
-        trending_down
-      </v-icon>
+    <v-tooltip v-else-if="trending < 0" bottom>
+      <span slot="activator"
+        ><v-icon large color="red">
+          trending_down
+        </v-icon>
       </span>
       <span>Te has alejado 😭</span>
     </v-tooltip>
-    <v-tooltip 
-      v-else 
-      bottom>
-      <span slot="activator"><v-icon
-        large
-        color="yellow darken-2"
-        class="rotate"
-      >
-        pause
-      </v-icon>
+    <v-tooltip v-else bottom>
+      <span slot="activator"
+        ><v-icon large color="yellow darken-2" class="rotate">
+          pause
+        </v-icon>
       </span>
       <span>Te mantienes igual 😒</span>
     </v-tooltip>

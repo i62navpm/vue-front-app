@@ -1,21 +1,10 @@
 <template>
   <div class="text-xs-center">
-    <v-dialog
-      v-model="dialog.open"
-      persistent
-      width="300"
-    >
-      <v-card
-        color="primary"
-        light
-      >
+    <v-dialog v-model="dialog.open" persistent width="300">
+      <v-card color="primary" light>
         <v-card-text class="white--text">
           Espera por favor
-          <v-progress-linear
-            indeterminate
-            color="white"
-            class="mb-0"
-          />
+          <v-progress-linear indeterminate color="white" class="mb-0" />
           <v-list dense>
             <v-list-tile color="white">
               <v-list-tile-action>
@@ -27,16 +16,13 @@
                   class="mr-3"
                   color="pink"
                 />
-                <v-icon 
-                  v-else
-                  class="mr-3"
-                  color="lime">check</v-icon>
+                <v-icon v-else class="mr-3" color="lime">check</v-icon>
               </v-list-tile-action>
 
               <v-list-tile-content>
                 <v-list-tile-title class="caption">
                   Buscando en el listado ordinario
-                </v-list-tile-title >
+                </v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>
 
@@ -50,16 +36,13 @@
                   class="mr-3"
                   color="pink"
                 />
-                <v-icon 
-                  v-else
-                  class="mr-3"
-                  color="lime">check</v-icon>
+                <v-icon v-else class="mr-3" color="lime">check</v-icon>
               </v-list-tile-action>
 
               <v-list-tile-content>
                 <v-list-tile-title class="caption">
                   Buscando en el listado bilingüe
-                </v-list-tile-title >
+                </v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>
 
@@ -73,16 +56,13 @@
                   class="mr-3"
                   color="pink"
                 />
-                <v-icon 
-                  v-else
-                  class="mr-3"
-                  color="lime">check</v-icon>
+                <v-icon v-else class="mr-3" color="lime">check</v-icon>
               </v-list-tile-action>
 
               <v-list-tile-content>
                 <v-list-tile-title class="caption">
                   Buscando en el listado de voluntarios
-                </v-list-tile-title >
+                </v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>
           </v-list>

@@ -1,46 +1,30 @@
 <template>
   <v-container class="user-details">
     <v-slide-y-transition mode="out-in">
-      <v-layout 
-        align-space-around 
-        justify-space-between 
-        column
-        fill-height>
+      <v-layout align-space-around justify-space-between column fill-height>
         <v-flex>
-          <v-layout 
-            align-start 
-            justify-space-between 
-            row 
-            fill-height>
-            <v-flex 
-              xs10
-              md12>
+          <v-layout align-start justify-space-between row fill-height>
+            <v-flex xs10 md12>
               <p class="person-name display-1 mb-5">
                 {{ $route.params.id }}
               </p>
             </v-flex>
-            <v-flex 
-              xs2 
-              class="text-xs-right">
+            <v-flex xs2 class="text-xs-right">
               <v-share-button-user :name="$route.params.id" />
             </v-flex>
           </v-layout>
         </v-flex>
 
         <v-flex v-if="privateProfile">
-          <h3 
-            class="display-1 font-weight-light">
+          <h3 class="display-1 font-weight-light">
             <v-icon large>lock</v-icon>
             Este perfil es privado
           </h3>
         </v-flex>
-        
-        <v-flex 
-          v-if="items.length" 
-          class="mb-5">
+
+        <v-flex v-if="items.length" class="mb-5">
           <v-flex v-if="isWorking">
-            <h3 
-              class="display-3 font-weight-light">
+            <h3 class="display-3 font-weight-light">
               !Está trabajando!
             </h3>
             <v-subheader>
@@ -48,63 +32,65 @@
             </v-subheader>
             <div class="incorporation-info text-xs-center">
               <v-chip
-                v-for="(value, key) of items[0].working" 
+                v-for="(value, key) of items[0].working"
                 :key="key"
-                label 
-                color="teal" 
-                text-color="white">
+                label
+                color="teal"
+                text-color="white"
+              >
                 <v-icon left>label</v-icon>
                 <span class="incorporation-info">
-                  <strong>{{ key | tableHeader }}:</strong>&nbsp;{{ value | modality }}<span/>
+                  <strong>{{ key | tableHeader }}:</strong>&nbsp;{{
+                    value | modality
+                  }}<span />
                 </span>
               </v-chip>
             </div>
           </v-flex>
           <v-flex v-else-if="isExtrange">
-            <h3 
-              class="headline font-weight-regular">
+            <h3 class="headline font-weight-regular">
               <span class="yellow">
-                Aparece en listas en las que han citado a personas con un orden superior al suyo
+                Aparece en listas en las que han citado a personas con un orden
+                superior al suyo
               </span>
             </h3>
-            <p 
-              class="caption font-weight-regular blue--text">
-              <v-icon 
-                color="info" 
-                small>help</v-icon> No quiere decir que te hayan sacado de la lista, sólo es que no podemos determinar tu posición con exactitud.
+            <p class="caption font-weight-regular blue--text">
+              <v-icon color="info" small>help</v-icon> No quiere decir que te
+              hayan sacado de la lista, sólo es que no podemos determinar tu
+              posición con exactitud.
             </p>
-            <h4 
-              class="subheading font-weight-regular">
-              Podría ser por renuncia, haber causado baja médica, ... o no complir con los requisitos de la citación (que hayan citado a alguien con una DAT diferente)
+            <h4 class="subheading font-weight-regular">
+              Podría ser por renuncia, haber causado baja médica, ... o no
+              complir con los requisitos de la citación (que hayan citado a
+              alguien con una DAT diferente)
             </h4>
           </v-flex>
-          <v-chart-line 
-            v-else 
-            :chart-data="statObject"/>
+          <v-chart-line v-else :chart-data="statObject" />
         </v-flex>
         <v-flex>
           <v-expansion-panel popout>
             <v-expansion-panel-content
-              v-for="(item,i) in items"
+              v-for="(item, i) in items"
               :key="i"
               expand-icon=""
             >
               <v-flex slot="header">
-                <v-user-list-status 
-                  :data="item" 
-                  :index="i"/>
+                <v-user-list-status :data="item" :index="i" />
               </v-flex>
               <v-card v-if="!isWorking">
                 <v-card-text>
                   <v-chip
-                    v-for="(value, key) of getUserInfo(item)" 
+                    v-for="(value, key) of getUserInfo(item)"
                     :key="key"
-                    label 
-                    color="teal" 
-                    text-color="white">
+                    label
+                    color="teal"
+                    text-color="white"
+                  >
                     <v-icon left>label</v-icon>
                     <span class="incorporation-info">
-                      <strong>{{ key | tableHeader }}:</strong>&nbsp;{{ value | modality }}<span/>
+                      <strong>{{ key | tableHeader }}:</strong>&nbsp;{{
+                        value | modality
+                      }}<span />
                     </span>
                   </v-chip>
                 </v-card-text>

@@ -1,41 +1,17 @@
 <template>
-  <v-container 
-    class="main-block-search" 
-    fluid>
-    <v-layout 
-      align-space-around
-      justify-space-around 
-      column 
-      fill-height
-    >
-      <v-flex 
-        xs6
-      >
-        <v-layout 
-          justify-center
-          row
-        >
-          <v-flex 
-            xs12
-            sm8
-            md6
-            lg4
-            class="display-2 font-weight-regular">
+  <v-container class="main-block-search" fluid>
+    <v-layout align-space-around justify-space-around column fill-height>
+      <v-flex xs6>
+        <v-layout justify-center row>
+          <v-flex xs12 sm8 md6 lg4 class="display-2 font-weight-regular">
             Descubre tu posición en las listas
           </v-flex>
         </v-layout>
       </v-flex>
-      <v-flex 
-        xs6>
-        <v-layout 
-          justify-center
-          row
-        >
-          <v-flex 
-            xs12
-            sm8
-            md6>
-            <people-search-select/>
+      <v-flex xs6>
+        <v-layout justify-center row>
+          <v-flex xs12 sm8 md6>
+            <people-search-select />
           </v-flex>
         </v-layout>
       </v-flex>
