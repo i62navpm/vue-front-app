@@ -12,15 +12,18 @@
     <v-spacer />
 
     <the-notification-button />
+    <the-feedback-button />
   </v-app-bar>
 </template>
 
 <script>
 import TheNotificationButton from './TheNotificationButton'
+import TheFeedbackButton from './TheFeedbackButton'
 
 export default {
   components: {
     TheNotificationButton,
+    TheFeedbackButton,
   },
   computed: {
     sidebarStatus() {
