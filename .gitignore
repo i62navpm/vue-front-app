@@ -23,6 +23,7 @@ yarn-error.log*
 *.sln
 *.sw*
 *.rules
+*.firebase
 firestore.indexes.json
 /functions/searchPerson/people.js
 /functions/removeUser/firebase.js

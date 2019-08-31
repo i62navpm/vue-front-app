@@ -316,14 +316,14 @@ export default {
       let headers = [
         ...row.reduce((acc, curr) => {
           Object.keys(curr).forEach(head => {
-            if (['position', 'count', 'dni', 'orden'].includes(head)) return
+            if (['position', 'count', 'nif', 'orden'].includes(head)) return
             acc.add(head)
           })
           return acc
         }, new Set()),
       ]
 
-      headers.unshift('dni')
+      headers.unshift('nif')
       headers.unshift('orden')
       return headers.map(head => ({
         text: this.$options.filters.tableHeader(head),

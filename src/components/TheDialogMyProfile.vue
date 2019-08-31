@@ -52,7 +52,7 @@
                     class="capitalize"
                     v-text="item.apellidosynombre"
                   />
-                  <v-list-tile-sub-title v-text="`*****${item.dni}`" />
+                  <v-list-tile-sub-title v-text="`*****${item.nif}`" />
                 </v-list-tile-content>
               </template>
             </v-autocomplete>

@@ -28,7 +28,7 @@
     <template slot="item" slot-scope="{ item }">
       <v-list-tile-content>
         <v-list-tile-title v-text="item.item.apellidosynombre" />
-        <v-list-tile-sub-title v-text="`*****${item.item.dni}`" />
+        <v-list-tile-sub-title v-text="`*****${item.item.nif}`" />
       </v-list-tile-content>
     </template>
   </v-autocomplete>
