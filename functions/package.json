@@ -15,7 +15,8 @@
   "dependencies": {
     "firebase-admin": "^8.0.0",
     "firebase-functions": "^3.1.0",
-    "fuse.js": "^3.4.5"
+    "fuse.js": "^3.4.5",
+    "nodemailer": "^6.3.0"
   },
   "devDependencies": {
     "eslint": "^5.12.0",
