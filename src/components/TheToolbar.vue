@@ -9,20 +9,19 @@
         Listando<span class="orange--text">Me</span>
       </v-toolbar-title>
     </router-link>
-    <v-spacer></v-spacer>
-    <v-btn
-      text
-      href="https://github.com/vuetifyjs/vuetify/releases/latest"
-      target="_blank"
-    >
-      <span class="mr-2">Latest Release</span>
-      <v-icon>open_in_new</v-icon>
-    </v-btn>
+    <v-spacer />
+
+    <the-notification-button />
   </v-app-bar>
 </template>
 
 <script>
+import TheNotificationButton from './TheNotificationButton'
+
 export default {
+  components: {
+    TheNotificationButton,
+  },
   computed: {
     sidebarStatus() {
       const { open } = this.$store.state.sidebar
