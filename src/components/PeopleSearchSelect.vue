@@ -76,7 +76,7 @@ export default {
     },
     goToPerson() {
       if (!this.model) return
-      this.$router.push(`/${this.model.apellidosynombre}`)
+      this.$router.push(`/${this.model.apellidosynombre}/${this.model.nif}`)
     },
   },
 }

@@ -20,7 +20,7 @@
               </v-list-tile-action>
 
               <v-list-tile-content>
-                <v-list-tile-title class="caption">
+                <v-list-tile-title class="white--text caption">
                   Buscando en el listado ordinario
                 </v-list-tile-title>
               </v-list-tile-content>
@@ -40,7 +40,7 @@
               </v-list-tile-action>
 
               <v-list-tile-content>
-                <v-list-tile-title class="caption">
+                <v-list-tile-title class="white--text caption">
                   Buscando en el listado bilingüe
                 </v-list-tile-title>
               </v-list-tile-content>
@@ -60,7 +60,7 @@
               </v-list-tile-action>
 
               <v-list-tile-content>
-                <v-list-tile-title class="caption">
+                <v-list-tile-title class="white--text caption">
                   Buscando en el listado de voluntarios
                 </v-list-tile-title>
               </v-list-tile-content>

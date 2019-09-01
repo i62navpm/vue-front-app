@@ -1,7 +1,7 @@
 <template>
   <v-fab-transition v-if="myUser">
     <v-btn
-      :to="`/${myUser.apellidosynombre}`"
+      :to="`/${myUser.apellidosynombre}/${myUser.nif}`"
       color="error"
       fixed
       bottom
