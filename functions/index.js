@@ -1,6 +1,10 @@
+const admin = require('firebase-admin')
 const functions = require('firebase-functions').region('europe-west2')
 const searchPerson = require('./searchPerson')
 const sendEmailFeedback = require('./sendEmailFeedback')
+const config = require('../config/firebase.json')
+
+admin.initializeApp(config)
 
 exports.searchPerson = functions.https.onCall(searchPerson)
 exports.sendEmailFeedback = functions.https.onCall(sendEmailFeedback)
