@@ -47,8 +47,8 @@ export default {
     togglePushNotifications: async ({ commit, state }, value) => {
       try {
         let googleFn = value
-          ? fb.httpsCallable('setMessagingToken')
-          : fb.httpsCallable('deleteMessagingToken')
+          ? fb.httpsCallable('messagingTokenSet')
+          : fb.httpsCallable('messagingTokenDelete')
 
         await googleFn(state.messaging)
 
@@ -115,7 +115,7 @@ export default {
           .where('email', '==', state.user.email)
           .get()
 
-        await fb.httpsCallable('deleteMessagingToken')(state.messaging)
+        await fb.httpsCallable('messagingTokenDelete')(state.messaging)
         await querySnapshot.forEach(doc => doc.ref.delete())
         await db
           .collection('privateProfiles')

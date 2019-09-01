@@ -81,7 +81,7 @@ export default {
   data() {
     return {
       drawer: false,
-      setMessagingToken: fb.httpsCallable('setMessagingToken'),
+      messagingTokenSet: fb.httpsCallable('messagingTokenSet'),
     }
   },
   computed: {
@@ -105,7 +105,7 @@ export default {
     try {
       messaging.onTokenRefresh(async () => {
         const token = await getMessagingToken()
-        this.setMessagingToken(token)
+        this.messagingTokenSet(token)
         this.$store.commit('setMessaging', { messaging: token })
       })
 

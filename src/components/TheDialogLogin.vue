@@ -55,7 +55,7 @@ export default {
   data() {
     return {
       buttonListener: () => this.$store.commit('setLoading', true),
-      setMessagingToken: fb.httpsCallable('setMessagingToken'),
+      messagingTokenSet: fb.httpsCallable('messagingTokenSet'),
     }
   },
   computed: {
@@ -107,7 +107,7 @@ export default {
       let myUser = null
 
       const messagingToken = await getMessagingToken()
-      this.setMessagingToken(messagingToken)
+      this.messagingTokenSet(messagingToken)
 
       if (authResult.additionalUserInfo.isNewUser) {
         db.collection('users').add({
