@@ -8,6 +8,7 @@ exports.sendEmailFeedback = functions.https.onCall(require('./sendEmailFeedback'
 exports.removeUser = functions.https.onCall(require('./removeUser'))
 exports.messagingTokenSet = functions.https.onCall(require('./messagingTokenSet'))
 exports.messagingTokenDelete = functions.https.onCall(require('./messagingTokenDelete'))
+exports.hasPaid = functions.https.onCall(require('./hasPaid'))
 
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
