@@ -24,6 +24,7 @@ yarn-error.log*
 *.sw*
 *.rules
 *.firebase
+.firebase
 firestore.indexes.json
 /functions/searchPerson/people.js
 /functions/removeUser/firebase.js
