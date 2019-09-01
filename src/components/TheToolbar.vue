@@ -99,7 +99,7 @@ export default {
         this.setStoreUser(user)
       } else {
         this.$store.dispatch('logout')
-        setTimeout(() => this.$store.commit('setLoading', false), 5000)
+        setTimeout(() => this.$store.commit('setLoading', false), 10000)
       }
     })
     try {
