@@ -22,7 +22,7 @@ const router = new Router({
         import(/* webpackChunkName: "user" */ './views/User.vue'),
     },
     {
-      path: '/:modality/:specialty',
+      path: '/list/:modality/:specialty',
       name: 'specialtyTable',
       meta: { requiresAuth: true, requiresPaid: true },
       component: () =>
