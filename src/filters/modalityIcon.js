@@ -7,7 +7,7 @@ export default function(value) {
     bilingualList: 'language',
     voluntaryList: 'directions_run',
     citationList: 'update',
-    voluntaryListDynamic: 'pan_tool',
+    citationVoluntaryList: 'pan_tool',
     incorporateList: 'autorenew',
     nextCitationList: 'mood',
   }

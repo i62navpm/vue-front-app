@@ -7,10 +7,9 @@ export default function(value) {
     bilingualList: 'Listado bilingüe',
     voluntaryList: 'Listado de voluntarios',
     citationList: 'Citaciones ordinarias',
-    voluntaryListDynamic: 'Citaciones de voluntarios',
+    citationVoluntaryList: 'Citaciones de voluntarios',
     incorporateList: 'Listado de incorporados',
     nextCitationList: 'Siguientes a citar',
-    nextVoluntaryList: 'Siguientes voluntarios a citar',
   }
   return mapModality[value] || value
 }

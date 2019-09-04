@@ -23,31 +23,29 @@
     <v-list>
       <v-list-group
         v-for="item in items"
-        :key="item.modality"
+        :key="item.list"
         v-model="item.active"
-        :prepend-icon="item.modality | modalityIcon"
+        :prepend-icon="item.list | modalityIcon"
         no-action
       >
         <v-list-tile slot="activator">
           <v-list-tile-content>
-            <v-list-tile-title>{{
-              item.modality | modality
-            }}</v-list-tile-title>
+            <v-list-tile-title>{{ item.list | modality }}</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
 
         <v-list-tile
-          v-for="specialty in item.specialties"
-          :key="specialty"
+          v-for="{ id, description } in item.specialties"
+          :key="id"
           @click="
             $router.push({
               name: 'specialtyTable',
-              params: { modality: item.modality, specialty },
+              params: { modality: item.list, specialty: id },
             })
           "
         >
           <v-list-tile-content>
-            <v-list-tile-title>{{ specialty | specialty }}</v-list-tile-title>
+            <v-list-tile-title>{{ description }}</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list-group>
@@ -55,18 +53,60 @@
   </v-navigation-drawer>
 </template>
 <script>
+import { specialtyCodes } from '@i62navpm/specialty-codes'
 export default {
   name: 'TheSidebar',
+  data() {
+    return {
+      items: [
+        {
+          list: 'normalList',
+          specialties: specialtyCodes.primary.normalSpecialties,
+        },
+        {
+          list: 'bilingualList',
+          specialties: specialtyCodes.primary.bilingualSpecialties,
+        },
+        {
+          list: 'voluntaryList',
+          specialties: specialtyCodes.primary.normalSpecialties,
+        },
+        {
+          list: 'assignmentList',
+          specialties: [
+            ...specialtyCodes.primary.bilingualSpecialties,
+            ...specialtyCodes.primary.normalSpecialties,
+          ],
+        },
+        {
+          list: 'citationList',
+          specialties: [
+            ...specialtyCodes.primary.bilingualSpecialties,
+            ...specialtyCodes.primary.normalSpecialties,
+          ],
+        },
+        {
+          list: 'citationVoluntaryList',
+          specialties: specialtyCodes.primary.normalSpecialties,
+        },
+        {
+          list: 'incorporateList',
+          specialties: [
+            ...specialtyCodes.primary.bilingualSpecialties,
+            ...specialtyCodes.primary.normalSpecialties,
+          ],
+        },
+        {
+          list: 'nextCitationList',
+          specialties: [
+            ...specialtyCodes.primary.bilingualSpecialties,
+            ...specialtyCodes.primary.normalSpecialties,
+          ],
+        },
+      ],
+    }
+  },
   computed: {
-    items() {
-      if (!this.$store.state.home.data) return
-      return Object.entries(this.$store.state.home.data).reduce((acc, curr) => {
-        const [modality, specialties] = curr
-        acc.push({ modality, specialties: Object.keys(specialties) })
-
-        return acc
-      }, [])
-    },
     sidebarStatus() {
       const { open } = this.$store.state.sidebar
       return open
