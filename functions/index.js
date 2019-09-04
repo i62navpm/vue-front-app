@@ -11,6 +11,7 @@ exports.messagingTokenDelete = functions.https.onCall(require('./messagingTokenD
 exports.hasPaid = functions.https.onCall(require('./hasPaid'))
 exports.getListFiles = functions.https.onCall(require('./getListFiles'))
 exports.getPaginateList = functions.https.onCall(require('./queriesBigQuery').getPaginateList)
+exports.getDatesList = functions.https.onCall(require('./queriesBigQuery').getDatesList)
 
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions

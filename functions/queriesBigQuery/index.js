@@ -6,6 +6,32 @@ const bigQuery = new BigQuery({
   keyFilename: path.resolve(__dirname, '../config/googleCloud.json'),
 })
 
+async function existsDateColumn(data = {}) {
+  const { datasetId, tableId } = data
+
+  const query = `SELECT data_type
+  FROM ${datasetId}.INFORMATION_SCHEMA.COLUMNS
+  where table_name="${tableId}" and data_type = "DATE"`
+
+  const options = {
+    query,
+  }
+
+  return bigQuery.query(options)
+}
+
+exports.getDatesList = async (data = {}) => {
+  const { datasetId, tableId } = data
+
+  const query = `SELECT DISTINCT(date) FROM ${datasetId}.${tableId} WHERE date <= CURRENT_DATE()`
+
+  const options = {
+    query,
+  }
+  const [dates] = await existsDateColumn(data)
+  return dates.length ? await bigQuery.query(options) : Promise.resolve([])
+}
+
 exports.getPaginateList = async (data = {}) => {
   const {
     datasetId,
@@ -14,12 +40,13 @@ exports.getPaginateList = async (data = {}) => {
       paginate = { page: 0, limit: 10 },
       filter = { name: '' },
       sort = 'orden',
+      order = 'ASC',
     },
   } = data
 
   const query = `SELECT * FROM ${datasetId}.${tableId} 
   ${filter.name ? `WHERE apellidosynombre LIKE "${filter.name}%"` : ''} 
-  ORDER BY ${sort} LIMIT @limit OFFSET @page`
+  ORDER BY ${sort} ${order} LIMIT @limit OFFSET @page`
 
   const options = {
     query,
