@@ -39,8 +39,7 @@
           :key="id"
           @click="
             $router.push({
-              name: 'specialtyTable',
-              params: { modality: item.list, specialty: id },
+              path: `/list/${item.list}/${id}`,
             })
           "
         >
