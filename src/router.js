@@ -22,13 +22,29 @@ const router = new Router({
         import(/* webpackChunkName: "user" */ './views/User.vue'),
     },
     {
-      path: '/list/:modality/:specialty',
+      path: '/list',
       name: 'specialtyTable',
       meta: { requiresAuth: true, requiresPaid: true },
       component: () =>
         import(
           /* webpackChunkName: "SpecialtyTable" */ './views/SpecialtyTable.vue'
         ),
+      children: [
+        {
+          path: ':modality(normalList|bilingualList|voluntaryList)/:specialty',
+          component: () =>
+            import(
+              /* webpackChunkName: "TheTableStaticList" */ './components/TheTableStaticList.vue'
+            ),
+        },
+        {
+          path: ':modality/:specialty',
+          component: () =>
+            import(
+              /* webpackChunkName: "TheTableDynamicList" */ './components/TheTableDynamicList.vue'
+            ),
+        },
+      ],
     },
     {
       path: '/legal/doc/terms-of-service',
