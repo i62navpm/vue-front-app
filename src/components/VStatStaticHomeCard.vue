@@ -23,7 +23,7 @@
               <v-list-tile :key="key" @click="goToList(key)">
                 <v-list-tile-content>
                   <v-list-tile-title>
-                    {{ key | specialty }}
+                    [{{ key }}] {{ key | specialty }}
                   </v-list-tile-title>
                   <v-list-tile-sub-title>
                     Fecha de creación: {{ item.createdAt }}

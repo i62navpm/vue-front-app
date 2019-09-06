@@ -44,7 +44,7 @@
           "
         >
           <v-list-tile-content>
-            <v-list-tile-title>{{ description }}</v-list-tile-title>
+            <v-list-tile-title>[{{ id }}] {{ description }}</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list-group>
