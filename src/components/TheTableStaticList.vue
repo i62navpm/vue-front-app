@@ -106,8 +106,10 @@ export default {
         }
 
         const { data: [rows] = [] } = await getPaginateList(options)
-        this.headers = this.getHeaders(rows)
-        this.opponents = this.getOpponents(rows)
+        const { total, data } = rows[0]
+        this.totalItems = total
+        this.headers = this.getHeaders(data)
+        this.opponents = this.getOpponents(data)
       } catch (err) {
         captureException(err)
         this.headers = []
