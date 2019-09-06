@@ -33,3 +33,4 @@ firebase-messaging-sw.js
 /public/index.html
 /src/plugins/sentry.js
 /src/plugins/stripe.js
+/src/assets/homeResults/**

@@ -20,13 +20,13 @@
         <div class="section section-right">
           <v-list two-line>
             <template v-for="(item, key) in data">
-              <v-list-tile :key="item.createdAt" @click="goToList(key)">
+              <v-list-tile :key="key" @click="goToList(key)">
                 <v-list-tile-content>
                   <v-list-tile-title>
                     {{ key | specialty }}
                   </v-list-tile-title>
                   <v-list-tile-sub-title>
-                    Fecha de creación: {{ parseDate(item.createdAt) }}
+                    Fecha de creación: {{ item.createdAt }}
                   </v-list-tile-sub-title>
                 </v-list-tile-content>
               </v-list-tile>
@@ -76,11 +76,7 @@ export default {
   },
   methods: {
     goToList(specialty) {
-      this.$router.push(`/${this.list}/${specialty}`)
-    },
-    parseDate(value) {
-      const date = new Date(value)
-      return date.toLocaleDateString()
+      this.$router.push(`/list/${this.list}/${specialty}`)
     },
   },
 }

@@ -1,7 +1,4 @@
-import { db } from '@/plugins/firestore'
-import statsUtils from '@/utils/stats'
-
-const stats = statsUtils(db)
+import getStats from '@/utils/stats'
 
 export default {
   state: {
@@ -14,18 +11,11 @@ export default {
     setHome: ({ commit }, data) => {
       commit('setHome', data)
     },
-    setStats: async ({ commit }) => {
-      let data = await stats.getStats([
-        'assignmentList',
-        'citationList',
-        'voluntaryListDynamic',
-        'incorporateList',
-        'bilingualList',
-        'normalList',
-        'voluntaryList',
-        'nextCitationList',
-      ])
-      commit('setHome', data)
+    setStats: ({ commit }) => {
+      commit(
+        'setHome',
+        getStats(['normalList', 'bilingualList', 'voluntaryList'])
+      )
     },
   },
   getters: {
