@@ -1,33 +1,32 @@
 <template>
   <div>
-    <v-container fluid grid-list-md>
-      <v-layout row wrap>
-        <v-flex d-flex xs12>
-          <v-layout row wrap>
-            <v-flex d-flex xs12 sm6>
-              <v-card>
-                <v-card-title class="title" primary-title>
-                  Número de personas
-                </v-card-title>
-                <v-card-text class="headline green--text text-xs-right"
-                  ># {{ totalItems }}</v-card-text
-                >
-              </v-card>
-            </v-flex>
-            <v-flex d-flex xs12 sm6>
-              <v-card>
-                <v-card-title class="title" primary-title>
-                  Número de personas
-                </v-card-title>
-                <v-card-text class="headline green--text text-xs-right"
-                  ># {{ totalItems }}</v-card-text
-                >
-              </v-card>
-            </v-flex>
-          </v-layout>
-        </v-flex>
-      </v-layout>
-    </v-container>
+    <v-layout justify-end>
+      <v-flex xs12 sm6>
+        <v-menu
+          v-model="datePicker"
+          :close-on-content-click="false"
+          lazy
+          transition="scale-transition"
+          min-width="290px"
+          offset-y
+        >
+          <template v-slot:activator="{ on }">
+            <v-text-field
+              v-model="computedDateFormatted"
+              label="Escoge la fecha del listado"
+              append-icon="event"
+              readonly
+              v-on="on"
+            ></v-text-field>
+          </template>
+          <v-date-picker
+            v-model="date"
+            :allowed-dates="allowedDates"
+            @input="onClickDatePicker"
+          ></v-date-picker>
+        </v-menu>
+      </v-flex>
+    </v-layout>
     <v-card>
       <v-card-title>
         <h4 class="title">Listado de interinos</h4>
@@ -99,6 +98,7 @@ export default {
     return {
       totalItems: 20,
       indexName: 2,
+      datePicker: false,
       date: null,
       dates: [],
       search: '',
@@ -113,6 +113,11 @@ export default {
       opponents: [],
     }
   },
+  computed: {
+    computedDateFormatted() {
+      return this.formatDate(this.date)
+    },
+  },
   watch: {
     search: debounce(async function() {
       this.pagination.page = 1
@@ -124,6 +129,19 @@ export default {
     ['pagination.rowsPerPage']: { handler: 'getAsyncOpponents' },
   },
   methods: {
+    formatDate(date) {
+      if (!date) return null
+
+      const [year, month, day] = date.split('-')
+      return `${month}/${day}/${year}`
+    },
+    onClickDatePicker() {
+      this.datePicker = false
+      this.pagination.page = 1
+    },
+    allowedDates(val) {
+      return this.dates.includes(val)
+    },
     async getAsyncDates() {
       try {
         this.loading = true
