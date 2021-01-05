@@ -10,7 +10,7 @@
   "dependencies": {
     "@sentry/browser": "^5.6.3",
     "@sentry/integrations": "^5.6.1",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "chart.js": "^2.7.2",
     "chartjs-plugin-zoom": "^0.6.5",
     "core-js": "^2.6.5",
